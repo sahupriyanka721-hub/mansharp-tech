@@ -300,20 +300,20 @@ export default function App() {
     <div className={`min-h-screen flex flex-col font-sans transition-colors duration-300 ${isDark ? 'bg-slate-950 text-slate-100 selection:bg-blue-600 selection:text-white' : 'bg-gradient-to-br from-slate-50 via-indigo-50/30 to-blue-50/40 text-slate-900 selection:bg-blue-500 selection:text-white'}`}>
       
       {/* HEADER */}
-      <header className={`border-b backdrop-blur-md sticky top-0 z-50 px-4 sm:px-8 py-4 flex justify-between items-center shadow-xl transition-colors duration-300 ${isDark ? 'border-slate-800/80 bg-slate-900/95 text-white' : 'border-slate-200/80 bg-white/90 text-slate-900'}`}>
+      <header className={`border-b backdrop-blur-md sticky top-0 z-50 px-4 sm:px-8 py-3.5 flex justify-between items-center shadow-lg transition-colors duration-300 ${isDark ? 'border-slate-800/80 bg-slate-900/95 text-white' : 'border-slate-200/80 bg-white/95 text-slate-900'}`}>
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => setActiveTab('about')}>
-          <div className="bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-600 text-white font-extrabold h-10 w-10 rounded-xl flex items-center justify-center text-lg shadow-lg shadow-blue-500/30">
+          <div className="bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-600 text-white font-extrabold h-9 w-9 sm:h-10 sm:w-10 rounded-xl flex items-center justify-center text-base sm:text-lg shadow-lg shadow-blue-500/30">
             M
           </div>
           <div>
-            <h1 className="font-extrabold text-base sm:text-lg leading-tight tracking-tight">MANSHARP</h1>
-            <p className="text-[10px] tracking-widest text-blue-500 font-bold uppercase">TECHNOLOGIES</p>
+            <h1 className="font-extrabold text-sm sm:text-lg leading-tight tracking-tight">MANSHARP</h1>
+            <p className="text-[9px] sm:text-[10px] tracking-widest text-blue-500 font-bold uppercase">TECHNOLOGIES</p>
           </div>
         </div>
 
         {/* DESKTOP NAVIGATION MENUS */}
         {!isAdmin && (
-          <nav className={`hidden lg:flex items-center gap-8 text-sm font-medium ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>
+          <nav className={`hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-medium ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>
             
             {/* About Menu */}
             <div className="relative group py-2 cursor-pointer">
@@ -332,7 +332,7 @@ export default function App() {
             <div className="relative py-2">
               <button 
                 onClick={() => setIsAiDropdownOpen(!isAiDropdownOpen)}
-                className="hover:text-blue-600 flex items-center gap-1 transition-colors text-blue-600 font-bold bg-blue-50 px-3 py-1 rounded-full border border-blue-100 shadow-sm"
+                className="hover:text-blue-600 flex items-center gap-1 transition-colors text-blue-600 font-bold bg-blue-50 px-3 py-1.5 rounded-full border border-blue-100 shadow-sm dark:bg-blue-950/60 dark:border-blue-800 dark:text-blue-400"
               >
                 ✨ AI Solutions <span className="text-[10px]">{isAiDropdownOpen ? '▲' : '▼'}</span>
               </button>
@@ -385,7 +385,7 @@ export default function App() {
             {/* Resources & Insights Menu */}
             <div className="relative group py-2 cursor-pointer">
               <span className="hover:text-blue-500 flex items-center gap-1 transition-colors">
-                Resources & Insights <span className="text-[10px]">▼</span>
+                Resources <span className="text-[10px]">▼</span>
               </span>
               <div className={`absolute top-full left-0 w-48 border rounded-2xl shadow-2xl p-2 flex flex-col gap-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 z-50 ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
                 <button onClick={() => setActiveTab('blogs')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>Blogs</button>
@@ -423,7 +423,7 @@ export default function App() {
         )}
 
         {/* Theme Toggle, Admin Buttons & Mobile Hamburger Button */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-2">
           <button 
             onClick={toggleTheme} 
             className={`p-2 sm:px-3 sm:py-2 rounded-xl border text-xs font-semibold transition-all flex items-center justify-center shadow-sm ${isDark ? 'bg-slate-900 border-slate-800 text-amber-400 hover:bg-slate-800' : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'}`}
@@ -432,7 +432,7 @@ export default function App() {
             {isDark ? '☀️' : '🌙'} <span className="hidden sm:inline ml-1">{isDark ? 'Light' : 'Dark'}</span>
           </button>
 
-          <button onClick={() => { setIsAdmin(!isAdmin); setIsLoggedIn(false); }} className="bg-slate-900 hover:bg-slate-800 text-white px-3 py-2 rounded-xl text-xs font-semibold transition-all shadow-md">
+          <button onClick={() => { setIsAdmin(!isAdmin); setIsLoggedIn(false); }} className="bg-slate-900 hover:bg-slate-800 text-white px-3 py-2 rounded-xl text-xs font-semibold transition-all shadow-md dark:bg-slate-800 dark:hover:bg-slate-700">
             {isAdmin ? 'Website' : 'Admin 🛡️'}
           </button>
 
@@ -451,24 +451,24 @@ export default function App() {
 
       {/* MOBILE DRAWER / OFF-CANVAS MENU */}
       {isMobileMenuOpen && !isAdmin && (
-        <div className={`lg:hidden fixed inset-x-0 top-[73px] bottom-0 z-40 overflow-y-auto p-4 sm:p-6 transition-all border-b shadow-2xl ${isDark ? 'bg-slate-950/98 border-slate-800 text-slate-200' : 'bg-white/98 border-slate-200 text-slate-800'}`}>
-          <div className="flex flex-col gap-3 pb-16">
+        <div className={`lg:hidden fixed inset-x-0 top-[69px] bottom-0 z-40 overflow-y-auto p-4 sm:p-6 transition-all border-b shadow-2xl ${isDark ? 'bg-slate-950/98 border-slate-800 text-slate-200' : 'bg-white/98 border-slate-200 text-slate-800'}`}>
+          <div className="flex flex-col gap-3 pb-24">
             
             {/* Mobile About Accordion */}
             <div>
               <button 
                 onClick={() => setMobileSubMenu(mobileSubMenu === 'about' ? null : 'about')}
-                className="w-full flex justify-between items-center py-2.5 px-3 rounded-xl font-semibold text-sm bg-slate-100 dark:bg-slate-900"
+                className="w-full flex justify-between items-center py-3 px-4 rounded-xl font-semibold text-sm bg-slate-100 dark:bg-slate-900"
               >
                 <span>About Us Menu</span>
                 <span>{mobileSubMenu === 'about' ? '▲' : '▼'}</span>
               </button>
               {mobileSubMenu === 'about' && (
-                <div className="flex flex-col pl-4 gap-2 mt-2 border-l-2 border-blue-500">
-                  <button onClick={() => { setActiveTab('about'); setIsMobileMenuOpen(false); }} className="text-left py-1.5 text-xs">About Us</button>
-                  <button onClick={() => { setActiveTab('why-choose-us'); setIsMobileMenuOpen(false); }} className="text-left py-1.5 text-xs">Why Choose Us</button>
-                  <button onClick={() => { setActiveTab('life-at-mansharp'); setIsMobileMenuOpen(false); }} className="text-left py-1.5 text-xs">Life At Mansharp</button>
-                  <button onClick={() => { setActiveTab('leadership'); setIsMobileMenuOpen(false); }} className="text-left py-1.5 text-xs">Leadership</button>
+                <div className="flex flex-col pl-4 gap-2 mt-2 border-l-2 border-blue-500 ml-2">
+                  <button onClick={() => { setActiveTab('about'); setIsMobileMenuOpen(false); }} className="text-left py-2 text-xs font-medium">About Us</button>
+                  <button onClick={() => { setActiveTab('why-choose-us'); setIsMobileMenuOpen(false); }} className="text-left py-2 text-xs font-medium">Why Choose Us</button>
+                  <button onClick={() => { setActiveTab('life-at-mansharp'); setIsMobileMenuOpen(false); }} className="text-left py-2 text-xs font-medium">Life At Mansharp</button>
+                  <button onClick={() => { setActiveTab('leadership'); setIsMobileMenuOpen(false); }} className="text-left py-2 text-xs font-medium">Leadership</button>
                 </div>
               )}
             </div>
@@ -477,17 +477,17 @@ export default function App() {
             <div>
               <button 
                 onClick={() => setMobileSubMenu(mobileSubMenu === 'ai' ? null : 'ai')}
-                className="w-full flex justify-between items-center py-2.5 px-3 rounded-xl font-semibold text-sm bg-blue-50 text-blue-600 dark:bg-blue-950/40 dark:text-blue-400"
+                className="w-full flex justify-between items-center py-3 px-4 rounded-xl font-semibold text-sm bg-blue-50 text-blue-600 dark:bg-blue-950/50 dark:text-blue-400"
               >
                 <span>✨ AI Solutions</span>
                 <span>{mobileSubMenu === 'ai' ? '▲' : '▼'}</span>
               </button>
               {mobileSubMenu === 'ai' && (
-                <div className="flex flex-col pl-4 gap-2 mt-2 border-l-2 border-blue-500">
-                  <button onClick={() => { setActiveTab('ai-transformation'); setIsMobileMenuOpen(false); }} className="text-left py-1.5 text-xs">AI Transformation</button>
-                  <button onClick={() => { setActiveTab('ai-copilot-pricing'); setIsMobileMenuOpen(false); }} className="text-left py-1.5 text-xs">Microsoft Copilot Pricing</button>
-                  <button onClick={() => { setActiveTab('ai-services'); setIsMobileMenuOpen(false); }} className="text-left py-1.5 text-xs">AI Services</button>
-                  <button onClick={() => { setActiveTab('ai-business-leaders'); setIsMobileMenuOpen(false); }} className="text-left py-1.5 text-xs">AI for Business Leaders</button>
+                <div className="flex flex-col pl-4 gap-2 mt-2 border-l-2 border-blue-500 ml-2">
+                  <button onClick={() => { setActiveTab('ai-transformation'); setIsMobileMenuOpen(false); }} className="text-left py-2 text-xs font-semibold">AI Transformation</button>
+                  <button onClick={() => { setActiveTab('ai-copilot-pricing'); setIsMobileMenuOpen(false); }} className="text-left py-2 text-xs font-medium">Microsoft Copilot Pricing</button>
+                  <button onClick={() => { setActiveTab('ai-services'); setIsMobileMenuOpen(false); }} className="text-left py-2 text-xs font-medium">AI Services</button>
+                  <button onClick={() => { setActiveTab('ai-business-leaders'); setIsMobileMenuOpen(false); }} className="text-left py-2 text-xs font-medium">AI for Business Leaders</button>
                 </div>
               )}
             </div>
@@ -496,17 +496,17 @@ export default function App() {
             <div>
               <button 
                 onClick={() => setMobileSubMenu(mobileSubMenu === 'industries' ? null : 'industries')}
-                className="w-full flex justify-between items-center py-2.5 px-3 rounded-xl font-semibold text-sm bg-slate-100 dark:bg-slate-900"
+                className="w-full flex justify-between items-center py-3 px-4 rounded-xl font-semibold text-sm bg-slate-100 dark:bg-slate-900"
               >
                 <span>Industries</span>
                 <span>{mobileSubMenu === 'industries' ? '▲' : '▼'}</span>
               </button>
               {mobileSubMenu === 'industries' && (
-                <div className="grid grid-cols-2 gap-2 pl-2 mt-2 border-l-2 border-blue-500">
+                <div className="grid grid-cols-2 gap-2 mt-2 pl-2 border-l-2 border-blue-500 ml-2">
                   {['Healthcare', 'Education', 'Public Sector', 'Financial Services', 'Manufacturing', 'Energy', 'Retail', 'Software'].map((ind, idx) => {
                     const slug = ind.toLowerCase().replace(/\s+/g, '-');
                     return (
-                      <button key={idx} onClick={() => { setActiveTab(slug); setIsMobileMenuOpen(false); }} className="text-left py-1.5 text-[11px]">{ind}</button>
+                      <button key={idx} onClick={() => { setActiveTab(slug); setIsMobileMenuOpen(false); }} className="text-left py-2 px-2 text-xs font-medium rounded-lg bg-slate-50 dark:bg-slate-900/50">{ind}</button>
                     );
                   })}
                 </div>
@@ -517,16 +517,16 @@ export default function App() {
             <div>
               <button 
                 onClick={() => setMobileSubMenu(mobileSubMenu === 'resources' ? null : 'resources')}
-                className="w-full flex justify-between items-center py-2.5 px-3 rounded-xl font-semibold text-sm bg-slate-100 dark:bg-slate-900"
+                className="w-full flex justify-between items-center py-3 px-4 rounded-xl font-semibold text-sm bg-slate-100 dark:bg-slate-900"
               >
                 <span>Resources & Insights</span>
                 <span>{mobileSubMenu === 'resources' ? '▲' : '▼'}</span>
               </button>
               {mobileSubMenu === 'resources' && (
-                <div className="flex flex-col pl-4 gap-2 mt-2 border-l-2 border-blue-500">
-                  <button onClick={() => { setActiveTab('blogs'); setIsMobileMenuOpen(false); }} className="text-left py-1.5 text-xs">Blogs</button>
-                  <button onClick={() => { setActiveTab('case-studies'); setIsMobileMenuOpen(false); }} className="text-left py-1.5 text-xs">Case Studies</button>
-                  <button onClick={() => { setActiveTab('workshops'); setIsMobileMenuOpen(false); }} className="text-left py-1.5 text-xs">Events & Workshops</button>
+                <div className="flex flex-col pl-4 gap-2 mt-2 border-l-2 border-blue-500 ml-2">
+                  <button onClick={() => { setActiveTab('blogs'); setIsMobileMenuOpen(false); }} className="text-left py-2 text-xs font-medium">Blogs</button>
+                  <button onClick={() => { setActiveTab('case-studies'); setIsMobileMenuOpen(false); }} className="text-left py-2 text-xs font-medium">Case Studies</button>
+                  <button onClick={() => { setActiveTab('workshops'); setIsMobileMenuOpen(false); }} className="text-left py-2 text-xs font-medium">Events & Workshops</button>
                 </div>
               )}
             </div>
@@ -535,17 +535,17 @@ export default function App() {
             <div>
               <button 
                 onClick={() => setMobileSubMenu(mobileSubMenu === 'solutions' ? null : 'solutions')}
-                className="w-full flex justify-between items-center py-2.5 px-3 rounded-xl font-semibold text-sm bg-slate-100 dark:bg-slate-900"
+                className="w-full flex justify-between items-center py-3 px-4 rounded-xl font-semibold text-sm bg-slate-100 dark:bg-slate-900"
               >
                 <span>Solutions</span>
                 <span>{mobileSubMenu === 'solutions' ? '▲' : '▼'}</span>
               </button>
               {mobileSubMenu === 'solutions' && (
-                <div className="flex flex-col pl-4 gap-2 mt-2 border-l-2 border-blue-500">
-                  <button onClick={() => { setActiveTab('department-solutions'); setIsMobileMenuOpen(false); }} className="text-left py-1.5 text-xs">Department Solutions</button>
-                  <button onClick={() => { setActiveTab('licenses'); setIsMobileMenuOpen(false); }} className="text-left py-1.5 text-xs">Licenses</button>
-                  <button onClick={() => { setActiveTab('technologies'); setIsMobileMenuOpen(false); }} className="text-left py-1.5 text-xs">Technologies</button>
-                  <button onClick={() => { setActiveTab('integration'); setIsMobileMenuOpen(false); }} className="text-left py-1.5 text-xs">Integration & Consulting</button>
+                <div className="flex flex-col pl-4 gap-2 mt-2 border-l-2 border-blue-500 ml-2">
+                  <button onClick={() => { setActiveTab('department-solutions'); setIsMobileMenuOpen(false); }} className="text-left py-2 text-xs font-medium">Department Solutions</button>
+                  <button onClick={() => { setActiveTab('licenses'); setIsMobileMenuOpen(false); }} className="text-left py-2 text-xs font-medium">Licenses</button>
+                  <button onClick={() => { setActiveTab('technologies'); setIsMobileMenuOpen(false); }} className="text-left py-2 text-xs font-medium">Technologies</button>
+                  <button onClick={() => { setActiveTab('integration'); setIsMobileMenuOpen(false); }} className="text-left py-2 text-xs font-medium">Integration & Consulting</button>
                 </div>
               )}
             </div>
@@ -554,20 +554,23 @@ export default function App() {
             <div>
               <button 
                 onClick={() => setMobileSubMenu(mobileSubMenu === 'products' ? null : 'products')}
-                className="w-full flex justify-between items-center py-2.5 px-3 rounded-xl font-semibold text-sm bg-slate-100 dark:bg-slate-900"
+                className="w-full flex justify-between items-center py-3 px-4 rounded-xl font-semibold text-sm bg-slate-100 dark:bg-slate-900"
               >
                 <span>Products</span>
                 <span>{mobileSubMenu === 'products' ? '▲' : '▼'}</span>
               </button>
               {mobileSubMenu === 'products' && (
-                <div className="flex flex-col pl-4 gap-2 mt-2 border-l-2 border-blue-500">
-                  <button onClick={() => { setActiveTab('aim-app'); setIsMobileMenuOpen(false); }} className="text-left py-1.5 text-xs">AIM App</button>
-                  <button onClick={() => { setActiveTab('org-chart'); setIsMobileMenuOpen(false); }} className="text-left py-1.5 text-xs">Mansharp Org Chart</button>
+                <div className="flex flex-col pl-4 gap-2 mt-2 border-l-2 border-blue-500 ml-2">
+                  <button onClick={() => { setActiveTab('aim-app'); setIsMobileMenuOpen(false); }} className="text-left py-2 text-xs font-medium">AIM App</button>
+                  <button onClick={() => { setActiveTab('org-chart'); setIsMobileMenuOpen(false); }} className="text-left py-2 text-xs font-medium">Mansharp Org Chart</button>
                 </div>
               )}
             </div>
 
-            <button onClick={() => { setActiveTab('contact'); setIsMobileMenuOpen(false); }} className="w-full mt-2 bg-gradient-to-r from-rose-500 to-pink-500 text-white py-3 rounded-xl text-sm font-semibold shadow-md">
+            <button 
+              onClick={() => { setActiveTab('contact'); setIsMobileMenuOpen(false); }} 
+              className="w-full mt-2 bg-gradient-to-r from-rose-500 to-pink-500 text-white py-3 rounded-xl text-sm font-bold shadow-lg text-center"
+            >
               Contact Us
             </button>
           </div>
@@ -575,148 +578,103 @@ export default function App() {
       )}
 
       {/* MAIN CONTENT AREA */}
-      <main className="flex-1 w-full">
-        {!isAdmin ? (
-          <div className="space-y-12 sm:space-y-16 pb-20">
-            
-            {/* DYNAMIC BANNER & IMAGE SLIDER SECTION */}
-            <div className="relative w-full h-[420px] sm:h-[580px] flex items-center justify-center text-center px-4 overflow-hidden shadow-2xl">
-              <div className="absolute inset-0 z-0">
-                <img 
-                  key={activeBanner.image}
-                  src={activeBanner.image} 
-                  alt="Banner" 
-                  className={`w-full h-full object-cover scale-105 transition-all duration-700 ${isDark ? 'brightness-[0.35]' : 'brightness-[0.55]'}`}
-                />
-                <div className={`absolute inset-0 bg-gradient-to-t ${isDark ? 'from-slate-950 via-slate-950/40' : 'from-slate-950/70 via-slate-950/20'} to-transparent`}></div>
-              </div>
-
-              {/* Slider Content */}
-              <div className="relative z-10 max-w-4xl mx-auto space-y-4 sm:space-y-6">
-                <span className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full shadow-lg">
-                  {activeBanner.subtitle}
-                </span>
-                <h1 className="text-2xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight drop-shadow-lg">
-                  {activeBanner.title}
-                </h1>
-                <p className="text-slate-100 text-xs sm:text-base max-w-2xl mx-auto leading-relaxed drop-shadow px-2">
-                  {activeBanner.desc}
-                </p>
-                <div className="flex justify-center gap-4 pt-2">
-                  <button onClick={() => setActiveTab('contact')} className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold px-6 sm:px-7 py-3 sm:py-3.5 rounded-2xl text-xs sm:text-sm transition-all shadow-xl shadow-blue-600/30">
-                    Get Started Today 🚀
-                  </button>
-                </div>
-              </div>
-
-              {/* Slider Navigation Dots */}
-              <div className="absolute bottom-4 sm:bottom-6 z-20 flex gap-1.5 sm:gap-2 overflow-x-auto max-w-[95%] px-2 py-1 scrollbar-none">
-                {bannerSlides.map((slide, index) => (
-                  <button
-                    key={index}
-                    onClick={() => {
-                      setCurrentSlide(index);
-                      setActiveTab(slide.id);
-                    }}
-                    className={`h-2 rounded-full transition-all duration-300 ${currentSlide === index ? 'w-6 sm:w-8 bg-blue-500 shadow-md' : 'w-2 bg-white/50 hover:bg-white'}`}
-                    title={slide.title}
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* SCROLLABLE DETAILED CONTENT SECTION */}
-            <div className="max-w-6xl mx-auto px-4 sm:px-8 space-y-12">
-              <div className={`p-6 sm:p-12 rounded-3xl border shadow-xl grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center transition-all ${isDark ? 'bg-slate-900/80 border-slate-800' : 'bg-white/80 border-slate-200'}`}>
-                <div className="space-y-4">
-                  <span className="text-xs font-bold uppercase tracking-widest text-blue-500 bg-blue-50 dark:bg-blue-950/60 px-3 py-1 rounded-full border border-blue-100 dark:border-blue-900">
-                    {activeBanner.subtitle} Insights
-                  </span>
-                  <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight">
-                    {activeBanner.contentTitle}
-                  </h2>
-                  <p className={`text-sm sm:text-base leading-relaxed ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
-                    {activeBanner.contentText}
-                  </p>
-                  <div className="pt-4 flex flex-wrap gap-3">
-                    <button onClick={() => setActiveTab('contact')} className="bg-slate-900 hover:bg-slate-800 text-white dark:bg-blue-600 dark:hover:bg-blue-500 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all">
-                      Talk To Our Specialist
-                    </button>
-                  </div>
-                </div>
-                <div className="relative h-64 sm:h-80 rounded-2xl overflow-hidden shadow-lg border border-slate-200 dark:border-slate-800">
-                  <img src={activeBanner.image} alt="Detail" className="w-full h-full object-cover" />
-                </div>
-              </div>
-            </div>
-
-          </div>
-        ) : (
-          /* ADMIN PANEL SECTION */
-          <div className="max-w-md mx-auto px-4 py-16">
+      <main className="flex-grow">
+        {isAdmin ? (
+          <div className="max-w-md mx-auto mt-16 p-6 sm:p-8 rounded-3xl shadow-2xl border bg-white dark:bg-slate-900 dark:border-slate-800">
+            <h2 className="text-xl font-extrabold text-center mb-6">Admin Portal</h2>
             {!isLoggedIn ? (
-              <form onSubmit={handleLogin} className={`p-8 rounded-3xl border shadow-2xl space-y-6 ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
-                <div className="text-center space-y-2">
-                  <div className="bg-blue-600 text-white h-12 w-12 rounded-2xl mx-auto flex items-center justify-center text-xl font-bold shadow-lg">🛡️</div>
-                  <h2 className="text-xl font-extrabold">Admin Authentication</h2>
-                  <p className="text-xs text-slate-500">Sign in to manage Mansharp portal credentials.</p>
+              <form onSubmit={handleLogin} className="flex flex-col gap-4">
+                <div>
+                  <label className="block text-xs font-semibold mb-1">Mobile Number</label>
+                  <input 
+                    type="text" 
+                    value={mobile} 
+                    onChange={(e) => setMobile(e.target.value)} 
+                    placeholder="Enter mobile (9876543210)" 
+                    className="w-full p-3 rounded-xl border text-sm bg-slate-50 dark:bg-slate-950 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    required 
+                  />
                 </div>
-                <div className="space-y-4">
-                  <div>
-                    <label className="text-xs font-bold block mb-1">Mobile Number</label>
-                    <input 
-                      type="text" 
-                      placeholder="Enter mobile (e.g. 9876543210)"
-                      value={mobile}
-                      onChange={(e) => setMobile(e.target.value)}
-                      className={`w-full px-4 py-3 rounded-xl border text-sm outline-none transition-all ${isDark ? 'bg-slate-950 border-slate-800 focus:border-blue-500' : 'bg-slate-50 border-slate-200 focus:border-blue-500'}`}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="text-xs font-bold block mb-1">Password</label>
-                    <input 
-                      type="password" 
-                      placeholder="Enter password (e.g. admin123)"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      className={`w-full px-4 py-3 rounded-xl border text-sm outline-none transition-all ${isDark ? 'bg-slate-950 border-slate-800 focus:border-blue-500' : 'bg-slate-50 border-slate-200 focus:border-blue-500'}`}
-                      required
-                    />
-                  </div>
-                  <button type="submit" className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl text-sm transition-all shadow-lg shadow-blue-500/30">
-                    Login to Dashboard
-                  </button>
+                <div>
+                  <label className="block text-xs font-semibold mb-1">Password</label>
+                  <input 
+                    type="password" 
+                    value={password} 
+                    onChange={(e) => setPassword(e.target.value)} 
+                    placeholder="Enter password (admin123)" 
+                    className="w-full p-3 rounded-xl border text-sm bg-slate-50 dark:bg-slate-950 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    required 
+                  />
                 </div>
+                <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl text-sm shadow-lg transition-all mt-2">
+                  Login as Admin
+                </button>
               </form>
             ) : (
-              <div className={`p-8 rounded-3xl border shadow-2xl text-center space-y-6 ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
-                <div className="h-16 w-16 bg-emerald-500/10 text-emerald-500 rounded-full flex items-center justify-center text-3xl mx-auto border border-emerald-500/20">✅</div>
-                <div className="space-y-2">
-                  <h2 className="text-xl font-extrabold">Welcome, Administrator!</h2>
-                  <p className="text-xs text-slate-500">You have successfully authenticated with administrative privileges.</p>
-                </div>
-                <button onClick={() => setIsLoggedIn(false)} className="bg-rose-500 hover:bg-rose-600 text-white font-bold px-6 py-2.5 rounded-xl text-xs transition-all">
-                  Logout Session
+              <div className="text-center py-6">
+                <div className="text-4xl mb-3">🎉</div>
+                <h3 className="text-lg font-bold text-green-500 mb-2">Welcome Admin!</h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mb-6">You have successfully authenticated into the Mansharp Admin Dashboard.</p>
+                <button onClick={() => setIsLoggedIn(false)} className="bg-rose-500 hover:bg-rose-600 text-white px-6 py-2 rounded-xl text-xs font-bold transition-all">
+                  Logout
                 </button>
               </div>
             )}
+          </div>
+        ) : (
+          <div>
+            {/* HERO BANNER SECTION */}
+            <section className="relative px-4 sm:px-8 py-12 sm:py-20 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+              <div className="flex flex-col gap-5">
+                <span className="self-start px-3.5 py-1.5 rounded-full text-xs font-bold bg-blue-100 text-blue-700 dark:bg-blue-950/80 dark:text-blue-300 border border-blue-200 dark:border-blue-900">
+                  {activeBanner.subtitle}
+                </span>
+                <h1 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
+                  {activeBanner.title}
+                </h1>
+                <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+                  {activeBanner.desc}
+                </p>
+                <div className="flex flex-wrap gap-4 pt-2">
+                  <button onClick={() => setActiveTab('contact')} className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-2xl text-sm shadow-xl shadow-blue-500/20 transition-all">
+                    Get Started Today
+                  </button>
+                  <button onClick={() => setActiveTab('aim-app')} className="border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-900 font-bold px-6 py-3 rounded-2xl text-sm transition-all">
+                    Explore Solutions
+                  </button>
+                </div>
+              </div>
+
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800 h-64 sm:h-96 group">
+                <img 
+                  src={activeBanner.image} 
+                  alt={activeBanner.title} 
+                  className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent flex flex-col justify-end p-6 sm:p-8 text-white">
+                  <span className="text-xs font-semibold text-blue-400 uppercase tracking-widest">{activeBanner.subtitle}</span>
+                  <h3 className="text-lg sm:text-2xl font-bold">{activeBanner.contentTitle}</h3>
+                </div>
+              </div>
+            </section>
+
+            {/* DETAILED CONTENT SECTION */}
+            <section className={`px-4 sm:px-8 py-16 border-t ${isDark ? 'border-slate-900 bg-slate-900/50' : 'border-slate-200 bg-white/50'}`}>
+              <div className="max-w-4xl mx-auto flex flex-col gap-6 text-center">
+                <h2 className="text-2xl sm:text-4xl font-extrabold">{activeBanner.contentTitle}</h2>
+                <p className="text-sm sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
+                  {activeBanner.contentText}
+                </p>
+              </div>
+            </section>
           </div>
         )}
       </main>
 
       {/* FOOTER */}
-      <footer className={`border-t py-8 px-4 sm:px-8 text-center text-xs transition-colors ${isDark ? 'border-slate-900 bg-slate-950 text-slate-400' : 'border-slate-200 bg-slate-100 text-slate-600'}`}>
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p>© {new Date().getFullYear()} Mansharp Technologies. All Rights Reserved.</p>
-          <div className="flex gap-4">
-            <button onClick={() => setActiveTab('privacy-policy')} className="hover:text-blue-500">Privacy Policy</button>
-            <button onClick={() => setActiveTab('terms')} className="hover:text-blue-500">Terms & Conditions</button>
-            <button onClick={() => setActiveTab('contact')} className="hover:text-blue-500">Support</button>
-          </div>
-        </div>
+      <footer className={`border-t px-4 sm:px-8 py-8 text-center text-xs text-slate-500 dark:text-slate-400 ${isDark ? 'border-slate-800 bg-slate-900' : 'border-slate-200 bg-white'}`}>
+        <p>© {new Date().getFullYear()} Mansharp Technologies. All rights reserved. Built with Microsoft Certified Excellence.</p>
       </footer>
-
     </div>
   );
 }
