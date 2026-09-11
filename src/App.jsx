@@ -9,7 +9,7 @@ export default function App() {
   const [theme, setTheme] = useState('dark'); // 'dark' or 'light'
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Slider data jo har option/tab ke liye alag image aur text dikhayega
+  // Header aur footer ke har ek option ke liye alag banner images aur texts
   const bannerSlides = [
     {
       id: 'about',
@@ -18,26 +18,146 @@ export default function App() {
       image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80'
     },
     {
+      id: 'why-choose-us',
+      title: 'Why Choose Mansharp Technologies',
+      desc: 'Discover why leading enterprises trust our Microsoft Certified Professionals for unmatched digital evolution.',
+      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=80'
+    },
+    {
+      id: 'life-at-mansharp',
+      title: 'Life At Mansharp',
+      desc: 'A culture built on collaboration, continuous learning, celebration, and pushing boundaries together.',
+      image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1600&q=80'
+    },
+    {
+      id: 'leadership',
+      title: 'Our Visionary Leadership',
+      desc: 'Guiding the path of digital transformation with decades of core technological and strategic expertise.',
+      image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&q=80'
+    },
+    {
       id: 'healthcare',
-      title: 'Transforming Healthcare with Smart Solutions',
-      desc: 'Secure, compliant, and advanced digital platforms designed for modern healthcare providers and patient care.',
+      title: 'Healthcare Solutions & Patient Care Platforms',
+      desc: 'Secure, HIPAA-compliant, and next-gen digital frameworks built for modern healthcare ecosystems.',
       image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1600&q=80'
     },
     {
+      id: 'education',
+      title: 'Smart Education & E-Learning Platforms',
+      desc: 'Empowering institutions and learners worldwide with interactive, scalable cloud infrastructures.',
+      image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80'
+    },
+    {
+      id: 'public-sector',
+      title: 'Public Sector & Government Digitalization',
+      desc: 'Streamlining citizen services through transparent, secure, and highly efficient digital government tech.',
+      image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80'
+    },
+    {
+      id: 'financial-services',
+      title: 'Financial Services & Banking Tech',
+      desc: 'Robust, secure, and high-performance financial systems designed to protect data and accelerate transactions.',
+      image: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=1600&q=80'
+    },
+    {
+      id: 'manufacturing',
+      title: 'Manufacturing & Supply Chain Innovation',
+      desc: 'Automating industrial processes, IoT integration, and smart analytics for manufacturing excellence.',
+      image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1600&q=80'
+    },
+    {
+      id: 'energy',
+      title: 'Energy & Utilities Smart Solutions',
+      desc: 'Sustainable technologies and data management systems tailored for modern energy enterprises.',
+      image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1600&q=80'
+    },
+    {
+      id: 'retail',
+      title: 'Retail & E-Commerce Digital Growth',
+      desc: 'Enhancing customer experiences and backend inventory systems through high-speed cloud solutions.',
+      image: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=1600&q=80'
+    },
+    {
+      id: 'software',
+      title: 'Software & Technology Product Development',
+      desc: 'Building custom software products, scalable architectures, and next-gen enterprise tools.',
+      image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80'
+    },
+    {
+      id: 'blogs',
+      title: 'Mansharp Insights & Industry Blogs',
+      desc: 'Read expert thoughts on Cloud Computing, Artificial Intelligence, Microsoft Technologies, and more.',
+      image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1600&q=80'
+    },
+    {
+      id: 'case-studies',
+      title: 'Proven Success Stories & Case Studies',
+      desc: 'See how we have helped global organizations overcome complex technological challenges.',
+      image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1600&q=80'
+    },
+    {
+      id: 'workshops',
+      title: 'Events & Technical Workshops',
+      desc: 'Join our interactive seminars, webinars, and technology skill-building workshops.',
+      image: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=1600&q=80'
+    },
+    {
+      id: 'department-solutions',
+      title: 'Enterprise Department Solutions',
+      desc: 'Targeted workflow enhancements across HR, Finance, Operations, and Sales departments.',
+      image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1600&q=80'
+    },
+    {
+      id: 'licenses',
+      title: 'Software Licenses & Enterprise Agreements',
+      desc: 'Streamline your enterprise licensing needs with certified Microsoft partners.',
+      image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1600&q=80'
+    },
+    {
       id: 'technologies',
-      title: 'Next-Gen Technologies & Cloud Infrastructure',
-      desc: 'Leveraging Microsoft Azure, AI, and robust cloud frameworks to scale your enterprise efficiently.',
+      title: 'Cutting-Edge Technologies & Azure Cloud',
+      desc: 'Empowering your business with state-of-the-art cloud architecture and modern developer tools.',
       image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80'
+    },
+    {
+      id: 'integration',
+      title: 'System Integration & IT Consulting',
+      desc: 'Seamlessly connect disparate legacy apps and systems with modern cloud infrastructure.',
+      image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1600&q=80'
+    },
+    {
+      id: 'aim-app',
+      title: 'AIM Asset Management Application',
+      desc: 'Track, manage, and optimize your organization assets in real-time with supreme efficiency.',
+      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80'
     },
     {
       id: 'org-chart',
       title: 'Mansharp Org Chart Solution',
-      desc: 'Visualize your corporate hierarchy seamlessly with our automated and interactive organizational mapping tool.',
+      desc: 'Automate reporting lines and visualize team hierarchies dynamically with our custom app.',
       image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=80'
+    },
+    {
+      id: 'contact',
+      title: 'Get in Touch With Our Experts',
+      desc: 'Let us discuss how we can accelerate your business growth through advanced technology solutions.',
+      image: 'https://images.unsplash.com/photo-1423596653951-9b62843232f3?auto=format&fit=crop&w=1600&q=80'
+    },
+    {
+      id: 'privacy-policy',
+      title: 'Privacy Policy & Data Security',
+      desc: 'Our steadfast commitment to maintaining data security, confidentiality, and your absolute privacy.',
+      image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1600&q=80'
+    },
+    {
+      id: 'terms',
+      title: 'Terms And Conditions',
+      desc: 'Guidelines and legal agreements governing the use of Mansharp Technologies services and website.',
+      image: 'https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=1600&q=80'
     }
   ];
 
-  // Active tab ke hisab se slide match karna ya default rakhna
+  // Active tab ke mutabiq slide index update karna
   useEffect(() => {
     const foundIndex = bannerSlides.findIndex(slide => slide.id === activeTab);
     if (foundIndex !== -1) {
@@ -99,9 +219,12 @@ export default function App() {
                 Industries <span className="text-[10px]">▼</span>
               </span>
               <div className={`absolute top-full left-0 w-56 border rounded-2xl shadow-2xl p-3 grid grid-cols-2 gap-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 z-50 ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
-                {['Healthcare', 'Education', 'Public Sector', 'Financial Services', 'Manufacturing', 'Energy', 'Retail', 'Software'].map((ind, idx) => (
-                  <button key={idx} onClick={() => setActiveTab(ind.toLowerCase().replace(/\s+/g, '-'))} className={`text-left px-2 py-1.5 rounded-lg text-[11px] transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-slate-100 text-slate-700'}`}>{ind}</button>
-                ))}
+                {['Healthcare', 'Education', 'Public Sector', 'Financial Services', 'Manufacturing', 'Energy', 'Retail', 'Software'].map((ind, idx) => {
+                  const slug = ind.toLowerCase().replace(/\s+/g, '-');
+                  return (
+                    <button key={idx} onClick={() => setActiveTab(slug)} className={`text-left px-2 py-1.5 rounded-lg text-[11px] transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-slate-100 text-slate-700'}`}>{ind}</button>
+                  );
+                })}
               </div>
             </div>
 
@@ -173,7 +296,7 @@ export default function App() {
                   key={activeBanner.image}
                   src={activeBanner.image} 
                   alt="Slider Banner" 
-                  className={`w-full h-full object-cover scale-105 transition-all duration-1000 ${isDark ? 'brightness-[0.35]' : 'brightness-[0.55]'}`}
+                  className={`w-full h-full object-cover scale-105 transition-all duration-700 ${isDark ? 'brightness-[0.35]' : 'brightness-[0.55]'}`}
                 />
                 <div className={`absolute inset-0 bg-gradient-to-t ${isDark ? 'from-slate-950 via-slate-950/40' : 'from-slate-900/60 via-slate-900/20'} to-transparent`}></div>
               </div>
@@ -181,7 +304,7 @@ export default function App() {
               {/* Slider Content */}
               <div className="relative z-10 max-w-4xl mx-auto space-y-6 animate-fadeIn">
                 <span className="bg-blue-600 text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full shadow-lg">
-                  Featured • {activeTab.replace(/-/g, ' ')}
+                  Mansharp Technologies • {activeTab.replace(/-/g, ' ')}
                 </span>
                 <h1 className="text-3xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight drop-shadow-lg">
                   {activeBanner.title}
@@ -196,8 +319,8 @@ export default function App() {
                 </div>
               </div>
 
-              {/* Slider Dots / Navigation Controls */}
-              <div className="absolute bottom-6 z-20 flex gap-2">
+              {/* Slider Navigation Dots */}
+              <div className="absolute bottom-6 z-20 flex gap-2 overflow-x-auto max-w-[90%] px-2 py-1">
                 {bannerSlides.map((slide, index) => (
                   <button
                     key={index}
@@ -205,14 +328,14 @@ export default function App() {
                       setCurrentSlide(index);
                       setActiveTab(slide.id);
                     }}
-                    className={`h-2.5 rounded-full transition-all duration-300 ${currentSlide === index ? 'w-8 bg-blue-500' : 'w-2.5 bg-white/50 hover:bg-white'}`}
-                    title={`Slide ${index + 1}`}
+                    className={`h-2 rounded-full transition-all duration-300 ${currentSlide === index ? 'w-6 bg-blue-500' : 'w-2 bg-white/50 hover:bg-white'}`}
+                    title={slide.title}
                   />
                 ))}
               </div>
             </div>
 
-            {/* ABOUT US / DYNAMIC TAB CONTENT */}
+            {/* TAB CONTENT DETAILS */}
             {activeTab === 'about' ? (
               <div className="max-w-6xl mx-auto px-4 sm:px-8 space-y-12">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -234,12 +357,11 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* CULTURE VALUES */}
                 <div className="space-y-8 pt-6">
                   <div className="text-center space-y-2">
                     <h2 className={`text-3xl font-extrabold ${isDark ? 'text-white' : 'text-slate-900'}`}>Our Culture</h2>
                     <p className={`text-xs sm:text-sm max-w-xl mx-auto ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                      At Mansharp, we foster curiosity, passion, and innovation. At every stage, our team strives to be who you love to work with. Here is how we do it:
+                      At Mansharp, we foster curiosity, passion, and innovation. At every stage, our team strives to be who you love to work with.
                     </p>
                   </div>
 
@@ -276,10 +398,13 @@ export default function App() {
                   {activeTab.replace(/-/g, ' ')}
                 </h2>
                 <p className={`text-sm max-w-xl mx-auto leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                  Explore our expert solutions and insights tailored under {activeTab.replace(/-/g, ' ')}. We deliver enterprise-grade transformation designed for modern businesses.
+                  Explore our expert solutions and insights tailored under {activeTab.replace(/-/g, ' ')}. We deliver enterprise-grade digital transformation designed for modern businesses.
                 </p>
-                <div className="pt-4">
-                  <button onClick={() => setActiveTab('about')} className="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-3 rounded-xl text-xs transition-all shadow-md">
+                <div className="pt-4 flex justify-center gap-4">
+                  <button onClick={() => setActiveTab('contact')} className="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-3 rounded-xl text-xs transition-all shadow-md">
+                    Inquire Now
+                  </button>
+                  <button onClick={() => setActiveTab('about')} className={`border font-semibold px-6 py-3 rounded-xl text-xs transition-all ${isDark ? 'border-slate-800 text-slate-300 hover:bg-slate-900' : 'border-slate-200 text-slate-700 hover:bg-slate-100'}`}>
                     Back to About
                   </button>
                 </div>
