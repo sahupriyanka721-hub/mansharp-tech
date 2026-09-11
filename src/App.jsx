@@ -48,7 +48,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-blue-600 selection:text-white" onClick={() => setActiveDropdown(null)}>
-      {/* Header with Interactive Penthara-style Dropdowns */}
+      {/* Header with Fully Functional Dropdowns */}
       <header className="border-b border-slate-800/80 bg-slate-900/95 backdrop-blur-md sticky top-0 z-50 px-4 sm:px-8 py-4 flex justify-between items-center shadow-2xl">
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => setActiveTab('home')}>
           <div className="bg-gradient-to-tr from-blue-600 to-indigo-600 text-white font-extrabold h-10 w-10 rounded-xl flex items-center justify-center text-lg shadow-lg shadow-blue-500/25">
@@ -66,25 +66,32 @@ export default function App() {
             
             {/* About Dropdown */}
             <div className="relative" onClick={(e) => e.stopPropagation()}>
-              <button onClick={() => setActiveDropdown(activeDropdown === 'about' ? null : 'about')} className="hover:text-blue-400 flex items-center gap-1 transition-colors py-2">
+              <button 
+                onClick={() => setActiveDropdown(activeDropdown === 'about' ? null : 'about')} 
+                className="hover:text-blue-400 flex items-center gap-1 transition-colors py-2"
+              >
                 About <span className="text-xs">▼</span>
               </button>
               {activeDropdown === 'about' && (
-                <div className="absolute top-full left-0 mt-2 w-48 bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl p-2 flex flex-col gap-1 z-50">
-                  <button onClick={() => { setActiveTab('home'); setActiveDropdown(null); }} className="text-left px-3 py-2 rounded-xl text-xs hover:bg-slate-800 text-slate-300">About Us</button>
-                  <button onClick={() => { setActiveTab('solutions'); setActiveDropdown(null); }} className="text-left px-3 py-2 rounded-xl text-xs hover:bg-slate-800 text-slate-300">Why Choose Us</button>
-                  <button onClick={() => { setActiveTab('home'); setActiveDropdown(null); }} className="text-left px-3 py-2 rounded-xl text-xs hover:bg-slate-800 text-slate-300">Leadership</button>
+                <div className="absolute top-full left-0 mt-2 w-52 bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl p-2 flex flex-col gap-1 z-50">
+                  <button onClick={() => { setActiveTab('home'); setActiveDropdown(null); }} className="text-left px-3 py-2 rounded-xl text-xs hover:bg-slate-800 text-slate-300 font-medium">About Us</button>
+                  <button onClick={() => { setActiveTab('solutions'); setActiveDropdown(null); }} className="text-left px-3 py-2 rounded-xl text-xs hover:bg-slate-800 text-slate-300 font-medium">Why Choose Us</button>
+                  <button onClick={() => { setActiveTab('home'); setActiveDropdown(null); }} className="text-left px-3 py-2 rounded-xl text-xs hover:bg-slate-800 text-slate-300 font-medium">Life At Mansharp</button>
+                  <button onClick={() => { setActiveTab('home'); setActiveDropdown(null); }} className="text-left px-3 py-2 rounded-xl text-xs hover:bg-slate-800 text-slate-300 font-medium">Leadership</button>
                 </div>
               )}
             </div>
 
             {/* Industries Dropdown */}
             <div className="relative" onClick={(e) => e.stopPropagation()}>
-              <button onClick={() => setActiveDropdown(activeDropdown === 'industries' ? null : 'industries')} className="hover:text-blue-400 flex items-center gap-1 transition-colors py-2">
+              <button 
+                onClick={() => setActiveDropdown(activeDropdown === 'industries' ? null : 'industries')} 
+                className="hover:text-blue-400 flex items-center gap-1 transition-colors py-2"
+              >
                 Industries <span className="text-xs">▼</span>
               </button>
               {activeDropdown === 'industries' && (
-                <div className="absolute top-full left-0 mt-2 w-56 bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl p-3 grid grid-cols-2 gap-1 z-50">
+                <div className="absolute top-full left-0 mt-2 w-60 bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl p-3 grid grid-cols-2 gap-1 z-50">
                   {['Healthcare', 'Education', 'Public Sector', 'Financial Services', 'Manufacturing', 'Energy', 'Retail', 'Software'].map((ind, idx) => (
                     <button key={idx} onClick={() => { setActiveTab('home'); setActiveDropdown(null); }} className="text-left px-2 py-1.5 rounded-lg text-[11px] hover:bg-slate-800 text-slate-300">{ind}</button>
                   ))}
@@ -94,26 +101,34 @@ export default function App() {
 
             {/* Resources Dropdown */}
             <div className="relative" onClick={(e) => e.stopPropagation()}>
-              <button onClick={() => setActiveDropdown(activeDropdown === 'resources' ? null : 'resources')} className="hover:text-blue-400 flex items-center gap-1 transition-colors py-2">
+              <button 
+                onClick={() => setActiveDropdown(activeDropdown === 'resources' ? null : 'resources')} 
+                className="hover:text-blue-400 flex items-center gap-1 transition-colors py-2"
+              >
                 Resources & Insights <span className="text-xs">▼</span>
               </button>
               {activeDropdown === 'resources' && (
-                <div className="absolute top-full left-0 mt-2 w-48 bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl p-2 flex flex-col gap-1 z-50">
+                <div className="absolute top-full left-0 mt-2 w-52 bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl p-2 flex flex-col gap-1 z-50">
+                  <button onClick={() => { setActiveTab('caseStudies'); setActiveDropdown(null); }} className="text-left px-3 py-2 rounded-xl text-xs hover:bg-slate-800 text-slate-300">Blogs</button>
                   <button onClick={() => { setActiveTab('caseStudies'); setActiveDropdown(null); }} className="text-left px-3 py-2 rounded-xl text-xs hover:bg-slate-800 text-slate-300">Case Studies</button>
-                  <button onClick={() => { setActiveTab('services'); setActiveDropdown(null); }} className="text-left px-3 py-2 rounded-xl text-xs hover:bg-slate-800 text-slate-300">Blogs & Articles</button>
+                  <button onClick={() => { setActiveTab('services'); setActiveDropdown(null); }} className="text-left px-3 py-2 rounded-xl text-xs hover:bg-slate-800 text-slate-300">Events & Workshops</button>
                 </div>
               )}
             </div>
 
             {/* Solutions Dropdown */}
             <div className="relative" onClick={(e) => e.stopPropagation()}>
-              <button onClick={() => setActiveDropdown(activeDropdown === 'solutions' ? null : 'solutions')} className="hover:text-blue-400 flex items-center gap-1 transition-colors py-2">
+              <button 
+                onClick={() => setActiveDropdown(activeDropdown === 'solutions' ? null : 'solutions')} 
+                className="hover:text-blue-400 flex items-center gap-1 transition-colors py-2"
+              >
                 Solutions <span className="text-xs">▼</span>
               </button>
               {activeDropdown === 'solutions' && (
                 <div className="absolute top-full left-0 mt-2 w-56 bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl p-2 flex flex-col gap-1 z-50">
                   <button onClick={() => { setActiveTab('solutions'); setActiveDropdown(null); }} className="text-left px-3 py-2 rounded-xl text-xs hover:bg-slate-800 text-slate-300">Department Solutions</button>
-                  <button onClick={() => { setActiveTab('services'); setActiveDropdown(null); }} className="text-left px-3 py-2 rounded-xl text-xs hover:bg-slate-800 text-slate-300">Licenses & Tech</button>
+                  <button onClick={() => { setActiveTab('services'); setActiveDropdown(null); }} className="text-left px-3 py-2 rounded-xl text-xs hover:bg-slate-800 text-slate-300">Licenses</button>
+                  <button onClick={() => { setActiveTab('services'); setActiveDropdown(null); }} className="text-left px-3 py-2 rounded-xl text-xs hover:bg-slate-800 text-slate-300">Technologies</button>
                   <button onClick={() => { setActiveTab('services'); setActiveDropdown(null); }} className="text-left px-3 py-2 rounded-xl text-xs hover:bg-slate-800 text-slate-300">Integration & Consulting</button>
                 </div>
               )}
@@ -121,12 +136,15 @@ export default function App() {
 
             {/* Products Dropdown */}
             <div className="relative" onClick={(e) => e.stopPropagation()}>
-              <button onClick={() => setActiveDropdown(activeDropdown === 'products' ? null : 'products')} className="hover:text-blue-400 flex items-center gap-1 transition-colors py-2">
+              <button 
+                onClick={() => setActiveDropdown(activeDropdown === 'products' ? null : 'products')} 
+                className="hover:text-blue-400 flex items-center gap-1 transition-colors py-2"
+              >
                 Products <span className="text-xs">▼</span>
               </button>
               {activeDropdown === 'products' && (
                 <div className="absolute top-full left-0 mt-2 w-64 bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl p-2 flex flex-col gap-1 z-50">
-                  <button onClick={() => { setActiveTab('products'); setActiveDropdown(null); }} className="text-left px-3 py-2 rounded-xl text-xs hover:bg-slate-800 text-slate-300 font-bold">AIM App (Asset Mgmt)</button>
+                  <button onClick={() => { setActiveTab('products'); setActiveDropdown(null); }} className="text-left px-3 py-2 rounded-xl text-xs hover:bg-slate-800 text-slate-300 font-bold">AIM App (Asset Management)</button>
                   <button onClick={() => { setActiveTab('products'); setActiveDropdown(null); }} className="text-left px-3 py-2 rounded-xl text-xs hover:bg-slate-800 text-slate-300 font-bold">Mansharp Org Chart</button>
                 </div>
               )}
@@ -158,7 +176,7 @@ export default function App() {
               <div className="space-y-16">
                 <div className="text-center space-y-6 py-12">
                   <h2 className="text-4xl sm:text-6xl font-extrabold text-white">Empowering Businesses Through Innovation</h2>
-                  <p className="text-slate-400 max-w-2xl mx-auto text-base">Select any menu item above or explore our enterprise products and solutions below.</p>
+                  <p className="text-slate-400 max-w-2xl mx-auto text-base">Select any menu item above or explore our enterprise products with images below.</p>
                   <button onClick={() => setActiveTab('products')} className="bg-blue-600 hover:bg-blue-500 text-white px-7 py-3.5 rounded-2xl text-sm font-semibold shadow-lg">View Products With Images →</button>
                 </div>
               </div>
@@ -180,7 +198,7 @@ export default function App() {
 
             {activeTab === 'services' && (
               <div className="space-y-8">
-                <h2 className="text-3xl font-extrabold text-white text-center">Our Core Services</h2>
+                <h2 className="text-3xl font-extrabold text-white text-center">Our Core Services & Technologies</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {services.map((s) => (
                     <div key={s.id} className="bg-slate-900 border border-slate-800 p-6 rounded-3xl space-y-3">
@@ -192,18 +210,36 @@ export default function App() {
               </div>
             )}
 
-            {/* PRODUCTS WITH IMAGES AND DETAILED NAMES */}
+            {activeTab === 'caseStudies' && (
+              <div className="space-y-8">
+                <h2 className="text-3xl font-extrabold text-white text-center">Resources, Blogs & Case Studies</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="bg-slate-900 border border-slate-800 p-6 rounded-3xl space-y-2">
+                    <span className="text-xs text-blue-400 font-bold uppercase">Blog Article</span>
+                    <h3 className="text-xl font-bold text-white">Transforming Enterprise Cloud with AI & Copilot</h3>
+                    <p className="text-slate-400 text-sm">Read how modern organizations leverage automated systems for high output.</p>
+                  </div>
+                  <div className="bg-slate-900 border border-slate-800 p-6 rounded-3xl space-y-2">
+                    <span className="text-xs text-blue-400 font-bold uppercase">Case Study</span>
+                    <h3 className="text-xl font-bold text-white">Scaling Auction Platform Onboarding</h3>
+                    <p className="text-slate-400 text-sm">Seamless workflow automation reducing manual overhead by 70%.</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* PRODUCTS WITH IMAGES AND DESCRIPTIVE NAMES */}
             {activeTab === 'products' && (
               <div className="space-y-8">
                 <div className="text-center space-y-2">
                   <h2 className="text-3xl sm:text-4xl font-extrabold text-white">Mansharp Products</h2>
-                  <p className="text-slate-400 text-sm">Interactive software suites equipped with dashboard previews and management tools.</p>
+                  <p className="text-slate-400 text-sm">Interactive software suites with live image previews and management dashboards.</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
                   {products.map((prod) => (
                     <div key={prod.id} className="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl flex flex-col">
                       <div className="h-48 w-full overflow-hidden bg-slate-950 relative">
-                        <img src={prod.image} alt={prod.title} className="w-full h-full object-cover opacity-80 hover:scale-105 transition-transform duration-500" />
+                        <img src={prod.image} alt={prod.title} className="w-full h-full object-cover opacity-85 hover:scale-105 transition-transform duration-500" />
                         <span className="absolute top-3 right-3 bg-blue-600 text-white font-bold px-3 py-1 rounded-xl text-xs shadow-md">
                           {prod.price}
                         </span>
