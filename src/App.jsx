@@ -6,7 +6,7 @@ export default function App() {
   const [mobile, setMobile] = useState('');
   const [password, setPassword] = useState('');
   const [activeTab, setActiveTab] = useState('home');
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [hoveredProduct, setHoveredProduct] = useState(null);
 
   // Dynamic States
   const [services, setServices] = useState([
@@ -18,21 +18,23 @@ export default function App() {
   const [products, setProducts] = useState([
     { 
       id: 1, 
-      title: 'AIM App (Asset & Inventory Management)', 
-      price: '$499/mo', 
-      desc: 'Effortlessly track and manage all your company assets in one centralized place with high precision.',
+      title: 'AIM App', 
+      subtitle: 'Asset & Inventory Management App',
+      desc: 'Effortlessly Track And Manage All Your Company Assets In One Place.', 
+      price: '$499/mo',
       image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80'
     },
     { 
       id: 2, 
-      title: 'Mansharp Org Chart Suite', 
-      price: '$899/mo', 
-      desc: 'Instantly view & search your team hierarchy with real-time interactive organization charts.',
+      title: 'Mansharp Org Chart', 
+      subtitle: 'Hierarchy & Real-time Analytics Suite',
+      desc: 'Instantly View & Search Your Team’s Hierarchy With Real-Time Org Charts.', 
+      price: '$899/mo',
       image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80'
     }
   ]);
 
-  const [newProduct, setNewProduct] = useState({ title: '', price: '', desc: '', image: '' });
+  const [newProduct, setNewProduct] = useState({ title: '', subtitle: '', price: '', desc: '', image: '' });
   const [contactForm, setContactForm] = useState({ name: '', email: '', message: '' });
 
   const handleLogin = (e) => {
@@ -46,7 +48,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-blue-600 selection:text-white">
-      {/* Header with Hover-Based Dropdowns (Exact video style) */}
+      {/* Header with Hover-Based Dropdown & Preview Image Feature */}
       <header className="border-b border-slate-800/80 bg-slate-900/95 backdrop-blur-md sticky top-0 z-50 px-4 sm:px-8 py-4 flex justify-between items-center shadow-2xl">
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => setActiveTab('home')}>
           <div className="bg-gradient-to-tr from-blue-600 to-indigo-600 text-white font-extrabold h-10 w-10 rounded-xl flex items-center justify-center text-lg shadow-lg shadow-blue-500/25">
@@ -58,7 +60,7 @@ export default function App() {
           </div>
         </div>
 
-        {/* Desktop Navigation with Pure Hover Dropdowns */}
+        {/* Desktop Navigation with Hover Dropdowns */}
         {!isAdmin && (
           <nav className="hidden lg:flex items-center gap-8 text-sm font-medium text-slate-300">
             
@@ -112,14 +114,29 @@ export default function App() {
               </div>
             </div>
 
-            {/* Products Menu */}
+            {/* Products Menu with Video-style Hover Preview Card (Name + Image) */}
             <div className="relative group py-2 cursor-pointer">
               <span className="group-hover:text-blue-400 flex items-center gap-1 transition-colors">
                 Products <span className="text-[10px]">▼</span>
               </span>
-              <div className="absolute top-full left-0 w-64 bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl p-2 flex flex-col gap-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 z-50">
-                <button onClick={() => setActiveTab('products')} className="text-left px-3 py-2 rounded-xl text-xs hover:bg-slate-800 text-slate-300 font-bold">AIM App (Asset Management)</button>
-                <button onClick={() => setActiveTab('products')} className="text-left px-3 py-2 rounded-xl text-xs hover:bg-slate-800 text-slate-300 font-bold">Mansharp Org Chart</button>
+              
+              <div className="absolute top-full left-[-80px] w-[500px] bg-slate-900 border border-slate-800 rounded-3xl shadow-2xl p-4 grid grid-cols-2 gap-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-3 group-hover:translate-y-0 z-50">
+                {products.map((prod) => (
+                  <div 
+                    key={prod.id} 
+                    onMouseEnter={() => setHoveredProduct(prod)}
+                    onClick={() => setActiveTab('products')} 
+                    className="bg-slate-950/80 border border-slate-800/80 hover:border-blue-500/50 p-3 rounded-2xl flex flex-col gap-2 transition-all cursor-pointer group/item"
+                  >
+                    <div className="h-28 w-full rounded-xl overflow-hidden bg-slate-900 relative">
+                      <img src={prod.image} alt={prod.title} className="w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500 opacity-90" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-white text-xs group-hover/item:text-blue-400 transition-colors">{prod.title}</h4>
+                      <p className="text-[10px] text-slate-400 line-clamp-1 mt-0.5">{prod.desc}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -143,8 +160,8 @@ export default function App() {
             {activeTab === 'home' && (
               <div className="text-center space-y-6 py-12">
                 <h2 className="text-4xl sm:text-6xl font-extrabold text-white">Empowering Businesses Through Innovation</h2>
-                <p className="text-slate-400 max-w-2xl mx-auto text-base">Hover over the menu items above to view options instantly, or check out our products with images below.</p>
-                <button onClick={() => setActiveTab('products')} className="bg-blue-600 hover:bg-blue-500 text-white px-7 py-3.5 rounded-2xl text-sm font-semibold shadow-lg">View Products With Images →</button>
+                <p className="text-slate-400 max-w-2xl mx-auto text-base">Hover over <span className="text-blue-400 font-bold">Products</span> in the navigation bar to see interactive option cards with images and names pop up instantly!</p>
+                <button onClick={() => setActiveTab('products')} className="bg-blue-600 hover:bg-blue-500 text-white px-7 py-3.5 rounded-2xl text-sm font-semibold shadow-lg">View Products →</button>
               </div>
             )}
 
@@ -194,7 +211,7 @@ export default function App() {
               </div>
             )}
 
-            {/* PRODUCTS WITH IMAGES AND NAMES */}
+            {/* PRODUCTS PAGE */}
             {activeTab === 'products' && (
               <div className="space-y-8">
                 <div className="text-center space-y-2">
@@ -254,12 +271,12 @@ export default function App() {
                   <button onClick={() => setIsLoggedIn(false)} className="bg-rose-600/20 text-rose-400 px-4 py-2 rounded-xl text-xs font-semibold">Logout</button>
                 </div>
                 <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-3">
-                  <h4 className="font-bold text-white text-sm">Add New Product (with Image & Name)</h4>
-                  <input type="text" placeholder="Product Title" value={newProduct.title} onChange={(e) => setNewProduct({...newProduct, title: e.target.value})} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white" />
+                  <h4 className="font-bold text-white text-sm">Add New Product Card</h4>
+                  <input type="text" placeholder="Product Title (e.g. AIM App)" value={newProduct.title} onChange={(e) => setNewProduct({...newProduct, title: e.target.value})} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white" />
                   <input type="text" placeholder="Price ($499/mo)" value={newProduct.price} onChange={(e) => setNewProduct({...newProduct, price: e.target.value})} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white" />
                   <input type="text" placeholder="Image URL" value={newProduct.image} onChange={(e) => setNewProduct({...newProduct, image: e.target.value})} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white" />
                   <textarea placeholder="Description" value={newProduct.desc} onChange={(e) => setNewProduct({...newProduct, desc: e.target.value})} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white"></textarea>
-                  <button onClick={() => { if(newProduct.title) { setProducts([...products, {id: Date.now(), ...newProduct}]); setNewProduct({title:'', price:'', desc:'', image:''}); }}} className="w-full bg-blue-600 text-white py-2.5 rounded-xl text-xs font-semibold">Add Product</button>
+                  <button onClick={() => { if(newProduct.title) { setProducts([...products, {id: Date.now(), ...newProduct}]); setNewProduct({title:'', subtitle:'', price:'', desc:'', image:''}); }}} className="w-full bg-blue-600 text-white py-2.5 rounded-xl text-xs font-semibold">Add Product</button>
                 </div>
               </div>
             )}
