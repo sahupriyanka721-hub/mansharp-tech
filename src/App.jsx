@@ -7,6 +7,9 @@ export default function App() {
   const [password, setPassword] = useState('');
   const [activeTab, setActiveTab] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  
+  // Dropdown States for Header Navigation (Penthara style)
+  const [activeDropdown, setActiveDropdown] = useState(null);
 
   // Dynamic States for Admin & User Panel
   const [services, setServices] = useState([
@@ -21,11 +24,10 @@ export default function App() {
   ]);
 
   const [products, setProducts] = useState([
-    { id: 1, title: 'Mansharp Org Chart Suite', price: '$499/mo', desc: 'Interactive organizational charting solution built for modern enterprise teams.' },
-    { id: 2, title: 'Cloud Workflow & Asset Engine', price: '$899/mo', desc: 'Centralized asset tracking and automated multi-tier approval management framework.' }
+    { id: 1, title: 'AIM App (Asset & Inventory Management)', price: '$499/mo', desc: 'Effortlessly track and manage all your company assets in one place.' },
+    { id: 2, title: 'Penthara Org Chart', price: '$899/mo', desc: 'Instantly view & search your team hierarchy with real-time Org Charts.' }
   ]);
 
-  // Form input states
   const [newService, setNewService] = useState({ title: '', desc: '' });
   const [newProduct, setNewProduct] = useState({ title: '', price: '' });
   const [contactForm, setContactForm] = useState({ name: '', email: '', message: '' });
@@ -40,42 +42,120 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-blue-600 selection:text-white">
-      {/* Header */}
-      <header className="border-b border-slate-800/80 bg-slate-900/90 backdrop-blur-md sticky top-0 z-50 px-4 sm:px-8 py-4 flex justify-between items-center shadow-2xl">
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-blue-600 selection:text-white" onClick={() => setActiveDropdown(null)}>
+      {/* Header with Penthara Style Dropdowns */}
+      <header className="border-b border-slate-800/80 bg-slate-900/95 backdrop-blur-md sticky top-0 z-50 px-4 sm:px-8 py-4 flex justify-between items-center shadow-2xl">
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => setActiveTab('home')}>
           <div className="bg-gradient-to-tr from-blue-600 to-indigo-600 text-white font-extrabold h-10 w-10 rounded-xl flex items-center justify-center text-lg shadow-lg shadow-blue-500/25">
             M
           </div>
           <div>
-            <h1 className="font-extrabold text-base sm:text-lg leading-tight tracking-tight text-white">Mansharp</h1>
-            <p className="text-[10px] tracking-widest text-blue-400 font-semibold uppercase">Technologies</p>
+            <h1 className="font-extrabold text-base sm:text-lg leading-tight tracking-tight text-white">MANSHARP</h1>
+            <p className="text-[10px] tracking-widest text-blue-400 font-semibold uppercase">TECHNOLOGIES</p>
           </div>
         </div>
 
-        {/* Navigation & Actions */}
-        <div className="flex items-center gap-3 sm:gap-4">
-          {!isAdmin && (
-            <>
-              {/* Desktop Nav */}
-              <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-300">
-                <button onClick={() => setActiveTab('home')} className={`transition-colors hover:text-blue-400 ${activeTab === 'home' ? 'text-blue-400 font-semibold' : ''}`}>Home</button>
-                <button onClick={() => setActiveTab('solutions')} className={`transition-colors hover:text-blue-400 ${activeTab === 'solutions' ? 'text-blue-400 font-semibold' : ''}`}>Solutions</button>
-                <button onClick={() => setActiveTab('services')} className={`transition-colors hover:text-blue-400 ${activeTab === 'services' ? 'text-blue-400 font-semibold' : ''}`}>Services</button>
-                <button onClick={() => setActiveTab('caseStudies')} className={`transition-colors hover:text-blue-400 ${activeTab === 'caseStudies' ? 'text-blue-400 font-semibold' : ''}`}>Case Studies</button>
-                <button onClick={() => setActiveTab('products')} className={`transition-colors hover:text-blue-400 ${activeTab === 'products' ? 'text-blue-400 font-semibold' : ''}`}>Products</button>
-                <button onClick={() => setActiveTab('contact')} className={`transition-colors hover:text-blue-400 ${activeTab === 'contact' ? 'text-blue-400 font-semibold' : ''}`}>Contact</button>
-              </nav>
-
-              {/* Mobile Menu Toggle Button */}
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all shadow-sm"
+        {/* Desktop Navigation with Dropdowns */}
+        {!isAdmin && (
+          <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-300 relative">
+            
+            {/* About Dropdown */}
+            <div className="relative" onClick={(e) => e.stopPropagation()}>
+              <button 
+                onClick={() => setActiveDropdown(activeDropdown === 'about' ? null : 'about')} 
+                className="hover:text-blue-400 flex items-center gap-1 transition-colors py-2"
               >
-                <span className="text-base">{mobileMenuOpen ? '✕' : '☰'}</span>
-                <span>{mobileMenuOpen ? 'Close' : 'Menu'}</span>
+                About <span className="text-xs">▼</span>
               </button>
-            </>
+              {activeDropdown === 'about' && (
+                <div className="absolute top-full left-0 mt-2 w-48 bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl p-2 flex flex-col gap-1 z-50">
+                  <button onClick={() => { setActiveTab('home'); setActiveDropdown(null); }} className="text-left px-3 py-2 rounded-xl text-xs hover:bg-slate-800 text-slate-300">About Us</button>
+                  <button onClick={() => { setActiveTab('solutions'); setActiveDropdown(null); }} className="text-left px-3 py-2 rounded-xl text-xs hover:bg-slate-800 text-slate-300">Why Choose Us</button>
+                  <button onClick={() => { setActiveTab('home'); setActiveDropdown(null); }} className="text-left px-3 py-2 rounded-xl text-xs hover:bg-slate-800 text-slate-300">Leadership</button>
+                </div>
+              )}
+            </div>
+
+            {/* Industries Dropdown */}
+            <div className="relative" onClick={(e) => e.stopPropagation()}>
+              <button 
+                onClick={() => setActiveDropdown(activeDropdown === 'industries' ? null : 'industries')} 
+                className="hover:text-blue-400 flex items-center gap-1 transition-colors py-2"
+              >
+                Industries <span className="text-xs">▼</span>
+              </button>
+              {activeDropdown === 'industries' && (
+                <div className="absolute top-full left-0 mt-2 w-56 bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl p-3 grid grid-cols-2 gap-1 z-50">
+                  {['Healthcare', 'Education', 'Public Sector', 'Financial Services', 'Manufacturing', 'Energy', 'Retail', 'Software'].map((ind, idx) => (
+                    <button key={idx} onClick={() => { setActiveTab('home'); setActiveDropdown(null); }} className="text-left px-2 py-1.5 rounded-lg text-[11px] hover:bg-slate-800 text-slate-300">{ind}</button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Resources Dropdown */}
+            <div className="relative" onClick={(e) => e.stopPropagation()}>
+              <button 
+                onClick={() => setActiveDropdown(activeDropdown === 'resources' ? null : 'resources')} 
+                className="hover:text-blue-400 flex items-center gap-1 transition-colors py-2"
+              >
+                Resources & Insights <span className="text-xs">▼</span>
+              </button>
+              {activeDropdown === 'resources' && (
+                <div className="absolute top-full left-0 mt-2 w-48 bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl p-2 flex flex-col gap-1 z-50">
+                  <button onClick={() => { setActiveTab('caseStudies'); setActiveDropdown(null); }} className="text-left px-3 py-2 rounded-xl text-xs hover:bg-slate-800 text-slate-300">Case Studies</button>
+                  <button onClick={() => { setActiveTab('services'); setActiveDropdown(null); }} className="text-left px-3 py-2 rounded-xl text-xs hover:bg-slate-800 text-slate-300">Blogs & Articles</button>
+                </div>
+              )}
+            </div>
+
+            {/* Solutions Dropdown */}
+            <div className="relative" onClick={(e) => e.stopPropagation()}>
+              <button 
+                onClick={() => setActiveDropdown(activeDropdown === 'solutions' ? null : 'solutions')} 
+                className="hover:text-blue-400 flex items-center gap-1 transition-colors py-2"
+              >
+                Solutions <span className="text-xs">▼</span>
+              </button>
+              {activeDropdown === 'solutions' && (
+                <div className="absolute top-full left-0 mt-2 w-56 bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl p-2 flex flex-col gap-1 z-50">
+                  <button onClick={() => { setActiveTab('solutions'); setActiveDropdown(null); }} className="text-left px-3 py-2 rounded-xl text-xs hover:bg-slate-800 text-slate-300">Department Solutions</button>
+                  <button onClick={() => { setActiveTab('services'); setActiveDropdown(null); }} className="text-left px-3 py-2 rounded-xl text-xs hover:bg-slate-800 text-slate-300">Licenses & Tech</button>
+                  <button onClick={() => { setActiveTab('services'); setActiveDropdown(null); }} className="text-left px-3 py-2 rounded-xl text-xs hover:bg-slate-800 text-slate-300">Integration & Consulting</button>
+                </div>
+              )}
+            </div>
+
+            {/* Products Dropdown */}
+            <div className="relative" onClick={(e) => e.stopPropagation()}>
+              <button 
+                onClick={() => setActiveDropdown(activeDropdown === 'products' ? null : 'products')} 
+                className="hover:text-blue-400 flex items-center gap-1 transition-colors py-2"
+              >
+                Products <span className="text-xs">▼</span>
+              </button>
+              {activeDropdown === 'products' && (
+                <div className="absolute top-full left-0 mt-2 w-64 bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl p-2 flex flex-col gap-1 z-50">
+                  <button onClick={() => { setActiveTab('products'); setActiveDropdown(null); }} className="text-left px-3 py-2 rounded-xl text-xs hover:bg-slate-800 text-slate-300 font-bold">AIM App (Asset Mgmt)</button>
+                  <button onClick={() => { setActiveTab('products'); setActiveDropdown(null); }} className="text-left px-3 py-2 rounded-xl text-xs hover:bg-slate-800 text-slate-300 font-bold">Mansharp Org Chart</button>
+                </div>
+              )}
+            </div>
+
+            <button onClick={() => setActiveTab('contact')} className="hover:text-blue-400 transition-colors">Contact Us</button>
+          </nav>
+        )}
+
+        {/* Actions & Mobile Toggle */}
+        <div className="flex items-center gap-3">
+          {!isAdmin && (
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="lg:hidden bg-slate-800 hover:bg-slate-700 text-slate-200 px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all"
+            >
+              <span>{mobileMenuOpen ? '✕' : '☰'}</span>
+              <span>Menu</span>
+            </button>
           )}
 
           <button
@@ -84,179 +164,134 @@ export default function App() {
               setIsLoggedIn(false);
               setMobileMenuOpen(false);
             }}
-            className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all shadow-md shadow-blue-600/30 flex items-center gap-1.5"
+            className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all shadow-md shadow-blue-600/30"
           >
-            {isAdmin ? 'User Portal' : 'Admin 🛡️'}
+            {isAdmin ? 'User Portal' : 'Admin Panel 🛡️'}
           </button>
         </div>
       </header>
 
-      {/* Mobile Dropdown Menu */}
+      {/* Mobile Menu */}
       {!isAdmin && mobileMenuOpen && (
-        <div className="lg:hidden bg-slate-900/95 border-b border-slate-800 px-6 py-5 flex flex-col gap-3 text-sm font-medium text-slate-300 backdrop-blur-2xl shadow-2xl animate-fadeIn">
-          <button onClick={() => { setActiveTab('home'); setMobileMenuOpen(false); }} className={`text-left py-2.5 px-3 rounded-xl transition-all ${activeTab === 'home' ? 'bg-blue-600/20 text-blue-400 font-bold border border-blue-500/30' : 'hover:bg-slate-800'}`}>Home</button>
-          <button onClick={() => { setActiveTab('solutions'); setMobileMenuOpen(false); }} className={`text-left py-2.5 px-3 rounded-xl transition-all ${activeTab === 'solutions' ? 'bg-blue-600/20 text-blue-400 font-bold border border-blue-500/30' : 'hover:bg-slate-800'}`}>Solutions & Pillars</button>
-          <button onClick={() => { setActiveTab('services'); setMobileMenuOpen(false); }} className={`text-left py-2.5 px-3 rounded-xl transition-all ${activeTab === 'services' ? 'bg-blue-600/20 text-blue-400 font-bold border border-blue-500/30' : 'hover:bg-slate-800'}`}>Services</button>
-          <button onClick={() => { setActiveTab('caseStudies'); setMobileMenuOpen(false); }} className={`text-left py-2.5 px-3 rounded-xl transition-all ${activeTab === 'caseStudies' ? 'bg-blue-600/20 text-blue-400 font-bold border border-blue-500/30' : 'hover:bg-slate-800'}`}>Case Studies</button>
-          <button onClick={() => { setActiveTab('products'); setMobileMenuOpen(false); }} className={`text-left py-2.5 px-3 rounded-xl transition-all ${activeTab === 'products' ? 'bg-blue-600/20 text-blue-400 font-bold border border-blue-500/30' : 'hover:bg-slate-800'}`}>Products</button>
-          <button onClick={() => { setActiveTab('contact'); setMobileMenuOpen(false); }} className={`text-left py-2.5 px-3 rounded-xl transition-all ${activeTab === 'contact' ? 'bg-blue-600/20 text-blue-400 font-bold border border-blue-500/30' : 'hover:bg-slate-800'}`}>Contact Us</button>
+        <div className="lg:hidden bg-slate-900 border-b border-slate-800 px-6 py-5 flex flex-col gap-3 text-sm font-medium text-slate-300 shadow-2xl">
+          <button onClick={() => { setActiveTab('home'); setMobileMenuOpen(false); }} className="text-left py-2 hover:text-blue-400">Home / About Us</button>
+          <button onClick={() => { setActiveTab('solutions'); setMobileMenuOpen(false); }} className="text-left py-2 hover:text-blue-400">Solutions & Departments</button>
+          <button onClick={() => { setActiveTab('services'); setMobileMenuOpen(false); }} className="text-left py-2 hover:text-blue-400">Services & Insights</button>
+          <button onClick={() => { setActiveTab('caseStudies'); setMobileMenuOpen(false); }} className="text-left py-2 hover:text-blue-400">Case Studies</button>
+          <button onClick={() => { setActiveTab('products'); setMobileMenuOpen(false); }} className="text-left py-2 hover:text-blue-400">Products (AIM & Org Chart)</button>
+          <button onClick={() => { setActiveTab('contact'); setMobileMenuOpen(false); }} className="text-left py-2 hover:text-blue-400">Contact Us</button>
         </div>
       )}
 
-      {/* Main Content */}
+      {/* Main Content Sections */}
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-8 py-6">
         {!isAdmin ? (
-          <div className="space-y-16 py-6">
+          <div className="space-y-20 py-6">
             
-            {/* HOME TAB (Hero, Ticker Announcements, Pillars, Industries) */}
             {activeTab === 'home' && (
               <div className="space-y-20">
                 {/* Hero Section */}
-                <div className="text-center space-y-8 py-10 sm:py-16">
-                  <div className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 text-blue-400 px-4 py-2 rounded-full text-xs font-semibold tracking-wide uppercase shadow-inner">
-                    <span>✨ Empowering Global Enterprises with Advanced Solutions</span>
+                <div className="text-center space-y-8 py-12 sm:py-20">
+                  <div className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 text-blue-400 px-4 py-2 rounded-full text-xs font-semibold tracking-wide uppercase">
+                    <span>✨ Strategic Enhancements for Enterprise Solutions</span>
                   </div>
                   <h2 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight">
-                    Unify, Secure, & Scale with <br />
+                    Empowering Businesses <br />
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500">
-                      Next-Gen Digital Innovation
+                      Through Digital Innovation
                     </span>
                   </h2>
                   <p className="text-slate-400 max-w-3xl mx-auto text-base sm:text-lg leading-relaxed">
-                    We help companies optimize cloud architecture, automate business workflows, secure endpoint infrastructure, and drive higher corporate ROI.
+                    We deliver cutting-edge software solutions, enterprise web development, and robust cloud services tailored to scale your business.
                   </p>
                   <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4">
-                    <button onClick={() => setActiveTab('solutions')} className="bg-blue-600 hover:bg-blue-500 text-white px-7 py-3.5 rounded-2xl text-sm font-semibold transition-all shadow-xl shadow-blue-600/25">
-                      Explore Solutions →
+                    <button onClick={() => setActiveTab('services')} className="bg-blue-600 hover:bg-blue-500 text-white px-7 py-3.5 rounded-2xl text-sm font-semibold transition-all shadow-xl shadow-blue-600/25">
+                      Explore Services →
                     </button>
                     <button onClick={() => setActiveTab('contact')} className="bg-slate-900 border border-slate-800 hover:bg-slate-800 text-slate-300 px-7 py-3.5 rounded-2xl text-sm font-semibold transition-all">
-                      Schedule Consultation
+                      Contact Us
                     </button>
                   </div>
                 </div>
 
-                {/* Core Solution Pillars (Penthara style) */}
-                <div className="space-y-8">
-                  <div className="text-center space-y-3">
-                    <h3 className="text-xs uppercase tracking-widest text-blue-400 font-bold">Our Solution Pillars</h3>
-                    <h4 className="text-2xl sm:text-4xl font-extrabold text-white">Strategic Enhancements for Organization</h4>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                    <div className="bg-slate-900/60 border border-slate-800 hover:border-slate-700 p-6 rounded-3xl space-y-3 shadow-xl transition-all">
-                      <div className="w-10 h-10 rounded-xl bg-blue-600/20 text-blue-400 flex items-center justify-center font-bold text-lg">01</div>
-                      <h5 className="text-lg font-bold text-white">Department Solutions</h5>
-                      <p className="text-slate-400 text-xs leading-relaxed">Optimize HR, Sales, Finance, and Operations with seamlessly integrated custom digital workflows.</p>
-                    </div>
-                    <div className="bg-slate-900/60 border border-slate-800 hover:border-slate-700 p-6 rounded-3xl space-y-3 shadow-xl transition-all">
-                      <div className="w-10 h-10 rounded-xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center font-bold text-lg">02</div>
-                      <h5 className="text-lg font-bold text-white">Cloud & Tech</h5>
-                      <p className="text-slate-400 text-xs leading-relaxed">Leverage secure cloud migration, data analytics, AI integration, and robust infrastructure.</p>
-                    </div>
-                    <div className="bg-slate-900/60 border border-slate-800 hover:border-slate-700 p-6 rounded-3xl space-y-3 shadow-xl transition-all">
-                      <div className="w-10 h-10 rounded-xl bg-purple-600/20 text-purple-400 flex items-center justify-center font-bold text-lg">03</div>
-                      <h5 className="text-lg font-bold text-white">Integration & Consulting</h5>
-                      <p className="text-slate-400 text-xs leading-relaxed">Expert advisory for app development, governance framework, and scalable modern architecture.</p>
-                    </div>
-                    <div className="bg-slate-900/60 border border-slate-800 hover:border-slate-700 p-6 rounded-3xl space-y-3 shadow-xl transition-all">
-                      <div className="w-10 h-10 rounded-xl bg-teal-600/20 text-teal-400 flex items-center justify-center font-bold text-lg">04</div>
-                      <h5 className="text-lg font-bold text-white">Licensing Optimization</h5>
-                      <p className="text-slate-400 text-xs leading-relaxed">Simplify subscription models and navigate cost-effective cloud licensing options effortlessly.</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Industries We Serve Section */}
-                <div className="bg-gradient-to-b from-slate-900/80 to-slate-950 border border-slate-800 p-8 sm:p-12 rounded-3xl space-y-8 shadow-2xl">
-                  <div className="text-center space-y-2">
-                    <h3 className="text-xs uppercase tracking-widest text-blue-400 font-bold">Global Presence</h3>
-                    <h4 className="text-2xl sm:text-3xl font-extrabold text-white">Industries We Transform</h4>
-                  </div>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
-                    {['Healthcare & Pharma', 'Banking & Finance', 'Retail & Commerce', 'Real Estate & PropTech', 'Manufacturing & Oil', 'Technology & SaaS', 'Insurance & Legal', 'Transportation & Media'].map((ind, idx) => (
-                      <div key={idx} className="bg-slate-950/80 border border-slate-800 py-4 px-3 rounded-2xl text-xs sm:text-sm font-semibold text-slate-300 hover:border-blue-500/60 transition-all">
-                        {ind}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* SOLUTIONS TAB (Department Breakdown) */}
-            {activeTab === 'solutions' && (
-              <div className="space-y-8 py-6">
-                <div className="text-center space-y-3 max-w-2xl mx-auto">
-                  <h2 className="text-3xl sm:text-4xl font-extrabold text-white">Department Solutions & Architecture</h2>
-                  <p className="text-slate-400 text-sm">Tailored digital systems designed to address unique departmental challenges across your enterprise.</p>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
-                  {[
-                    { title: 'Human Resources', desc: 'Digitize onboarding flows, employee engagement, and automated compliance tracking.' },
-                    { title: 'Sales & Marketing', desc: 'Enhance lead generation, customer behavioral insights, and intelligent pipeline tracking.' },
-                    { title: 'Business Operations', desc: 'Improve supply chain transparency, eliminate bottlenecks, and automate routine tasks.' },
-                    { title: 'IT & Security Teams', desc: 'Strengthen enterprise security posture, device management, and zero-trust framework enforcement.' }
-                  ].map((sol, i) => (
-                    <div key={i} className="bg-slate-900/60 border border-slate-800 p-7 rounded-3xl space-y-3 shadow-xl">
-                      <h3 className="text-xl font-bold text-white">{sol.title}</h3>
-                      <p className="text-slate-400 text-sm leading-relaxed">{sol.desc}</p>
+                {/* Core Pillars Section */}
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                  {['Department Solutions', 'Cloud & Tech', 'Integration & Consulting', 'Licensing Optimization'].map((title, i) => (
+                    <div key={i} className="bg-slate-900/60 border border-slate-800 p-6 rounded-3xl space-y-3 shadow-xl">
+                      <div className="w-10 h-10 rounded-xl bg-blue-600/20 text-blue-400 flex items-center justify-center font-bold text-lg">0{i+1}</div>
+                      <h3 className="text-lg font-bold text-white">{title}</h3>
+                      <p className="text-slate-400 text-xs leading-relaxed">Tailored Microsoft and cloud solutions optimized to streamline your organization workflows.</p>
                     </div>
                   ))}
                 </div>
               </div>
             )}
 
-            {/* SERVICES TAB */}
+            {activeTab === 'solutions' && (
+              <div className="space-y-8 py-6">
+                <div className="text-center space-y-3">
+                  <h2 className="text-3xl sm:text-4xl font-extrabold text-white">Solutions & Strategic Enhancements</h2>
+                  <p className="text-slate-400 text-sm">Tailored architecture designed for modern enterprise departments.</p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+                  {['Human Resources Management', 'Sales & CRM Tracking', 'Operations Automation', 'IT Infrastructure & Security'].map((item, idx) => (
+                    <div key={idx} className="bg-slate-900/60 border border-slate-800 p-7 rounded-3xl space-y-2">
+                      <h3 className="text-xl font-bold text-white">{item}</h3>
+                      <p className="text-slate-400 text-sm">Advanced platform integrations to accelerate corporate growth and operational transparency.</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {activeTab === 'services' && (
               <div className="space-y-8 py-6">
                 <div className="text-center space-y-3">
-                  <h2 className="text-3xl sm:text-4xl font-extrabold text-white">Services That Transform Work</h2>
-                  <p className="text-slate-400 text-sm">Professional consulting and implementation solutions for high-growth enterprises.</p>
+                  <h2 className="text-3xl sm:text-4xl font-extrabold text-white">Our Core Services</h2>
+                  <p className="text-slate-400 text-sm">Empowering your team with smart digital services.</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
                   {services.map((s) => (
                     <div key={s.id} className="bg-slate-900/60 border border-slate-800 p-7 rounded-3xl space-y-4 shadow-xl">
                       <h3 className="text-xl font-bold text-white">{s.title}</h3>
-                      <p className="text-slate-400 text-sm leading-relaxed">{s.desc}</p>
+                      <p className="text-slate-400 text-sm">{s.desc}</p>
                     </div>
                   ))}
                 </div>
               </div>
             )}
 
-            {/* CASE STUDIES TAB (Success Stories component) */}
             {activeTab === 'caseStudies' && (
               <div className="space-y-8 py-6">
-                <div className="text-center space-y-3 max-w-2xl mx-auto">
-                  <h2 className="text-3xl sm:text-4xl font-extrabold text-white">Success Stories of Innovation</h2>
-                  <p className="text-slate-400 text-sm">Real-world examples of our solutions in action helping major international brands.</p>
+                <div className="text-center space-y-3">
+                  <h2 className="text-3xl sm:text-4xl font-extrabold text-white">Success Stories & Case Studies</h2>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
                   {caseStudies.map((cs) => (
-                    <div key={cs.id} className="bg-slate-900/60 border border-slate-800 p-7 rounded-3xl space-y-3 shadow-xl">
-                      <span className="text-[11px] font-bold text-blue-400 tracking-wider uppercase bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">Client: {cs.client}</span>
+                    <div key={cs.id} className="bg-slate-900/60 border border-slate-800 p-7 rounded-3xl space-y-3">
+                      <span className="text-xs font-bold text-blue-400 uppercase bg-blue-500/10 px-3 py-1 rounded-full">{cs.client}</span>
                       <h3 className="text-xl font-bold text-white pt-2">{cs.title}</h3>
-                      <p className="text-slate-400 text-sm leading-relaxed">{cs.desc}</p>
+                      <p className="text-slate-400 text-sm">{cs.desc}</p>
                     </div>
                   ))}
                 </div>
               </div>
             )}
 
-            {/* PRODUCTS TAB */}
             {activeTab === 'products' && (
               <div className="space-y-8 py-6">
                 <div className="text-center space-y-3">
-                  <h2 className="text-3xl sm:text-4xl font-extrabold text-white">Enterprise Software Products</h2>
-                  <p className="text-slate-400 text-sm">Ready-to-deploy suites designed to maximize workplace organization.</p>
+                  <h2 className="text-3xl sm:text-4xl font-extrabold text-white">Mansharp Products</h2>
+                  <p className="text-slate-400 text-sm">Discover our proprietary enterprise software applications.</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
                   {products.map((prod) => (
-                    <div key={prod.id} className="bg-slate-900/60 border border-slate-800 p-7 rounded-3xl flex justify-between items-center shadow-xl">
-                      <div className="space-y-1">
+                    <div key={prod.id} className="bg-slate-900/60 border border-slate-800 p-7 rounded-3xl flex justify-between items-center">
+                      <div>
                         <h3 className="text-xl font-bold text-white">{prod.title}</h3>
-                        <p className="text-slate-400 text-xs">{prod.desc}</p>
+                        <p className="text-slate-400 text-xs mt-1">{prod.desc}</p>
                       </div>
-                      <span className="bg-blue-600/20 border border-blue-500/30 text-blue-400 font-extrabold px-4 py-2.5 rounded-xl text-sm whitespace-nowrap ml-4">
+                      <span className="bg-blue-600/20 text-blue-400 font-extrabold px-4 py-2.5 rounded-xl text-sm">
                         {prod.price}
                       </span>
                     </div>
@@ -265,109 +300,88 @@ export default function App() {
               </div>
             )}
 
-            {/* CONTACT TAB */}
             {activeTab === 'contact' && (
               <div className="max-w-xl mx-auto space-y-6 py-6">
                 <div className="text-center space-y-2">
-                  <h2 className="text-3xl font-extrabold text-white">Talk to Our Enterprise Experts</h2>
-                  <p className="text-slate-400 text-sm">Request a personalized consultation, implementation roadmap, and ROI analysis.</p>
+                  <h2 className="text-3xl font-extrabold text-white">Contact Us</h2>
+                  <p className="text-slate-400 text-sm">Tell us about your challenge or need and we will get back to you soon.</p>
                 </div>
-                <form onSubmit={(e) => { e.preventDefault(); alert('Consultation request submitted successfully!'); setContactForm({ name: '', email: '', message: '' }); }} className="space-y-4 bg-slate-900/80 border border-slate-800 p-8 rounded-3xl shadow-2xl backdrop-blur-xl">
-                  <div>
-                    <label className="block text-xs font-medium text-slate-400 mb-1.5">Your Full Name</label>
-                    <input type="text" value={contactForm.name} onChange={(e) => setContactForm({...contactForm, name: e.target.value})} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-blue-500" required />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-medium text-slate-400 mb-1.5">Business Email</label>
-                    <input type="email" value={contactForm.email} onChange={(e) => setContactForm({...contactForm, email: e.target.value})} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-blue-500" required />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-medium text-slate-400 mb-1.5">Project Details / Requirements</label>
-                    <textarea rows="4" value={contactForm.message} onChange={(e) => setContactForm({...contactForm, message: e.target.value})} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-blue-500" required></textarea>
-                  </div>
-                  <button type="submit" className="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3.5 rounded-xl transition-all shadow-lg shadow-blue-600/25 text-sm">Submit Request</button>
+                <form onSubmit={(e) => { e.preventDefault(); alert('Query submitted!'); setContactForm({name:'', email:'', message:''}); }} className="space-y-4 bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl">
+                  <input type="text" placeholder="Your Name" value={contactForm.name} onChange={(e) => setContactForm({...contactForm, name: e.target.value})} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white" required />
+                  <input type="email" placeholder="Business Email" value={contactForm.email} onChange={(e) => setContactForm({...contactForm, email: e.target.value})} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white" required />
+                  <textarea rows="4" placeholder="Message / Requirements" value={contactForm.message} onChange={(e) => setContactForm({...contactForm, message: e.target.value})} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white" required></textarea>
+                  <button type="submit" className="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3.5 rounded-xl text-sm">Submit</button>
                 </form>
               </div>
             )}
           </div>
         ) : (
-          /* ADMIN PANEL */
+          /* Admin Panel */
           <div className="w-full max-w-xl mx-auto py-8">
             {!isLoggedIn ? (
-              <form onSubmit={handleLogin} className="bg-slate-900/80 border border-slate-800 p-8 rounded-3xl shadow-2xl space-y-6 backdrop-blur-xl">
+              <form onSubmit={handleLogin} className="bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl space-y-6">
                 <div className="text-center space-y-2">
-                  <h3 className="text-2xl font-bold tracking-tight text-white">Admin Portal Login</h3>
-                  <p className="text-xs text-slate-400">Enter authorized credentials to manage platform</p>
+                  <h3 className="text-2xl font-bold text-white">Admin Login</h3>
+                  <p className="text-xs text-slate-400">Mobile: 9876543210 | Password: admin123</p>
                 </div>
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-xs font-medium text-slate-400 mb-1.5">Mobile Number</label>
-                    <input type="text" placeholder="Mobile Number" value={mobile} onChange={(e) => setMobile(e.target.value)} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-blue-500" required />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-medium text-slate-400 mb-1.5">Password</label>
-                    <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-blue-500" required />
-                  </div>
-                </div>
-                <button type="submit" className="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3.5 rounded-xl transition-all shadow-lg text-sm">Authenticate</button>
+                <input type="text" placeholder="Mobile Number" value={mobile} onChange={(e) => setMobile(e.target.value)} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white" required />
+                <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white" required />
+                <button type="submit" className="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3.5 rounded-xl text-sm">Login</button>
               </form>
             ) : (
-              <div className="space-y-8">
-                <div className="flex justify-between items-center bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-md">
-                  <div>
-                    <h3 className="font-bold text-lg text-white">Admin Dashboard</h3>
-                    <p className="text-xs text-slate-400">Manage Services & Products Dynamically</p>
-                  </div>
-                  <button onClick={() => setIsLoggedIn(false)} className="bg-rose-600/10 border border-rose-500/20 text-rose-400 hover:bg-rose-600/20 px-4 py-2 rounded-xl text-xs font-semibold transition-all">
-                    Logout
-                  </button>
+              <div className="space-y-6">
+                <div className="flex justify-between items-center bg-slate-900 border border-slate-800 p-6 rounded-2xl">
+                  <h3 className="font-bold text-white">Admin Dashboard</h3>
+                  <button onClick={() => setIsLoggedIn(false)} className="bg-rose-600/20 text-rose-400 px-4 py-2 rounded-xl text-xs font-semibold">Logout</button>
                 </div>
-
-                {/* Manage Services */}
-                <div className="bg-slate-900/60 border border-slate-800 p-6 rounded-2xl space-y-4 shadow-md">
-                  <h4 className="font-bold text-white text-md">Manage Services</h4>
-                  <div className="flex flex-col sm:flex-row gap-2">
-                    <input type="text" placeholder="Service Title" value={newService.title} onChange={(e) => setNewService({...newService, title: e.target.value})} className="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white" />
-                    <input type="text" placeholder="Description" value={newService.desc} onChange={(e) => setNewService({...newService, desc: e.target.value})} className="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white" />
-                    <button onClick={() => { if(newService.title) { setServices([...services, {id: Date.now(), ...newService}]); setNewService({title:'', desc:''}); }}} className="bg-blue-600 hover:bg-blue-500 px-5 py-2.5 rounded-xl text-xs font-semibold">Add</button>
-                  </div>
-                  <div className="space-y-2 pt-2">
-                    {services.map(s => (
-                      <div key={s.id} className="flex justify-between items-center bg-slate-950 p-3 rounded-xl border border-slate-800/60 text-xs">
-                        <span>{s.title}</span>
-                        <button onClick={() => setServices(services.filter(x => x.id !== s.id))} className="text-rose-400 hover:text-rose-300 font-semibold">Delete</button>
-                      </div>
-                    ))}
+                <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-3">
+                  <h4 className="font-bold text-white text-sm">Add New Service</h4>
+                  <div className="flex gap-2">
+                    <input type="text" placeholder="Title" value={newService.title} onChange={(e) => setNewService({...newService, title: e.target.value})} className="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white" />
+                    <input type="text" placeholder="Description" value={newService.desc} onChange={(e) => setNewService({...newService, desc: e.target.value})} className="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white" />
+                    <button onClick={() => { if(newService.title) { setServices([...services, {id: Date.now(), ...newService}]); setNewService({title:'', desc:''}); }}} className="bg-blue-600 px-4 py-2 rounded-xl text-xs">Add</button>
                   </div>
                 </div>
-
-                {/* Manage Products */}
-                <div className="bg-slate-900/60 border border-slate-800 p-6 rounded-2xl space-y-4 shadow-md">
-                  <h4 className="font-bold text-white text-md">Manage Products</h4>
-                  <div className="flex flex-col sm:flex-row gap-2">
-                    <input type="text" placeholder="Product Name" value={newProduct.title} onChange={(e) => setNewProduct({...newProduct, title: e.target.value})} className="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white" />
-                    <input type="text" placeholder="Price" value={newProduct.price} onChange={(e) => setNewProduct({...newProduct, price: e.target.value})} className="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white" />
-                    <button onClick={() => { if(newProduct.title) { setProducts([...products, {id: Date.now(), ...newProduct}]); setNewProduct({title:'', price:''}); }}} className="bg-blue-600 hover:bg-blue-500 px-5 py-2.5 rounded-xl text-xs font-semibold">Add</button>
-                  </div>
-                  <div className="space-y-2 pt-2">
-                    {products.map(prod => (
-                      <div key={prod.id} className="flex justify-files justify-between items-center bg-slate-950 p-3 rounded-xl border border-slate-800/60 text-xs">
-                        <span>{prod.title} - {prod.price}</span>
-                        <button onClick={() => setProducts(products.filter(x => x.id !== prod.id))} className="text-rose-400 hover:text-rose-300 font-semibold">Delete</button>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
               </div>
             )}
           </div>
         )}
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-slate-800/80 py-8 text-center text-xs text-slate-500 bg-slate-900/50">
-        © {new Date().getFullYear()} Mansharp Technologies Private Limited. All rights reserved.
+      {/* Penthara Style Footer */}
+      <footer className="border-t border-slate-800/80 py-12 bg-slate-900/70 text-slate-400 text-xs">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="space-y-3">
+            <h4 className="font-extrabold text-white text-sm">MANSHARP TECHNOLOGIES</h4>
+            <p className="leading-relaxed">Empowering enterprises with intelligent solutions and cloud architecture.</p>
+          </div>
+          <div>
+            <h5 className="font-bold text-white mb-3">Solutions</h5>
+            <ul className="space-y-2">
+              <li>Department Solutions</li>
+              <li>Licenses</li>
+              <li>Technologies</li>
+              <li>Integration & Consulting</li>
+            </ul>
+          </div>
+          <div>
+            <h5 className="font-bold text-white mb-3">Industries</h5>
+            <ul className="space-y-2">
+              <li>Healthcare</li>
+              <li>Manufacturing</li>
+              <li>Public Sector</li>
+              <li>View More →</li>
+            </ul>
+          </div>
+          <div>
+            <h5 className="font-bold text-white mb-3">Contact</h5>
+            <p>Email: info@mansharp.com</p>
+            <p className="mt-2">USA & India Offices</p>
+          </div>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 border-t border-slate-800/60 mt-8 pt-6 text-center">
+          © {new Date().getFullYear()} Mansharp Technologies Private Limited. All rights reserved.
+        </div>
       </footer>
     </div>
   );
