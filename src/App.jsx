@@ -9,7 +9,7 @@ export default function App() {
   const [theme, setTheme] = useState('dark');
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Har ek option ke liye unique banner image, title, description aur content sections
+  // Har ek option ke liye unique banner image, title, description aur content sections (Jisme AI Solutions bhi shamil hai)
   const bannerSlides = [
     {
       id: 'about',
@@ -19,6 +19,15 @@ export default function App() {
       subtitle: 'About Us',
       contentTitle: 'We Are Mansharp Technologies',
       contentText: 'Embarking on our journey in 2013, our team of Microsoft Certified Professionals strives to deliver extraordinary solutions. We dream of bringing remarkable individuals together and transforming technology for positive change.'
+    },
+    {
+      id: 'ai-solutions',
+      title: 'Shape the Future of Your Enterprise with AI Solutions',
+      desc: 'Unlock limitless growth with custom AI models, Microsoft Copilot integration, and smart cloud architectures.',
+      image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1600&q=80',
+      subtitle: 'Mansharp AI',
+      contentTitle: 'Transforming Business With Artificial Intelligence',
+      contentText: 'Empower every individual, team, and industry with next-gen automated workflows, intelligent data pipelines, and secure enterprise AI.'
     },
     {
       id: 'why-choose-us',
@@ -229,7 +238,6 @@ export default function App() {
     }
   ];
 
-  // Tab change hone par automatic slide match karna aur page top par scroll karna
   useEffect(() => {
     const foundIndex = bannerSlides.findIndex(slide => slide.id === activeTab);
     if (foundIndex !== -1) {
@@ -273,7 +281,6 @@ export default function App() {
         {!isAdmin && (
           <nav className={`hidden lg:flex items-center gap-8 text-sm font-medium ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
             
-            {/* About Menu */}
             <div className="relative group py-2 cursor-pointer">
               <span className="hover:text-blue-500 flex items-center gap-1 transition-colors">
                 About <span className="text-[10px]">▼</span>
@@ -286,7 +293,6 @@ export default function App() {
               </div>
             </div>
 
-            {/* Industries Menu */}
             <div className="relative group py-2 cursor-pointer">
               <span className="hover:text-blue-500 flex items-center gap-1 transition-colors">
                 Industries <span className="text-[10px]">▼</span>
@@ -301,7 +307,6 @@ export default function App() {
               </div>
             </div>
 
-            {/* Resources & Insights Menu */}
             <div className="relative group py-2 cursor-pointer">
               <span className="hover:text-blue-500 flex items-center gap-1 transition-colors">
                 Resources & Insights <span className="text-[10px]">▼</span>
@@ -313,12 +318,12 @@ export default function App() {
               </div>
             </div>
 
-            {/* Solutions Menu */}
             <div className="relative group py-2 cursor-pointer">
               <span className="hover:text-blue-500 flex items-center gap-1 transition-colors">
                 Solutions <span className="text-[10px]">▼</span>
               </span>
               <div className={`absolute top-full left-0 w-56 border rounded-2xl shadow-2xl p-2 flex flex-col gap-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 z-50 ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
+                <button onClick={() => setActiveTab('ai-solutions')} className={`text-left px-3 py-2 rounded-xl text-xs font-bold text-blue-500 transition-colors ${isDark ? 'hover:bg-slate-800' : 'hover:bg-slate-100'}`}>✨ AI Solutions</button>
                 <button onClick={() => setActiveTab('department-solutions')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-slate-100 text-slate-700'}`}>Department Solutions</button>
                 <button onClick={() => setActiveTab('licenses')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-slate-100 text-slate-700'}`}>Licenses</button>
                 <button onClick={() => setActiveTab('technologies')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-slate-100 text-slate-700'}`}>Technologies</button>
@@ -326,7 +331,6 @@ export default function App() {
               </div>
             </div>
 
-            {/* Products Menu */}
             <div className="relative group py-2 cursor-pointer">
               <span className="hover:text-blue-500 flex items-center gap-1 transition-colors">
                 Products <span className="text-[10px]">▼</span>
@@ -341,12 +345,10 @@ export default function App() {
           </nav>
         )}
 
-        {/* Theme Toggle & Admin Buttons */}
         <div className="flex items-center gap-3">
           <button 
             onClick={toggleTheme} 
             className={`p-2.5 rounded-xl border text-sm font-semibold transition-all flex items-center justify-center ${isDark ? 'bg-slate-900 border-slate-800 text-amber-400 hover:bg-slate-800' : 'bg-slate-100 border-slate-200 text-slate-700 hover:bg-slate-200'}`}
-            title="Toggle Light/Dark Theme"
           >
             {isDark ? '☀️ Light' : '🌙 Dark'}
           </button>
@@ -356,6 +358,17 @@ export default function App() {
           </button>
         </div>
       </header>
+
+      {/* AI SOLUTIONS PROMO BAR (Jaise video mein Fenthara AI par diya gaya hai) */}
+      {!isAdmin && (
+        <div 
+          onClick={() => setActiveTab('ai-solutions')}
+          className="bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 text-white text-center py-2 px-4 text-xs sm:text-sm font-medium cursor-pointer hover:bg-blue-800 transition-all flex items-center justify-center gap-2 shadow-inner border-b border-blue-800/50"
+        >
+          <span>✨ Want To Explore AI Solutions Click Here!</span>
+          <span className="underline font-bold">Explore Now →</span>
+        </div>
+      )}
 
       {/* MAIN CONTENT AREA */}
       <main className="flex-1 w-full">
@@ -408,7 +421,7 @@ export default function App() {
               </div>
             </div>
 
-            {/* SCROLLABLE DETAILED CONTENT SECTION FOR EVERY OPTION */}
+            {/* SCROLLABLE DETAILED CONTENT SECTION */}
             <div className="max-w-6xl mx-auto px-4 sm:px-8 space-y-12">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div className="space-y-4">
@@ -435,7 +448,7 @@ export default function App() {
                 </div>
               </div>
 
-              {/* EXTRA CARDS SECTION WHEN SCROLLING */}
+              {/* EXTRA CARDS SECTION */}
               <div className="space-y-8 pt-10">
                 <div className="text-center space-y-2">
                   <h3 className={`text-2xl sm:text-3xl font-extrabold ${isDark ? 'text-white' : 'text-slate-900'}`}>Key Features & Capabilities</h3>
@@ -483,7 +496,6 @@ export default function App() {
       {/* FOOTER */}
       <footer className={`border-t text-xs py-12 px-4 sm:px-8 mt-auto transition-colors duration-300 ${isDark ? 'border-slate-800 bg-slate-900/90 text-slate-400' : 'border-slate-200 bg-white text-slate-600'}`}>
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 pb-8 border-b border-inherit">
-          
           <div className="space-y-3">
             <p className="flex items-center gap-2 hover:text-blue-500 transition-colors cursor-pointer" onClick={() => setActiveTab('contact')}>
               <span className="text-blue-500 font-bold">📞</span> +1-732-668-8002
@@ -495,26 +507,22 @@ export default function App() {
               <span className="text-blue-500 font-bold">✉️</span> info@mansharptech.com
             </p>
           </div>
-
           <div className="space-y-2">
             <h4 className={`font-bold mb-2 uppercase tracking-wider text-[11px] ${isDark ? 'text-white' : 'text-slate-900'}`}>Licenses</h4>
             <p className="hover:text-blue-500 cursor-pointer" onClick={() => setActiveTab('technologies')}>Technologies</p>
             <p className="hover:text-blue-500 cursor-pointer" onClick={() => setActiveTab('integration')}>Integration & Consulting</p>
           </div>
-
           <div className="space-y-2">
             <h4 className={`font-bold mb-2 uppercase tracking-wider text-[11px] ${isDark ? 'text-white' : 'text-slate-900'}`}>Industries</h4>
             <p className="hover:text-blue-500 cursor-pointer" onClick={() => setActiveTab('healthcare')}>Healthcare</p>
             <p className="hover:text-blue-500 cursor-pointer" onClick={() => setActiveTab('manufacturing')}>Manufacturing</p>
             <p className="hover:text-blue-500 cursor-pointer" onClick={() => setActiveTab('public-sector')}>Public Sector</p>
           </div>
-
           <div className="space-y-2">
             <h4 className={`font-bold mb-2 uppercase tracking-wider text-[11px] ${isDark ? 'text-white' : 'text-slate-900'}`}>Products</h4>
             <p className="hover:text-blue-500 cursor-pointer" onClick={() => setActiveTab('org-chart')}>Org Chart</p>
             <p className="hover:text-blue-500 cursor-pointer" onClick={() => setActiveTab('aim-app')}>Asset Management App</p>
           </div>
-
         </div>
 
         <div className="max-w-7xl mx-auto pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
@@ -528,7 +536,6 @@ export default function App() {
               <p>SCO 515, Third Floor, Sector 70, Mohali, Punjab, 160055</p>
             </div>
           </div>
-
           <div className="flex items-center gap-4 text-slate-400">
             <span className="hover:text-blue-500 cursor-pointer" onClick={() => setActiveTab('privacy-policy')}>Privacy Policy</span>
             <span>•</span>
