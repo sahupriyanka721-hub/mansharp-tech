@@ -6,10 +6,9 @@ export default function App() {
   const [mobile, setMobile] = useState('');
   const [password, setPassword] = useState('');
   const [activeTab, setActiveTab] = useState('about');
-  const [theme, setTheme] = useState('dark');
+  const [theme, setTheme] = useState('light'); // Default ab light/attractive rakha hai
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Click-based AI dropdown state
   const [isAiDropdownOpen, setIsAiDropdownOpen] = useState(false);
 
   const bannerSlides = [
@@ -86,159 +85,6 @@ export default function App() {
       contentText: 'Our leaders foster an environment of accountability, continuous growth, and long-term strategic success for global clients.'
     },
     {
-      id: 'healthcare',
-      title: 'Transforming Healthcare with Smart Solutions',
-      desc: 'Secure, compliant, and advanced digital platforms designed for modern healthcare providers and patient care.',
-      image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1600&q=80',
-      subtitle: 'Healthcare Industry',
-      contentTitle: 'Next-Gen Patient Care Systems',
-      contentText: 'We build HIPAA-compliant, highly secure cloud solutions that streamline clinical workflows and improve patient health outcomes.'
-    },
-    {
-      id: 'education',
-      title: 'Smart Education & E-Learning Platforms',
-      desc: 'Empowering institutions and learners worldwide with interactive, scalable cloud infrastructures.',
-      image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80',
-      subtitle: 'Education Industry',
-      contentTitle: 'Digital Transformation for Schools & Universities',
-      contentText: 'Modernizing classrooms and remote learning frameworks with robust, cloud-enabled educational management systems.'
-    },
-    {
-      id: 'public-sector',
-      title: 'Public Sector & Government Digitalization',
-      desc: 'Streamlining citizen services through transparent, secure, and highly efficient digital government tech.',
-      image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80',
-      subtitle: 'Public Sector',
-      contentTitle: 'Transparent Citizen Services',
-      contentText: 'Empowering government bodies with secure data pipelines, streamlined workflows, and citizen-first digital portals.'
-    },
-    {
-      id: 'financial-services',
-      title: 'Financial Services & Banking Tech',
-      desc: 'Robust, secure, and high-performance financial systems designed to protect data and accelerate transactions.',
-      image: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=1600&q=80',
-      subtitle: 'Fintech & Banking',
-      contentTitle: 'Secure Financial Infrastructures',
-      contentText: 'Providing encrypted, low-latency financial software solutions that safeguard sensitive assets and scale with market demands.'
-    },
-    {
-      id: 'manufacturing',
-      title: 'Manufacturing & Supply Chain Innovation',
-      desc: 'Automating industrial processes, IoT integration, and smart analytics for manufacturing excellence.',
-      image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1600&q=80',
-      subtitle: 'Manufacturing Industry',
-      contentTitle: 'Smart Factory Automation',
-      contentText: 'Connecting factory floors to cloud intelligence for predictive maintenance, optimized supply chains, and reduced downtime.'
-    },
-    {
-      id: 'energy',
-      title: 'Energy & Utilities Smart Solutions',
-      desc: 'Sustainable technologies and data management systems tailored for modern energy enterprises.',
-      image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1600&q=80',
-      subtitle: 'Energy Sector',
-      contentTitle: 'Sustainable Energy Management',
-      contentText: 'Helping utility providers monitor grid performance, reduce carbon footprints, and analyze resource distribution efficiently.'
-    },
-    {
-      id: 'retail',
-      title: 'Retail & E-Commerce Digital Growth',
-      desc: 'Enhancing customer experiences and backend inventory systems through high-speed cloud solutions.',
-      image: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=1600&q=80',
-      subtitle: 'Retail & Commerce',
-      contentTitle: 'Omnichannel Retail Experiences',
-      contentText: 'Scaling e-commerce platforms with real-time inventory tracking, AI-driven recommendations, and seamless checkout flows.'
-    },
-    {
-      id: 'software',
-      title: 'Software & Technology Product Development',
-      desc: 'Building custom software products, scalable architectures, and next-gen enterprise tools.',
-      image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80',
-      subtitle: 'Software Products',
-      contentTitle: 'Custom Engineering & SaaS',
-      contentText: 'Turning complex software concepts into market-ready, highly reliable, and cloud-native applications.'
-    },
-    {
-      id: 'blogs',
-      title: 'Mansharp Insights & Industry Blogs',
-      desc: 'Read expert thoughts on Cloud Computing, Artificial Intelligence, Microsoft Technologies, and more.',
-      image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1600&q=80',
-      subtitle: 'Resources & Insights',
-      contentTitle: 'Latest Tech Articles & Trends',
-      contentText: 'Stay updated with deep dives into emerging cloud patterns, enterprise app strategies, and expert engineering notes.'
-    },
-    {
-      id: 'case-studies',
-      title: 'Proven Success Stories & Case Studies',
-      desc: 'See how we have helped global organizations overcome complex technological challenges.',
-      image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1600&q=80',
-      subtitle: 'Success Stories',
-      contentTitle: 'Transforming Challenges Into Triumphs',
-      contentText: 'Explore our documented case histories showcasing measurable business value delivered across diverse industry verticals.'
-    },
-    {
-      id: 'workshops',
-      title: 'Events & Technical Workshops',
-      desc: 'Join our interactive seminars, webinars, and technology skill-building workshops.',
-      image: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=1600&q=80',
-      subtitle: 'Events & Learning',
-      contentTitle: 'Connect & Learn With Experts',
-      contentText: 'Participate in our live sessions designed to educate tech leaders on leveraging modern cloud architectures and AI.'
-    },
-    {
-      id: 'department-solutions',
-      title: 'Enterprise Department Solutions',
-      desc: 'Targeted workflow enhancements across HR, Finance, Operations, and Sales departments.',
-      image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1600&q=80',
-      subtitle: 'Solutions',
-      contentTitle: 'Optimizing Every Business Unit',
-      contentText: 'Tailored digital toolsets designed to remove departmental silos, automate repetitive tasks, and boost organizational output.'
-    },
-    {
-      id: 'licenses',
-      title: 'Software Licenses & Enterprise Agreements',
-      desc: 'Streamline your enterprise licensing needs with certified Microsoft partners.',
-      image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1600&q=80',
-      subtitle: 'Enterprise Licensing',
-      contentTitle: 'Hassle-Free Software Procurement',
-      contentText: 'Expert guidance on procuring, managing, and optimizing Microsoft volume licensing and cloud subscriptions.'
-    },
-    {
-      id: 'technologies',
-      title: 'Cutting-Edge Technologies & Azure Cloud',
-      desc: 'Empowering your business with state-of-the-art cloud architecture and modern developer tools.',
-      image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80',
-      subtitle: 'Technology Stack',
-      contentTitle: 'Built on Microsoft Azure & AI',
-      contentText: 'Leveraging enterprise-grade cloud frameworks, advanced analytics, and robust security protocols for maximum scalability.'
-    },
-    {
-      id: 'integration',
-      title: 'System Integration & IT Consulting',
-      desc: 'Seamlessly connect disparate legacy apps and systems with modern cloud infrastructure.',
-      image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1600&q=80',
-      subtitle: 'Consulting & Strategy',
-      contentTitle: 'Bridging Legacy & Modern Systems',
-      contentText: 'Strategic roadmap planning and seamless API integration services to unify your entire IT ecosystem.'
-    },
-    {
-      id: 'aim-app',
-      title: 'AIM Asset Management Application',
-      desc: 'Track, manage, and optimize your organization assets in real-time with supreme efficiency.',
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80',
-      subtitle: 'Products',
-      contentTitle: 'Real-Time Asset Tracking',
-      contentText: 'Our flagship AIM application offers end-to-end visibility and lifecycle management for enterprise hardware and software assets.'
-    },
-    {
-      id: 'org-chart',
-      title: 'Mansharp Org Chart Solution',
-      desc: 'Automate reporting lines and visualize team hierarchies dynamically with our custom app.',
-      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=80',
-      subtitle: 'Products',
-      contentTitle: 'Dynamic Corporate Hierarchy Mapping',
-      contentText: 'Effortlessly visualize team structures, manage reporting lines, and sync employee directories in real-time.'
-    },
-    {
       id: 'contact',
       title: 'Get in Touch With Our Experts',
       desc: 'Let us discuss how we can accelerate your business growth through advanced technology solutions.',
@@ -246,24 +92,6 @@ export default function App() {
       subtitle: 'Contact Us',
       contentTitle: 'We Are Here to Help',
       contentText: 'Reach out to our offices in USA or India, or drop us a message to start building your next big digital initiative.'
-    },
-    {
-      id: 'privacy-policy',
-      title: 'Privacy Policy & Data Security',
-      desc: 'Our steadfast commitment to maintaining data security, confidentiality, and your absolute privacy.',
-      image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1600&q=80',
-      subtitle: 'Legal',
-      contentTitle: 'Your Privacy Matters',
-      contentText: 'Read how we protect, collect, and handle your data securely in compliance with international privacy regulations.'
-    },
-    {
-      id: 'terms',
-      title: 'Terms And Conditions',
-      desc: 'Guidelines and legal agreements governing the use of Mansharp Technologies services and website.',
-      image: 'https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=1600&q=80',
-      subtitle: 'Legal',
-      contentTitle: 'Terms of Service',
-      contentText: 'Important legal terms and conditions outlining user responsibilities and service agreements with Mansharp Technologies.'
     }
   ];
 
@@ -292,34 +120,34 @@ export default function App() {
   const activeBanner = bannerSlides[currentSlide] || bannerSlides[0];
 
   return (
-    <div className={`min-h-screen flex flex-col font-sans transition-colors duration-300 ${isDark ? 'bg-slate-950 text-slate-100 selection:bg-blue-600 selection:text-white' : 'bg-slate-50 text-slate-900 selection:bg-blue-500 selection:text-white'}`}>
+    <div className={`min-h-screen flex flex-col font-sans transition-colors duration-300 ${isDark ? 'bg-slate-950 text-slate-100' : 'bg-gradient-to-br from-slate-50 via-indigo-50/20 to-blue-50/30 text-slate-900'}`}>
       
-      {/* HEADER */}
-      <header className={`border-b backdrop-blur-md sticky top-0 z-50 px-4 sm:px-8 py-4 flex justify-between items-center shadow-2xl transition-colors duration-300 ${isDark ? 'border-slate-800/80 bg-slate-900/95' : 'border-slate-200 bg-white/95'}`}>
+      {/* HEADER - Light/Dark Sleek Combo */}
+      <header className={`border-b backdrop-blur-md sticky top-0 z-50 px-4 sm:px-8 py-4 flex justify-between items-center shadow-md transition-colors duration-300 ${isDark ? 'border-slate-800 bg-slate-900/95 text-white' : 'border-slate-200/80 bg-white/90 text-slate-900'}`}>
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => setActiveTab('about')}>
-          <div className="bg-gradient-to-tr from-blue-600 to-indigo-600 text-white font-extrabold h-10 w-10 rounded-xl flex items-center justify-center text-lg shadow-lg shadow-blue-500/25">
+          <div className="bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-600 text-white font-extrabold h-10 w-10 rounded-xl flex items-center justify-center text-lg shadow-lg shadow-blue-500/30">
             M
           </div>
           <div>
-            <h1 className={`font-extrabold text-base sm:text-lg leading-tight tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>MANSHARP</h1>
-            <p className="text-[10px] tracking-widest text-blue-500 font-semibold uppercase">TECHNOLOGIES</p>
+            <h1 className="font-extrabold text-base sm:text-lg leading-tight tracking-tight">MANSHARP</h1>
+            <p className="text-[10px] tracking-widest text-blue-600 font-bold uppercase">TECHNOLOGIES</p>
           </div>
         </div>
 
         {/* NAVIGATION MENUS */}
         {!isAdmin && (
-          <nav className={`hidden lg:flex items-center gap-8 text-sm font-medium ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
+          <nav className={`hidden lg:flex items-center gap-8 text-sm font-medium ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>
             
             {/* About Menu */}
             <div className="relative group py-2 cursor-pointer">
-              <span className="hover:text-blue-500 flex items-center gap-1 transition-colors">
+              <span className="hover:text-blue-600 flex items-center gap-1 transition-colors">
                 About <span className="text-[10px]">▼</span>
               </span>
-              <div className={`absolute top-full left-0 w-48 border rounded-2xl shadow-2xl p-2 flex flex-col gap-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 z-50 ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
-                <button onClick={() => setActiveTab('about')} className={`text-left px-3 py-2 rounded-xl text-xs font-bold transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-slate-100 text-slate-700'}`}>About Us</button>
-                <button onClick={() => setActiveTab('why-choose-us')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-slate-100 text-slate-700'}`}>Why Choose Us</button>
-                <button onClick={() => setActiveTab('life-at-mansharp')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-slate-100 text-slate-700'}`}>Life At Mansharp</button>
-                <button onClick={() => setActiveTab('leadership')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-slate-100 text-slate-700'}`}>Leadership</button>
+              <div className={`absolute top-full left-0 w-48 border rounded-2xl shadow-xl p-2 flex flex-col gap-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 z-50 ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-100'}`}>
+                <button onClick={() => setActiveTab('about')} className="text-left px-3 py-2 rounded-xl text-xs font-bold hover:bg-blue-50 hover:text-blue-600 transition-colors">About Us</button>
+                <button onClick={() => setActiveTab('why-choose-us')} className="text-left px-3 py-2 rounded-xl text-xs hover:bg-blue-50 hover:text-blue-600 transition-colors">Why Choose Us</button>
+                <button onClick={() => setActiveTab('life-at-mansharp')} className="text-left px-3 py-2 rounded-xl text-xs hover:bg-blue-50 hover:text-blue-600 transition-colors">Life At Mansharp</button>
+                <button onClick={() => setActiveTab('leadership')} className="text-left px-3 py-2 rounded-xl text-xs hover:bg-blue-50 hover:text-blue-600 transition-colors">Leadership</button>
               </div>
             </div>
 
@@ -327,34 +155,34 @@ export default function App() {
             <div className="relative py-2">
               <button 
                 onClick={() => setIsAiDropdownOpen(!isAiDropdownOpen)}
-                className="hover:text-blue-500 flex items-center gap-1 transition-colors text-blue-400 font-bold"
+                className="hover:text-blue-600 flex items-center gap-1 transition-colors text-blue-600 font-bold bg-blue-50 px-3 py-1 rounded-full border border-blue-100 shadow-sm"
               >
                 ✨ AI Solutions <span className="text-[10px]">{isAiDropdownOpen ? '▲' : '▼'}</span>
               </button>
 
               {isAiDropdownOpen && (
-                <div className={`absolute top-full left-0 mt-2 w-56 border rounded-2xl shadow-2xl p-2 flex flex-col gap-1 z-50 ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
+                <div className={`absolute top-full left-0 mt-2 w-56 border rounded-2xl shadow-2xl p-2 flex flex-col gap-1 z-50 ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-100'}`}>
                   <button 
                     onClick={() => { setActiveTab('ai-transformation'); setIsAiDropdownOpen(false); }} 
-                    className={`text-left px-3 py-2 rounded-xl text-xs font-semibold transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-200' : 'hover:bg-slate-100 text-slate-800'}`}
+                    className="text-left px-3 py-2 rounded-xl text-xs font-semibold hover:bg-blue-50 hover:text-blue-600 transition-colors"
                   >
                     AI Transformation
                   </button>
                   <button 
                     onClick={() => { setActiveTab('ai-copilot-pricing'); setIsAiDropdownOpen(false); }} 
-                    className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-slate-100 text-slate-700'}`}
+                    className="text-left px-3 py-2 rounded-xl text-xs hover:bg-blue-50 hover:text-blue-600 transition-colors"
                   >
                     Microsoft Copilot Pricing
                   </button>
                   <button 
                     onClick={() => { setActiveTab('ai-services'); setIsAiDropdownOpen(false); }} 
-                    className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-slate-100 text-slate-700'}`}
+                    className="text-left px-3 py-2 rounded-xl text-xs hover:bg-blue-50 hover:text-blue-600 transition-colors"
                   >
                     AI Services
                   </button>
                   <button 
                     onClick={() => { setActiveTab('ai-business-leaders'); setIsAiDropdownOpen(false); }} 
-                    className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-slate-100 text-slate-700'}`}
+                    className="text-left px-3 py-2 rounded-xl text-xs hover:bg-blue-50 hover:text-blue-600 transition-colors"
                   >
                     AI for Business Leaders
                   </button>
@@ -362,58 +190,7 @@ export default function App() {
               )}
             </div>
 
-            {/* Industries Menu */}
-            <div className="relative group py-2 cursor-pointer">
-              <span className="hover:text-blue-500 flex items-center gap-1 transition-colors">
-                Industries <span className="text-[10px]">▼</span>
-              </span>
-              <div className={`absolute top-full left-0 w-56 border rounded-2xl shadow-2xl p-3 grid grid-cols-2 gap-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 z-50 ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
-                {['Healthcare', 'Education', 'Public Sector', 'Financial Services', 'Manufacturing', 'Energy', 'Retail', 'Software'].map((ind, idx) => {
-                  const slug = ind.toLowerCase().replace(/\s+/g, '-');
-                  return (
-                    <button key={idx} onClick={() => setActiveTab(slug)} className={`text-left px-2 py-1.5 rounded-lg text-[11px] transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-slate-100 text-slate-700'}`}>{ind}</button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Resources & Insights Menu */}
-            <div className="relative group py-2 cursor-pointer">
-              <span className="hover:text-blue-500 flex items-center gap-1 transition-colors">
-                Resources & Insights <span className="text-[10px]">▼</span>
-              </span>
-              <div className={`absolute top-full left-0 w-48 border rounded-2xl shadow-2xl p-2 flex flex-col gap-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 z-50 ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
-                <button onClick={() => setActiveTab('blogs')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-slate-100 text-slate-700'}`}>Blogs</button>
-                <button onClick={() => setActiveTab('case-studies')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-slate-100 text-slate-700'}`}>Case Studies</button>
-                <button onClick={() => setActiveTab('workshops')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-slate-100 text-slate-700'}`}>Events & Workshops</button>
-              </div>
-            </div>
-
-            {/* Solutions Menu */}
-            <div className="relative group py-2 cursor-pointer">
-              <span className="hover:text-blue-500 flex items-center gap-1 transition-colors">
-                Solutions <span className="text-[10px]">▼</span>
-              </span>
-              <div className={`absolute top-full left-0 w-56 border rounded-2xl shadow-2xl p-2 flex flex-col gap-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 z-50 ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
-                <button onClick={() => setActiveTab('department-solutions')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-slate-100 text-slate-700'}`}>Department Solutions</button>
-                <button onClick={() => setActiveTab('licenses')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-slate-100 text-slate-700'}`}>Licenses</button>
-                <button onClick={() => setActiveTab('technologies')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-slate-100 text-slate-700'}`}>Technologies</button>
-                <button onClick={() => setActiveTab('integration')} className={`text-left px-3.5 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-slate-100 text-slate-700'}`}>Integration & Consulting</button>
-              </div>
-            </div>
-
-            {/* Products Menu */}
-            <div className="relative group py-2 cursor-pointer">
-              <span className="hover:text-blue-500 flex items-center gap-1 transition-colors">
-                Products <span className="text-[10px]">▼</span>
-              </span>
-              <div className={`absolute top-full left-[-40px] w-56 border rounded-2xl shadow-2xl p-2 flex flex-col gap-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 z-50 ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
-                <button onClick={() => setActiveTab('aim-app')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-slate-100 text-slate-700'}`}>AIM App</button>
-                <button onClick={() => setActiveTab('org-chart')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-slate-100 text-slate-700'}`}>Mansharp Org Chart</button>
-              </div>
-            </div>
-
-            <button onClick={() => setActiveTab('contact')} className={`border px-4 py-2 rounded-xl transition-all ${isDark ? 'bg-rose-900/30 border-rose-700/50 hover:bg-rose-900/50 text-rose-200' : 'bg-rose-50 border-rose-200 hover:bg-rose-100 text-rose-600'}`}>Contact us</button>
+            <button onClick={() => setActiveTab('contact')} className="bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white px-4 py-2 rounded-xl text-xs font-semibold shadow-md transition-all">Contact Us</button>
           </nav>
         )}
 
@@ -421,13 +198,12 @@ export default function App() {
         <div className="flex items-center gap-3">
           <button 
             onClick={toggleTheme} 
-            className={`p-2.5 rounded-xl border text-sm font-semibold transition-all flex items-center justify-center ${isDark ? 'bg-slate-900 border-slate-800 text-amber-400 hover:bg-slate-800' : 'bg-slate-100 border-slate-200 text-slate-700 hover:bg-slate-200'}`}
-            title="Toggle Light/Dark Theme"
+            className={`p-2 rounded-xl border text-xs font-semibold transition-all flex items-center justify-center shadow-sm ${isDark ? 'bg-slate-900 border-slate-800 text-amber-400' : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'}`}
           >
-            {isDark ? '☀️ Light' : '🌙 Dark'}
+            {isDark ? '☀️ Light Mode' : '🌙 Dark Accents'}
           </button>
 
-          <button onClick={() => { setIsAdmin(!isAdmin); setIsLoggedIn(false); }} className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all shadow-md">
+          <button onClick={() => { setIsAdmin(!isAdmin); setIsLoggedIn(false); }} className="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-xl text-xs font-semibold transition-all shadow-md">
             {isAdmin ? 'Website View' : 'Admin Panel 🛡️'}
           </button>
         </div>
@@ -439,31 +215,31 @@ export default function App() {
           <div className="space-y-16 pb-20">
             
             {/* DYNAMIC BANNER & IMAGE SLIDER SECTION */}
-            <div className="relative w-full h-[480px] sm:h-[580px] flex items-center justify-center text-center px-4 overflow-hidden shadow-2xl">
+            <div className="relative w-full h-[480px] sm:h-[580px] flex items-center justify-center text-center px-4 overflow-hidden shadow-xl">
               <div className="absolute inset-0 z-0">
                 <img 
                   key={activeBanner.image}
                   src={activeBanner.image} 
                   alt="Banner" 
-                  className={`w-full h-full object-cover scale-105 transition-all duration-700 ${isDark ? 'brightness-[0.35]' : 'brightness-[0.55]'}`}
+                  className="w-full h-full object-cover scale-105 brightness-[0.55] transition-all duration-700"
                 />
-                <div className={`absolute inset-0 bg-gradient-to-t ${isDark ? 'from-slate-950 via-slate-950/40' : 'from-slate-900/60 via-slate-900/20'} to-transparent`}></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent"></div>
               </div>
 
               {/* Slider Content */}
               <div className="relative z-10 max-w-4xl mx-auto space-y-6 animate-fadeIn">
-                <span className="bg-blue-600 text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full shadow-lg">
+                <span className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full shadow-lg">
                   {activeBanner.subtitle}
                 </span>
-                <h1 className="text-3xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight drop-shadow-lg">
+                <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight drop-shadow-md">
                   {activeBanner.title}
                 </h1>
-                <p className="text-slate-100 text-xs sm:text-base max-w-2xl mx-auto leading-relaxed drop-shadow">
+                <p className="text-slate-200 text-xs sm:text-base max-w-2xl mx-auto leading-relaxed">
                   {activeBanner.desc}
                 </p>
                 <div className="flex justify-center gap-4 pt-2">
-                  <button onClick={() => setActiveTab('contact')} className="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-3 rounded-xl text-xs sm:text-sm transition-all shadow-xl">
-                    Get Started Today
+                  <button onClick={() => setActiveTab('contact')} className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold px-7 py-3.5 rounded-2xl text-xs sm:text-sm transition-all shadow-xl shadow-blue-600/30">
+                    Get Started Today 🚀
                   </button>
                 </div>
               </div>
@@ -477,160 +253,111 @@ export default function App() {
                       setCurrentSlide(index);
                       setActiveTab(slide.id);
                     }}
-                    className={`h-2 rounded-full transition-all duration-300 ${currentSlide === index ? 'w-6 bg-blue-500' : 'w-2 bg-white/50 hover:bg-white'}`}
+                    className={`h-2 rounded-full transition-all duration-300 ${currentSlide === index ? 'w-8 bg-blue-500 shadow-md' : 'w-2 bg-white/50 hover:bg-white'}`}
                     title={slide.title}
                   />
                 ))}
               </div>
             </div>
 
-            {/* SCROLLABLE DETAILED CONTENT SECTION */}
+            {/* LIGHT AND DARK MIXED CARDS SECTION FOR ATTRACTIVE LOOK */}
             <div className="max-w-6xl mx-auto px-4 sm:px-8 space-y-12">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              
+              {/* Highlight Info Box */}
+              <div className={`p-8 sm:p-12 rounded-3xl border shadow-xl grid grid-cols-1 lg:grid-cols-2 gap-8 items-center transition-all ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-blue-100/80'}`}>
                 <div className="space-y-4">
-                  <span className="text-blue-500 font-bold uppercase text-xs tracking-widest">{activeBanner.subtitle}</span>
-                  <h2 className={`text-2xl sm:text-4xl font-extrabold ${isDark ? 'text-white' : 'text-slate-900'}`}>{activeBanner.contentTitle}</h2>
-                  <p className={`text-xs sm:text-sm leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                  <span className="bg-blue-100 text-blue-700 font-bold uppercase text-[10px] tracking-wider px-3 py-1 rounded-md">{activeBanner.subtitle}</span>
+                  <h2 className={`text-2xl sm:text-3xl font-extrabold ${isDark ? 'text-white' : 'text-slate-900'}`}>{activeBanner.contentTitle}</h2>
+                  <p className={`text-xs sm:text-sm leading-relaxed ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
                     {activeBanner.contentText}
                   </p>
-                  <p className={`text-xs sm:text-sm leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    Our dedicated team ensures robust implementation, continuous monitoring, and scalable architecture customized specifically to your enterprise goals.
-                  </p>
-                  <div className="pt-2">
-                    <button onClick={() => setActiveTab('contact')} className="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-3 rounded-xl text-xs transition-all shadow-md">
-                      Speak With Our Expert
-                    </button>
+                  <button onClick={() => setActiveTab('contact')} className="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-5 py-2.5 rounded-xl text-xs transition-all shadow-md">
+                    Speak With Expert
+                  </button>
+                </div>
+                <div className="rounded-2xl overflow-hidden shadow-lg border border-slate-100">
+                  <img src={activeBanner.image} alt="Feature" className="w-full h-72 object-cover hover:scale-105 transition-transform duration-500" />
+                </div>
+              </div>
+
+              {/* Colorful Feature Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-4">
+                {[
+                  { title: '⚡ Fast Performance', desc: 'Optimized cloud execution with ultra-low latency frameworks.', color: 'from-amber-500/10 to-orange-500/10 border-orange-200 text-orange-600' },
+                  { title: '🔒 High Security', desc: 'Enterprise-grade encryption and secure access controls.', color: 'from-blue-500/10 to-indigo-500/10 border-blue-200 text-blue-600' },
+                  { title: '💡 Smart AI Ready', desc: 'Integrated seamlessly with modern Microsoft Copilot systems.', color: 'from-purple-500/10 to-pink-500/10 border-purple-200 text-purple-600' }
+                ].map((item, i) => (
+                  <div key={i} className={`p-6 rounded-2xl border bg-gradient-to-br ${item.color} shadow-sm space-y-2 hover:shadow-md transition-all`}>
+                    <h3 className="font-bold text-sm">{item.title}</h3>
+                    <p className={`text-xs ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>{item.desc}</p>
                   </div>
-                </div>
-                <div className={`rounded-3xl overflow-hidden border shadow-2xl ${isDark ? 'border-slate-800 bg-slate-900' : 'border-slate-200 bg-white'}`}>
-                  <img 
-                    src={activeBanner.image} 
-                    alt="Detail Feature" 
-                    className="w-full h-80 object-cover hover:scale-105 transition-transform duration-700"
-                  />
-                </div>
+                ))}
               </div>
 
-              {/* EXTRA CARDS SECTION */}
-              <div className="space-y-8 pt-10">
-                <div className="text-center space-y-2">
-                  <h3 className={`text-2xl sm:text-3xl font-extrabold ${isDark ? 'text-white' : 'text-slate-900'}`}>Key Features & Capabilities</h3>
-                  <p className={`text-xs sm:text-sm max-w-xl mx-auto ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    Discover how our specialized framework under {activeBanner.subtitle} drives performance and operational excellence.
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {[
-                    { title: 'Advanced Cloud Security', desc: 'Enterprise-grade protection protocols ensuring complete data privacy and regulatory compliance.' },
-                    { title: 'Seamless Integration', desc: 'Effortlessly connect with your existing legacy systems and third-party developer platforms.' },
-                    { title: '24/7 Expert Support', desc: 'Dedicated Microsoft certified engineering teams available around the clock to assist your business.' }
-                  ].map((card, idx) => (
-                    <div key={idx} className={`border p-6 rounded-3xl space-y-2 transition-all ${isDark ? 'bg-slate-900/80 border-slate-800 hover:border-blue-500/50' : 'bg-white border-slate-200 hover:border-blue-400 shadow-sm'}`}>
-                      <h4 className={`text-base font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>{card.title}</h4>
-                      <p className={`text-xs leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>{card.desc}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
             </div>
 
           </div>
         ) : (
           <div className="w-full max-w-xl mx-auto py-12 px-4">
             {!isLoggedIn ? (
-              <form onSubmit={handleLogin} className={`border p-8 rounded-3xl space-y-6 shadow-xl ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
-                <h3 className={`text-2xl font-bold text-center ${isDark ? 'text-white' : 'text-slate-900'}`}>Admin Login</h3>
-                <input type="text" placeholder="Mobile Number (9876543210)" value={mobile} onChange={(e) => setMobile(e.target.value)} className={`w-full border rounded-xl px-4 py-3 text-sm ${isDark ? 'bg-slate-950 border-slate-800 text-white' : 'bg-slate-50 border-slate-200 text-slate-900'}`} required />
-                <input type="password" placeholder="Password (admin123)" value={password} onChange={(e) => setPassword(e.target.value)} className={`w-full border rounded-xl px-4 py-3 text-sm ${isDark ? 'bg-slate-950 border-slate-800 text-white' : 'bg-slate-50 border-slate-200 text-slate-900'}`} required />
-                <button type="submit" className="w-full bg-blue-600 text-white font-semibold py-3.5 rounded-xl text-sm shadow-md">Login</button>
+              <form onSubmit={handleLogin} className="border bg-white border-slate-200 p-8 rounded-3xl space-y-6 shadow-xl">
+                <h3 className="text-2xl font-bold text-center text-slate-900">Admin Login</h3>
+                <input type="text" placeholder="Mobile Number (9876543210)" value={mobile} onChange={(e) => setMobile(e.target.value)} className="w-full border rounded-xl px-4 py-3 text-sm bg-slate-50 border-slate-200 text-slate-900 focus:outline-blue-500" required />
+                <input type="password" placeholder="Password (admin123)" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full border rounded-xl px-4 py-3 text-sm bg-slate-50 border-slate-200 text-slate-900 focus:outline-blue-500" required />
+                <button type="submit" className="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3.5 rounded-xl text-sm shadow-md">Login</button>
               </form>
             ) : (
-              <div className={`border p-8 rounded-3xl space-y-6 text-center shadow-xl ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
-                <h3 className={`text-xl font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>Welcome Admin!</h3>
-                <p className={`text-xs ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>You have successfully accessed the admin console.</p>
-                <button onClick={() => setIsLoggedIn(false)} className="bg-rose-600/20 text-rose-500 px-6 py-2.5 rounded-xl text-xs font-semibold">Logout</button>
+              <div className="border bg-white border-slate-200 p-8 rounded-3xl space-y-6 text-center shadow-xl">
+                <h3 className="text-xl font-bold text-slate-900">Welcome Admin!</h3>
+                <p className="text-xs text-slate-600">You have successfully accessed the admin console.</p>
+                <button onClick={() => setIsLoggedIn(false)} className="bg-rose-50 text-rose-600 px-6 py-2.5 rounded-xl text-xs font-semibold border border-rose-100">Logout</button>
               </div>
             )}
           </div>
         )}
       </main>
 
-      {/* FOOTER WITH LINKS, CONTACT DETAILS & COPYRIGHT */}
-      <footer className={`border-t pt-16 pb-8 px-4 sm:px-8 mt-auto ${isDark ? 'border-slate-800 bg-slate-900 text-slate-400' : 'border-slate-200 bg-white text-slate-600'}`}>
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-800/40">
-          
-          {/* Column 1: Brand Info & Contact */}
-          <div className="space-y-4 lg:col-span-2">
+      {/* FOOTER */}
+      <footer className="border-t border-slate-200 bg-slate-900 text-slate-300 pt-16 pb-8 px-4 sm:px-8 mt-auto">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-800">
+          <div className="space-y-4">
             <div className="flex items-center gap-3 cursor-pointer" onClick={() => setActiveTab('about')}>
-              <div className="bg-gradient-to-tr from-blue-600 to-indigo-600 text-white font-extrabold h-9 w-9 rounded-xl flex items-center justify-center text-base shadow-lg">
-                M
-              </div>
+              <div className="bg-blue-600 text-white font-extrabold h-9 w-9 rounded-xl flex items-center justify-center text-base shadow-lg">M</div>
               <div>
-                <h2 className={`font-extrabold text-base leading-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>MANSHARP</h2>
-                <p className="text-[9px] tracking-widest text-blue-500 font-semibold uppercase">TECHNOLOGIES</p>
+                <h2 className="font-extrabold text-base leading-tight text-white">MANSHARP</h2>
+                <p className="text-[9px] tracking-widest text-blue-400 font-semibold uppercase">TECHNOLOGIES</p>
               </div>
             </div>
-            <p className="text-xs leading-relaxed max-w-sm">
-              Igniting possibilities through cutting-edge Microsoft Certified solutions, cloud architectures, and next-gen enterprise AI integration.
+            <p className="text-xs leading-relaxed text-slate-400">
+              Igniting possibilities through cutting-edge Microsoft solutions and enterprise AI integration.
             </p>
-            <div className="space-y-2 text-xs pt-1">
-              <p className="flex items-center gap-2">
-                <span className="font-semibold text-blue-500">📞 Phone:</span> +1 (987) 654-3210 / +91 98765 43210
-              </p>
-              <p className="flex items-center gap-2">
-                <span className="font-semibold text-blue-500">✉️ Email:</span> contact@mansharptech.com
-              </p>
-              <p className="flex items-center gap-2">
-                <span className="font-semibold text-blue-500">📍 Location:</span> USA & India Global Offices
-              </p>
-            </div>
           </div>
-
-          {/* Column 2: Quick Links / About */}
           <div className="space-y-3">
-            <h3 className={`text-xs font-bold uppercase tracking-wider ${isDark ? 'text-white' : 'text-slate-900'}`}>About</h3>
-            <ul className="space-y-2 text-xs">
-              <li><button onClick={() => setActiveTab('about')} className="hover:text-blue-500 transition-colors">About Us</button></li>
-              <li><button onClick={() => setActiveTab('why-choose-us')} className="hover:text-blue-500 transition-colors">Why Choose Us</button></li>
-              <li><button onClick={() => setActiveTab('life-at-mansharp')} className="hover:text-blue-500 transition-colors">Life At Mansharp</button></li>
-              <li><button onClick={() => setActiveTab('leadership')} className="hover:text-blue-500 transition-colors">Leadership</button></li>
+            <h3 className="text-xs font-bold uppercase tracking-wider text-white">Quick Links</h3>
+            <ul className="space-y-2 text-xs text-slate-400">
+              <li><button onClick={() => setActiveTab('about')} className="hover:text-white transition-colors">About Us</button></li>
+              <li><button onClick={() => setActiveTab('why-choose-us')} className="hover:text-white transition-colors">Why Choose Us</button></li>
+              <li><button onClick={() => setActiveTab('ai-transformation')} className="hover:text-white transition-colors">AI Solutions</button></li>
             </ul>
           </div>
-
-          {/* Column 3: AI Solutions & Solutions */}
           <div className="space-y-3">
-            <h3 className={`text-xs font-bold uppercase tracking-wider ${isDark ? 'text-white' : 'text-slate-900'}`}>AI & Solutions</h3>
-            <ul className="space-y-2 text-xs">
-              <li><button onClick={() => setActiveTab('ai-transformation')} className="hover:text-blue-500 transition-colors">AI Transformation</button></li>
-              <li><button onClick={() => setActiveTab('ai-copilot-pricing')} className="hover:text-blue-500 transition-colors">Microsoft Copilot Pricing</button></li>
-              <li><button onClick={() => setActiveTab('ai-services')} className="hover:text-blue-500 transition-colors">AI Services</button></li>
-              <li><button onClick={() => setActiveTab('department-solutions')} className="hover:text-blue-500 transition-colors">Department Solutions</button></li>
-              <li><button onClick={() => setActiveTab('licenses')} className="hover:text-blue-500 transition-colors">Licenses</button></li>
+            <h3 className="text-xs font-bold uppercase tracking-wider text-white">Support & Contact</h3>
+            <ul className="space-y-2 text-xs text-slate-400">
+              <li><button onClick={() => setActiveTab('contact')} className="hover:text-white transition-colors">Contact Us</button></li>
+              <li><span className="text-slate-400">📞 +1 (987) 654-3210</span></li>
+              <li><span className="text-slate-400">✉️ contact@mansharptech.com</span></li>
             </ul>
           </div>
-
-          {/* Column 4: Products & Legal */}
           <div className="space-y-3">
-            <h3 className={`text-xs font-bold uppercase tracking-wider ${isDark ? 'text-white' : 'text-slate-900'}`}>Products & Legal</h3>
-            <ul className="space-y-2 text-xs">
-              <li><button onClick={() => setActiveTab('aim-app')} className="hover:text-blue-500 transition-colors">AIM App</button></li>
-              <li><button onClick={() => setActiveTab('org-chart')} className="hover:text-blue-500 transition-colors">Mansharp Org Chart</button></li>
-              <li><button onClick={() => setActiveTab('blogs')} className="hover:text-blue-500 transition-colors">Blogs & Insights</button></li>
-              <li><button onClick={() => setActiveTab('privacy-policy')} className="hover:text-blue-500 transition-colors">Privacy Policy</button></li>
-              <li><button onClick={() => setActiveTab('terms')} className="hover:text-blue-500 transition-colors">Terms & Conditions</button></li>
-            </ul>
+            <h3 className="text-xs font-bold uppercase tracking-wider text-white">Offices</h3>
+            <p className="text-xs text-slate-400">USA & India Global Development Centers.</p>
           </div>
-
         </div>
-
-        {/* Bottom Copyright */}
-        <div className="max-w-7xl mx-auto pt-6 flex flex-col sm:flex-row items-center justify-between text-xs gap-4">
+        <div className="max-w-7xl mx-auto pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
           <p>Copyright © {new Date().getFullYear()} Mansharp Technologies, All rights reserved.</p>
           <div className="flex gap-4">
-            <button onClick={() => setActiveTab('privacy-privacy')} className="hover:text-blue-500 transition-colors">Privacy</button>
-            <button onClick={() => setActiveTab('terms')} className="hover:text-blue-500 transition-colors">Terms</button>
-            <button onClick={() => setActiveTab('contact')} className="hover:text-blue-500 transition-colors">Contact</button>
+            <button onClick={() => setActiveTab('contact')} className="hover:text-slate-300">Privacy Policy</button>
+            <button onClick={() => setActiveTab('contact')} className="hover:text-slate-300">Terms of Service</button>
           </div>
         </div>
       </footer>
