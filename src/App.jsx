@@ -12,7 +12,6 @@ export default function App() {
   // Click-based AI dropdown state
   const [isAiDropdownOpen, setIsAiDropdownOpen] = useState(false);
 
-  // Har ek option ke liye unique banner image, title, description aur content sections
   const bannerSlides = [
     {
       id: 'about',
@@ -25,7 +24,7 @@ export default function App() {
     },
     {
       id: 'ai-transformation',
-      title: 'Shape the Future of Your Enterprise with AI',
+      title: 'Shape the Future of Your Enterprise with AI Solutions',
       desc: 'Unlock limitless growth with custom AI models, Microsoft Copilot integration, and smart cloud architectures.',
       image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1600&q=80',
       subtitle: 'Mansharp AI',
@@ -34,7 +33,7 @@ export default function App() {
     },
     {
       id: 'ai-copilot-pricing',
-      title: 'Microsoft Copilot Pricing & Plans',
+      title: 'Microsoft Copilot Plans & Pricing',
       desc: 'Enterprise-grade security and privacy. Trusted by companies around the world.',
       image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80',
       subtitle: 'AI Pricing',
@@ -268,7 +267,6 @@ export default function App() {
     }
   ];
 
-  // Tab change hone par automatic slide match karna aur page top par scroll karna
   useEffect(() => {
     const foundIndex = bannerSlides.findIndex(slide => slide.id === activeTab);
     if (foundIndex !== -1) {
@@ -486,7 +484,7 @@ export default function App() {
               </div>
             </div>
 
-            {/* SCROLLABLE DETAILED CONTENT SECTION FOR EVERY OPTION */}
+            {/* SCROLLABLE DETAILED CONTENT SECTION */}
             <div className="max-w-6xl mx-auto px-4 sm:px-8 space-y-12">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div className="space-y-4">
@@ -513,7 +511,7 @@ export default function App() {
                 </div>
               </div>
 
-              {/* EXTRA CARDS SECTION WHEN SCROLLING */}
+              {/* EXTRA CARDS SECTION */}
               <div className="space-y-8 pt-10">
                 <div className="text-center space-y-2">
                   <h3 className={`text-2xl sm:text-3xl font-extrabold ${isDark ? 'text-white' : 'text-slate-900'}`}>Key Features & Capabilities</h3>
@@ -630,7 +628,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto pt-6 flex flex-col sm:flex-row items-center justify-between text-xs gap-4">
           <p>Copyright © {new Date().getFullYear()} Mansharp Technologies, All rights reserved.</p>
           <div className="flex gap-4">
-            <button onClick={() => setActiveTab('privacy-policy')} className="hover:text-blue-500 transition-colors">Privacy</button>
+            <button onClick={() => setActiveTab('privacy-privacy')} className="hover:text-blue-500 transition-colors">Privacy</button>
             <button onClick={() => setActiveTab('terms')} className="hover:text-blue-500 transition-colors">Terms</button>
             <button onClick={() => setActiveTab('contact')} className="hover:text-blue-500 transition-colors">Contact</button>
           </div>
