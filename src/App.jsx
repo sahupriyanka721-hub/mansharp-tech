@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function App() {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -7,6 +7,43 @@ export default function App() {
   const [password, setPassword] = useState('');
   const [activeTab, setActiveTab] = useState('about');
   const [theme, setTheme] = useState('dark'); // 'dark' or 'light'
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  // Slider data jo har option/tab ke liye alag image aur text dikhayega
+  const bannerSlides = [
+    {
+      id: 'about',
+      title: 'Empowering Innovation & Possibilities Beyond Boundaries',
+      desc: 'At Mansharp Technologies, we ignite possibilities through cutting-edge technology. Our journey is a roadmap to the future.',
+      image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80'
+    },
+    {
+      id: 'healthcare',
+      title: 'Transforming Healthcare with Smart Solutions',
+      desc: 'Secure, compliant, and advanced digital platforms designed for modern healthcare providers and patient care.',
+      image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1600&q=80'
+    },
+    {
+      id: 'technologies',
+      title: 'Next-Gen Technologies & Cloud Infrastructure',
+      desc: 'Leveraging Microsoft Azure, AI, and robust cloud frameworks to scale your enterprise efficiently.',
+      image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80'
+    },
+    {
+      id: 'org-chart',
+      title: 'Mansharp Org Chart Solution',
+      desc: 'Visualize your corporate hierarchy seamlessly with our automated and interactive organizational mapping tool.',
+      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=80'
+    }
+  ];
+
+  // Active tab ke hisab se slide match karna ya default rakhna
+  useEffect(() => {
+    const foundIndex = bannerSlides.findIndex(slide => slide.id === activeTab);
+    if (foundIndex !== -1) {
+      setCurrentSlide(foundIndex);
+    }
+  }, [activeTab]);
 
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
@@ -21,8 +58,8 @@ export default function App() {
     }
   };
 
-  // Dynamic class helpers based on theme
   const isDark = theme === 'dark';
+  const activeBanner = bannerSlides[currentSlide] || bannerSlides[0];
 
   return (
     <div className={`min-h-screen flex flex-col font-sans transition-colors duration-300 ${isDark ? 'bg-slate-950 text-slate-100 selection:bg-blue-600 selection:text-white' : 'bg-slate-50 text-slate-900 selection:bg-blue-500 selection:text-white'}`}>
@@ -129,79 +166,99 @@ export default function App() {
         {!isAdmin ? (
           <div className="space-y-16 pb-20">
             
-            {activeTab === 'about' ? (
-              <div className="space-y-16">
-                
-                {/* HERO SECTION WITH TEAM BACKGROUND PHOTO */}
-                <div className="relative w-full h-[450px] sm:h-[550px] flex items-center justify-center text-center px-4 overflow-hidden">
-                  <div className="absolute inset-0 z-0">
-                    <img 
-                      src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80" 
-                      alt="Team Background" 
-                      className={`w-full h-full object-cover scale-105 transition-all ${isDark ? 'brightness-[0.35]' : 'brightness-[0.55]'}`}
-                    />
-                    <div className={`absolute inset-0 bg-gradient-to-t ${isDark ? 'from-slate-950 via-slate-950/40' : 'from-slate-50 via-slate-50/40'} to-transparent`}></div>
-                  </div>
+            {/* DYNAMIC BANNER & IMAGE SLIDER SECTION */}
+            <div className="relative w-full h-[480px] sm:h-[580px] flex items-center justify-center text-center px-4 overflow-hidden shadow-2xl">
+              <div className="absolute inset-0 z-0">
+                <img 
+                  key={activeBanner.image}
+                  src={activeBanner.image} 
+                  alt="Slider Banner" 
+                  className={`w-full h-full object-cover scale-105 transition-all duration-1000 ${isDark ? 'brightness-[0.35]' : 'brightness-[0.55]'}`}
+                />
+                <div className={`absolute inset-0 bg-gradient-to-t ${isDark ? 'from-slate-950 via-slate-950/40' : 'from-slate-900/60 via-slate-900/20'} to-transparent`}></div>
+              </div>
 
-                  <div className="relative z-10 max-w-4xl mx-auto space-y-4">
-                    <h1 className="text-3xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight drop-shadow-md">
-                      Empowering Innovation & <br /> Possibilities Beyond Boundaries
-                    </h1>
-                    <p className="text-slate-100 text-xs sm:text-base max-w-2xl mx-auto leading-relaxed pt-2 drop-shadow">
-                      At Mansharp Technologies, we ignite possibilities through cutting-edge technology. Our journey isn’t just about the past; it’s a roadmap to the future. Join us as we pioneer new horizons — one innovation at a time.
+              {/* Slider Content */}
+              <div className="relative z-10 max-w-4xl mx-auto space-y-6 animate-fadeIn">
+                <span className="bg-blue-600 text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full shadow-lg">
+                  Featured • {activeTab.replace(/-/g, ' ')}
+                </span>
+                <h1 className="text-3xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight drop-shadow-lg">
+                  {activeBanner.title}
+                </h1>
+                <p className="text-slate-100 text-xs sm:text-base max-w-2xl mx-auto leading-relaxed drop-shadow">
+                  {activeBanner.desc}
+                </p>
+                <div className="flex justify-center gap-4 pt-2">
+                  <button onClick={() => setActiveTab('contact')} className="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-3 rounded-xl text-xs sm:text-sm transition-all shadow-xl">
+                    Get Started Today
+                  </button>
+                </div>
+              </div>
+
+              {/* Slider Dots / Navigation Controls */}
+              <div className="absolute bottom-6 z-20 flex gap-2">
+                {bannerSlides.map((slide, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      setCurrentSlide(index);
+                      setActiveTab(slide.id);
+                    }}
+                    className={`h-2.5 rounded-full transition-all duration-300 ${currentSlide === index ? 'w-8 bg-blue-500' : 'w-2.5 bg-white/50 hover:bg-white'}`}
+                    title={`Slide ${index + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* ABOUT US / DYNAMIC TAB CONTENT */}
+            {activeTab === 'about' ? (
+              <div className="max-w-6xl mx-auto px-4 sm:px-8 space-y-12">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                  <div className="space-y-4">
+                    <h2 className={`text-2xl sm:text-3xl font-extrabold ${isDark ? 'text-white' : 'text-slate-900'}`}>We're Mansharp Technologies</h2>
+                    <p className={`text-xs sm:text-sm leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                      Embarking on our journey in 2013, our team of Microsoft Certified Professionals strives to deliver extraordinary solutions. Though our name draws inspiration from space exploration and futuristic vision, our commitment extends far beyond expectations.
+                    </p>
+                    <p className={`text-xs sm:text-sm leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                      We dream of bringing remarkable individuals together and transforming technology for positive change. We don't just create; we add value. Today, we stand proud at the forefront of the digital revolution.
                     </p>
                   </div>
+                  <div className={`rounded-3xl overflow-hidden border shadow-2xl ${isDark ? 'border-slate-800 bg-slate-900' : 'border-slate-200 bg-white'}`}>
+                    <img 
+                      src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80" 
+                      alt="Mansharp Team Celebration" 
+                      className="w-full h-72 object-cover hover:scale-105 transition-transform duration-700"
+                    />
+                  </div>
                 </div>
 
-                {/* ABOUT CONTENT & TEAM PHOTO */}
-                <div className="max-w-6xl mx-auto px-4 sm:px-8 space-y-12">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                    <div className="space-y-4">
-                      <h2 className={`text-2xl sm:text-3xl font-extrabold ${isDark ? 'text-white' : 'text-slate-900'}`}>We're Mansharp Technologies</h2>
-                      <p className={`text-xs sm:text-sm leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                        Embarking on our journey in 2013, our team of Microsoft Certified Professionals strives to deliver extraordinary solutions. Though our name draws inspiration from space exploration and futuristic vision, our commitment extends far beyond expectations.
-                      </p>
-                      <p className={`text-xs sm:text-sm leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                        We dream of bringing remarkable individuals together and transforming technology for positive change. We don't just create; we add value. Today, we stand proud at the forefront of the digital revolution.
-                      </p>
-                    </div>
-                    <div className={`rounded-3xl overflow-hidden border shadow-2xl ${isDark ? 'border-slate-800 bg-slate-900' : 'border-slate-200 bg-white'}`}>
-                      <img 
-                        src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80" 
-                        alt="Mansharp Team Celebration" 
-                        className="w-full h-72 object-cover hover:scale-105 transition-transform duration-700"
-                      />
-                    </div>
+                {/* CULTURE VALUES */}
+                <div className="space-y-8 pt-6">
+                  <div className="text-center space-y-2">
+                    <h2 className={`text-3xl font-extrabold ${isDark ? 'text-white' : 'text-slate-900'}`}>Our Culture</h2>
+                    <p className={`text-xs sm:text-sm max-w-xl mx-auto ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                      At Mansharp, we foster curiosity, passion, and innovation. At every stage, our team strives to be who you love to work with. Here is how we do it:
+                    </p>
                   </div>
 
-                  {/* CULTURE VALUES */}
-                  <div className="space-y-8 pt-6">
-                    <div className="text-center space-y-2">
-                      <h2 className={`text-3xl font-extrabold ${isDark ? 'text-white' : 'text-slate-900'}`}>Our Culture</h2>
-                      <p className={`text-xs sm:text-sm max-w-xl mx-auto ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                        At Mansharp, we foster curiosity, passion, and innovation. At every stage, our team strives to be who you love to work with. Here is how we do it:
-                      </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                      {[
-                        { title: 'Client-Centricity', desc: 'Clients are our heartbeat. We forge trust-based relationships, ensuring their sustained success.' },
-                        { title: 'Global Mindset', desc: 'We act across cultures, understanding diverse markets and delivering universally adaptable solutions.' },
-                        { title: 'Integrity & Data Integrity', desc: 'Transparency, trustworthiness, and data integrity define our actions.' },
-                        { title: 'Collaboration', desc: 'Diverse perspectives drive well-rounded solutions.' },
-                        { title: 'Innovation', desc: 'Transforming ideas into reality through AI and state-of-the-art tech.' },
-                        { title: 'Excellence', desc: 'Unwavering standards drive our quality and client satisfaction.' }
-                      ].map((item, idx) => (
-                        <div key={idx} className={`border p-6 rounded-3xl space-y-2 transition-all ${isDark ? 'bg-slate-900/80 border-slate-800 hover:border-blue-500/50' : 'bg-white border-slate-200 hover:border-blue-400 shadow-sm'}`}>
-                          <h3 className={`text-lg font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>{item.title}</h3>
-                          <p className={`text-xs leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>{item.desc}</p>
-                        </div>
-                      ))}
-                    </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {[
+                      { title: 'Client-Centricity', desc: 'Clients are our heartbeat. We forge trust-based relationships, ensuring their sustained success.' },
+                      { title: 'Global Mindset', desc: 'We act across cultures, understanding diverse markets and delivering universally adaptable solutions.' },
+                      { title: 'Integrity & Data Integrity', desc: 'Transparency, trustworthiness, and data integrity define our actions.' },
+                      { title: 'Collaboration', desc: 'Diverse perspectives drive well-rounded solutions.' },
+                      { title: 'Innovation', desc: 'Transforming ideas into reality through AI and state-of-the-art tech.' },
+                      { title: 'Excellence', desc: 'Unwavering standards drive our quality and client satisfaction.' }
+                    ].map((item, idx) => (
+                      <div key={idx} className={`border p-6 rounded-3xl space-y-2 transition-all ${isDark ? 'bg-slate-900/80 border-slate-800 hover:border-blue-500/50' : 'bg-white border-slate-200 hover:border-blue-400 shadow-sm'}`}>
+                        <h3 className={`text-lg font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>{item.title}</h3>
+                        <p className={`text-xs leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>{item.desc}</p>
+                      </div>
+                    ))}
                   </div>
-
                 </div>
-
               </div>
             ) : activeTab === 'contact' ? (
               <div className="max-w-xl mx-auto px-4 py-12 space-y-6">
