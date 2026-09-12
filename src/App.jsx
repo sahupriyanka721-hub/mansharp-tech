@@ -6,15 +6,15 @@ export default function App() {
   const [mobile, setMobile] = useState('');
   const [password, setPassword] = useState('');
   const [activeTab, setActiveTab] = useState('about');
-  const [theme, setTheme] = useState('light'); // Default light rakha hai taaki attractive lage
+  const [theme, setTheme] = useState('light');
   const [currentSlide, setCurrentSlide] = useState(0);
 
   // Click-based AI dropdown state
   const [isAiDropdownOpen, setIsAiDropdownOpen] = useState(false);
 
-  // Mobile Menu Drawer State (New Added for Mobile Responsiveness)
+  // Mobile Menu Drawer State
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [mobileDropdown, setMobileDropdown] = useState(null); // 'about', 'ai', 'industries', 'resources', 'solutions', 'products'
+  const [mobileDropdown, setMobileDropdown] = useState(null);
 
   const bannerSlides = [
     {
@@ -592,7 +592,7 @@ export default function App() {
               </div>
             </section>
 
-            {/* VIDEO & APP BANNER SECTION (Services & Solutions Showcase) */}
+            {/* PROFESSIONAL VIDEO & APP BANNER SECTION */}
             <section className={`py-16 px-4 sm:px-8 max-w-6xl mx-auto`}>
               <div className="text-center mb-12">
                 <span className="text-blue-600 font-bold text-xs uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full border border-blue-100">Interactive Showcase</span>
@@ -601,7 +601,7 @@ export default function App() {
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                {/* Embedded Video Showcase (Fixed with playsInline & stable link) */}
+                {/* Embedded Professional Video Showcase */}
                 <div className={`p-4 rounded-3xl border shadow-xl ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
                   <div className="relative rounded-2xl overflow-hidden aspect-video shadow-inner bg-black">
                     <video 
@@ -613,7 +613,7 @@ export default function App() {
                       playsInline
                       poster="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
                     >
-                      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+                      <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
                   </div>
