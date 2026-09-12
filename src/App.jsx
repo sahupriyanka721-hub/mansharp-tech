@@ -592,7 +592,7 @@ export default function App() {
               </div>
             </section>
 
-            {/* 🌟 NEW ADDED: VIDEO & APP BANNER SECTION (Services & Solutions Showcase) */}
+            {/* VIDEO & APP BANNER SECTION (Services & Solutions Showcase) */}
             <section className={`py-16 px-4 sm:px-8 max-w-6xl mx-auto`}>
               <div className="text-center mb-12">
                 <span className="text-blue-600 font-bold text-xs uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full border border-blue-100">Interactive Showcase</span>
@@ -601,7 +601,7 @@ export default function App() {
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                {/* Embedded Video Showcase */}
+                {/* Embedded Video Showcase (Fixed with playsInline & stable link) */}
                 <div className={`p-4 rounded-3xl border shadow-xl ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
                   <div className="relative rounded-2xl overflow-hidden aspect-video shadow-inner bg-black">
                     <video 
@@ -610,9 +610,10 @@ export default function App() {
                       autoPlay 
                       muted 
                       loop
+                      playsInline
                       poster="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
                     >
-                      <source src="https://assets.mixkit.co/videos/preview/mixkit-team-working-in-an-office-4129-large.mp4" type="video/mp4" />
+                      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
                   </div>
@@ -703,7 +704,7 @@ export default function App() {
             <button onClick={() => setActiveTab('terms')} className="hover:text-white transition-colors">Terms and Conditions</button>
           </div>
 
-          {/* 🌟 NEW ADDED: Direct Clickable Social Icons (Facebook, Instagram, LinkedIn) */}
+          {/* Social Icons */}
           <div className="flex items-center gap-3">
             <a 
               href="https://facebook.com" 
