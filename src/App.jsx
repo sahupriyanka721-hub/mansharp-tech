@@ -6,15 +6,15 @@ export default function App() {
   const [mobile, setMobile] = useState('');
   const [password, setPassword] = useState('');
   const [activeTab, setActiveTab] = useState('about');
-  const [theme, setTheme] = useState('light'); // Default light rakha hai taaki attractive lage
+  const [theme, setTheme] = useState('light');
   const [currentSlide, setCurrentSlide] = useState(0);
 
   // Click-based AI dropdown state
   const [isAiDropdownOpen, setIsAiDropdownOpen] = useState(false);
 
-  // Mobile Menu Drawer State (New Added for Mobile Responsiveness)
+  // Mobile Menu Drawer State
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [mobileDropdown, setMobileDropdown] = useState(null); // 'about', 'ai', 'industries', 'resources', 'solutions', 'products'
+  const [mobileDropdown, setMobileDropdown] = useState(null);
 
   const bannerSlides = [
     {
@@ -22,15 +22,17 @@ export default function App() {
       title: 'Empowering Innovation & Possibilities Beyond Boundaries',
       desc: 'At Mansharp Technologies, we ignite possibilities through cutting-edge technology. Our journey is a roadmap to the future.',
       image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80',
+      video: 'https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-screens-with-code-and-data-31918-large.mp4',
       subtitle: 'About Us',
       contentTitle: 'We Are Mansharp Technologies',
-      contentText: 'Embarking on our journey in 2013, our team of Microsoft Certified Professionals strives to deliver extraordinary solutions. We dream of bringing remarkable individuals together and transforming technology for positive change.'
+      contentText: 'Embarking on our journey, our team of Microsoft Certified Professionals strives to deliver extraordinary solutions. We dream of bringing remarkable individuals together and transforming technology for positive change.'
     },
     {
       id: 'ai-transformation',
       title: 'Shape the Future of Your Enterprise with AI Solutions',
       desc: 'Unlock limitless growth with custom AI models, Microsoft Copilot integration, and smart cloud architectures.',
       image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1600&q=80',
+      video: 'https://assets.mixkit.co/videos/preview/mixkit-artificial-intelligence-plexus-background-animation-41584-large.mp4',
       subtitle: 'Mansharp AI',
       contentTitle: 'Transforming Business With Artificial Intelligence',
       contentText: 'Empower every individual, team, and industry with next-gen automated workflows, intelligent data pipelines, and secure enterprise AI.'
@@ -40,6 +42,7 @@ export default function App() {
       title: 'Microsoft Copilot Plans & Pricing',
       desc: 'Enterprise-grade security and privacy. Trusted by companies around the world.',
       image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80',
+      video: 'https://assets.mixkit.co/videos/preview/mixkit-hands-typing-on-a-laptop-keyboard-close-up-42861-large.mp4',
       subtitle: 'AI Pricing',
       contentTitle: 'Flexible Plans for Your Scale',
       contentText: 'Explore Microsoft Copilot pricing models tailored for individual productivity and organization-wide transformation.'
@@ -49,6 +52,7 @@ export default function App() {
       title: 'Explore Our Range of AI Powered Services',
       desc: 'Curated AI services for successful AI adoption and implementation across your enterprise.',
       image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1600&q=80',
+      video: 'https://assets.mixkit.co/videos/preview/mixkit-data-center-with-blue-lights-32431-large.mp4',
       subtitle: 'AI Services',
       contentTitle: 'Curated AI Adoption Services',
       contentText: 'From custom Copilot studio integrations to building your own Azure AI services, we guide you at every step.'
@@ -58,6 +62,7 @@ export default function App() {
       title: 'AI for Business Leaders',
       desc: 'Strategic insights and executive frameworks to leverage artificial intelligence effectively.',
       image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&q=80',
+      video: 'https://assets.mixkit.co/videos/preview/mixkit-business-team-working-in-an-office-41585-large.mp4',
       subtitle: 'Executive AI',
       contentTitle: 'Leading With Intelligence',
       contentText: 'Empower leadership teams with data-driven decision tools and secure enterprise AI guidelines.'
@@ -65,10 +70,11 @@ export default function App() {
     {
       id: 'why-choose-us',
       title: 'Why Choose Mansharp Technologies',
-      desc: 'Discover why leading enterprises trust our Microsoft Certified Professionals for unmatched digital evolution.',
+      desc: 'Discover why leading enterprises trust our professionals for unmatched digital evolution.',
       image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=80',
+      video: 'https://assets.mixkit.co/videos/preview/mixkit-team-of-coworkers-brainstorming-in-an-office-41583-large.mp4',
       subtitle: 'Excellence & Trust',
-      contentTitle: 'Microsoft Solutions Expertise',
+      contentTitle: 'Solutions Expertise',
       contentText: 'We deliver innovative, growth-focused solutions that help businesses thrive and stay ahead in today’s fast-changing digital landscape.'
     },
     {
@@ -76,7 +82,8 @@ export default function App() {
       title: 'Life At Mansharp',
       desc: 'A culture built on collaboration, continuous learning, celebration, and pushing boundaries together.',
       image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1600&q=80',
-      subtitle: 'Our Starfleet Culture',
+      video: 'https://assets.mixkit.co/videos/preview/mixkit-group-of-happy-colleagues-celebrating-in-an-office-42865-large.mp4',
+      subtitle: 'Our Culture',
       contentTitle: 'Where Passion Meets Innovation',
       contentText: 'Our workplace thrives on diverse perspectives, continuous learning, and celebrating every success together as one unified family.'
     },
@@ -85,6 +92,7 @@ export default function App() {
       title: 'Together We Lead!',
       desc: 'Guiding the path of digital transformation with decades of core technological and strategic expertise.',
       image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&q=80',
+      video: 'https://assets.mixkit.co/videos/preview/mixkit-business-people-meeting-in-a-conference-room-41582-large.mp4',
       subtitle: 'Visionary Leadership',
       contentTitle: 'Guiding With Vision & Integrity',
       contentText: 'Our leaders foster an environment of accountability, continuous growth, and long-term strategic success for global clients.'
@@ -92,8 +100,9 @@ export default function App() {
     {
       id: 'healthcare',
       title: 'Transforming Healthcare with Smart Solutions',
-      desc: 'Secure, compliant, and advanced digital platforms designed for modern healthcare providers and patient care.',
+      desc: 'Secure, compliant, and advanced digital platforms designed for modern healthcare providers.',
       image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1600&q=80',
+      video: 'https://assets.mixkit.co/videos/preview/mixkit-medical-research-laboratory-with-advanced-equipment-43093-large.mp4',
       subtitle: 'Healthcare Industry',
       contentTitle: 'Next-Gen Patient Care Systems',
       contentText: 'We build HIPAA-compliant, highly secure cloud solutions that streamline clinical workflows and improve patient health outcomes.'
@@ -103,6 +112,7 @@ export default function App() {
       title: 'Smart Education & E-Learning Platforms',
       desc: 'Empowering institutions and learners worldwide with interactive, scalable cloud infrastructures.',
       image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80',
+      video: 'https://assets.mixkit.co/videos/preview/mixkit-students-working-together-in-a-classroom-43100-large.mp4',
       subtitle: 'Education Industry',
       contentTitle: 'Digital Transformation for Schools & Universities',
       contentText: 'Modernizing classrooms and remote learning frameworks with robust, cloud-enabled educational management systems.'
@@ -112,6 +122,7 @@ export default function App() {
       title: 'Public Sector & Government Digitalization',
       desc: 'Streamlining citizen services through transparent, secure, and highly efficient digital government tech.',
       image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80',
+      video: 'https://assets.mixkit.co/videos/preview/mixkit-modern-city-with-traffic-at-night-aerial-view-41586-large.mp4',
       subtitle: 'Public Sector',
       contentTitle: 'Transparent Citizen Services',
       contentText: 'Empowering government bodies with secure data pipelines, streamlined workflows, and citizen-first digital portals.'
@@ -121,6 +132,7 @@ export default function App() {
       title: 'Financial Services & Banking Tech',
       desc: 'Robust, secure, and high-performance financial systems designed to protect data and accelerate transactions.',
       image: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=1600&q=80',
+      video: 'https://assets.mixkit.co/videos/preview/mixkit-financial-stock-market-trading-screen-background-41588-large.mp4',
       subtitle: 'Fintech & Banking',
       contentTitle: 'Secure Financial Infrastructures',
       contentText: 'Providing encrypted, low-latency financial software solutions that safeguard sensitive assets and scale with market demands.'
@@ -130,6 +142,7 @@ export default function App() {
       title: 'Manufacturing & Supply Chain Innovation',
       desc: 'Automating industrial processes, IoT integration, and smart analytics for manufacturing excellence.',
       image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1600&q=80',
+      video: 'https://assets.mixkit.co/videos/preview/mixkit-automated-industrial-robotic-arm-working-in-a-factory-42999-large.mp4',
       subtitle: 'Manufacturing Industry',
       contentTitle: 'Smart Factory Automation',
       contentText: 'Connecting factory floors to cloud intelligence for predictive maintenance, optimized supply chains, and reduced downtime.'
@@ -139,6 +152,7 @@ export default function App() {
       title: 'Energy & Utilities Smart Solutions',
       desc: 'Sustainable technologies and data management systems tailored for modern energy enterprises.',
       image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1600&q=80',
+      video: 'https://assets.mixkit.co/videos/preview/mixkit-wind-turbines-in-a-green-field-43044-large.mp4',
       subtitle: 'Energy Sector',
       contentTitle: 'Sustainable Energy Management',
       contentText: 'Helping utility providers monitor grid performance, reduce carbon footprints, and analyze resource distribution efficiently.'
@@ -148,6 +162,7 @@ export default function App() {
       title: 'Retail & E-Commerce Digital Growth',
       desc: 'Enhancing customer experiences and backend inventory systems through high-speed cloud solutions.',
       image: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=1600&q=80',
+      video: 'https://assets.mixkit.co/videos/preview/mixkit-shopping-mall-interior-with-escalators-43075-large.mp4',
       subtitle: 'Retail & Commerce',
       contentTitle: 'Omnichannel Retail Experiences',
       contentText: 'Scaling e-commerce platforms with real-time inventory tracking, AI-driven recommendations, and seamless checkout flows.'
@@ -157,6 +172,7 @@ export default function App() {
       title: 'Software & Technology Product Development',
       desc: 'Building custom software products, scalable architectures, and next-gen enterprise tools.',
       image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80',
+      video: 'https://assets.mixkit.co/videos/preview/mixkit-software-developer-working-on-codes-in-a-computer-43088-large.mp4',
       subtitle: 'Software Products',
       contentTitle: 'Custom Engineering & SaaS',
       contentText: 'Turning complex software concepts into market-ready, highly reliable, and cloud-native applications.'
@@ -164,8 +180,9 @@ export default function App() {
     {
       id: 'blogs',
       title: 'Mansharp Insights & Industry Blogs',
-      desc: 'Read expert thoughts on Cloud Computing, Artificial Intelligence, Microsoft Technologies, and more.',
+      desc: 'Read expert thoughts on Cloud Computing, Artificial Intelligence, and more.',
       image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1600&q=80',
+      video: 'https://assets.mixkit.co/videos/preview/mixkit-hands-of-a-woman-typing-on-a-laptop-43091-large.mp4',
       subtitle: 'Resources & Insights',
       contentTitle: 'Latest Tech Articles & Trends',
       contentText: 'Stay updated with deep dives into emerging cloud patterns, enterprise app strategies, and expert engineering notes.'
@@ -175,6 +192,7 @@ export default function App() {
       title: 'Proven Success Stories & Case Studies',
       desc: 'See how we have helped global organizations overcome complex technological challenges.',
       image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1600&q=80',
+      video: 'https://assets.mixkit.co/videos/preview/mixkit-business-colleagues-analyzing-graphs-in-a-meeting-41581-large.mp4',
       subtitle: 'Success Stories',
       contentTitle: 'Transforming Challenges Into Triumphs',
       contentText: 'Explore our documented case histories showcasing measurable business value delivered across diverse industry verticals.'
@@ -184,6 +202,7 @@ export default function App() {
       title: 'Events & Technical Workshops',
       desc: 'Join our interactive seminars, webinars, and technology skill-building workshops.',
       image: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=1600&q=80',
+      video: 'https://assets.mixkit.co/videos/preview/mixkit-speaker-at-a-conference-presenting-to-an-audience-42867-large.mp4',
       subtitle: 'Events & Learning',
       contentTitle: 'Connect & Learn With Experts',
       contentText: 'Participate in our live sessions designed to educate tech leaders on leveraging modern cloud architectures and AI.'
@@ -193,6 +212,7 @@ export default function App() {
       title: 'Enterprise Department Solutions',
       desc: 'Targeted workflow enhancements across HR, Finance, Operations, and Sales departments.',
       image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1600&q=80',
+      video: 'https://assets.mixkit.co/videos/preview/mixkit-business-team-working-together-in-an-office-41585-large.mp4',
       subtitle: 'Solutions',
       contentTitle: 'Optimizing Every Business Unit',
       contentText: 'Tailored digital toolsets designed to remove departmental silos, automate repetitive tasks, and boost organizational output.'
@@ -200,19 +220,21 @@ export default function App() {
     {
       id: 'licenses',
       title: 'Software Licenses & Enterprise Agreements',
-      desc: 'Streamline your enterprise licensing needs with certified Microsoft partners.',
+      desc: 'Streamline your enterprise licensing needs with certified partners.',
       image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1600&q=80',
+      video: 'https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-screens-with-code-and-data-31918-large.mp4',
       subtitle: 'Enterprise Licensing',
       contentTitle: 'Hassle-Free Software Procurement',
-      contentText: 'Expert guidance on procuring, managing, and optimizing Microsoft volume licensing and cloud subscriptions.'
+      contentText: 'Expert guidance on procuring, managing, and optimizing volume licensing and cloud subscriptions.'
     },
     {
       id: 'technologies',
-      title: 'Cutting-Edge Technologies & Azure Cloud',
+      title: 'Cutting-Edge Technologies & Cloud',
       desc: 'Empowering your business with state-of-the-art cloud architecture and modern developer tools.',
       image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80',
+      video: 'https://assets.mixkit.co/videos/preview/mixkit-data-center-with-blue-lights-32431-large.mp4',
       subtitle: 'Technology Stack',
-      contentTitle: 'Built on Microsoft Azure & AI',
+      contentTitle: 'Built on Cloud & AI',
       contentText: 'Leveraging enterprise-grade cloud frameworks, advanced analytics, and robust security protocols for maximum scalability.'
     },
     {
@@ -220,6 +242,7 @@ export default function App() {
       title: 'System Integration & IT Consulting',
       desc: 'Seamlessly connect disparate legacy apps and systems with modern cloud infrastructure.',
       image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1600&q=80',
+      video: 'https://assets.mixkit.co/videos/preview/mixkit-server-room-with-blue-lights-32430-large.mp4',
       subtitle: 'Consulting & Strategy',
       contentTitle: 'Bridging Legacy & Modern Systems',
       contentText: 'Strategic roadmap planning and seamless API integration services to unify your entire IT ecosystem.'
@@ -229,6 +252,7 @@ export default function App() {
       title: 'AIM Asset Management Application',
       desc: 'Track, manage, and optimize your organization assets in real-time with supreme efficiency.',
       image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80',
+      video: 'https://assets.mixkit.co/videos/preview/mixkit-hands-typing-on-a-laptop-keyboard-close-up-42861-large.mp4',
       subtitle: 'Products',
       contentTitle: 'Real-Time Asset Tracking',
       contentText: 'Our flagship AIM application offers end-to-end visibility and lifecycle management for enterprise hardware and software assets.'
@@ -238,6 +262,7 @@ export default function App() {
       title: 'Mansharp Org Chart Solution',
       desc: 'Automate reporting lines and visualize team hierarchies dynamically with our custom app.',
       image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=80',
+      video: 'https://assets.mixkit.co/videos/preview/mixkit-business-people-meeting-in-a-conference-room-41582-large.mp4',
       subtitle: 'Products',
       contentTitle: 'Dynamic Corporate Hierarchy Mapping',
       contentText: 'Effortlessly visualize team structures, manage reporting lines, and sync employee directories in real-time.'
@@ -247,15 +272,17 @@ export default function App() {
       title: 'Get in Touch With Our Experts',
       desc: 'Let us discuss how we can accelerate your business growth through advanced technology solutions.',
       image: 'https://images.unsplash.com/photo-1423596653951-9b62843232f3?auto=format&fit=crop&w=1600&q=80',
+      video: 'https://assets.mixkit.co/videos/preview/mixkit-customer-service-representative-working-on-a-laptop-42866-large.mp4',
       subtitle: 'Contact Us',
       contentTitle: 'We Are Here to Help',
-      contentText: 'Reach out to our offices in USA or India, or drop us a message to start building your next big digital initiative.'
+      contentText: 'Reach out to us or drop us a message to start building your next big digital initiative.'
     },
     {
       id: 'privacy-policy',
       title: 'Privacy Policy & Data Security',
       desc: 'Our steadfast commitment to maintaining data security, confidentiality, and your absolute privacy.',
       image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1600&q=80',
+      video: 'https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-screens-with-code-and-data-31918-large.mp4',
       subtitle: 'Legal',
       contentTitle: 'Your Privacy Matters',
       contentText: 'Read how we protect, collect, and handle your data securely in compliance with international privacy regulations.'
@@ -265,9 +292,10 @@ export default function App() {
       title: 'Terms And Conditions',
       desc: 'Guidelines and legal agreements governing the use of Mansharp Technologies services and website.',
       image: 'https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=1600&q=80',
+      video: 'https://assets.mixkit.co/videos/preview/mixkit-software-developer-working-on-codes-in-a-computer-43088-large.mp4',
       subtitle: 'Legal',
       contentTitle: 'Terms of Service',
-      contentText: 'Important legal terms and conditions outlining user responsibilities and service agreements with Mansharp Technologies.'
+      contentText: 'Important legal terms and conditions outlining user responsibilities and service agreements.'
     }
   ];
 
@@ -435,7 +463,6 @@ export default function App() {
             {isAdmin ? 'Website View' : 'Admin Panel 🛡️'}
           </button>
 
-          {/* Mobile Menu Trigger Button */}
           {!isAdmin && (
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
@@ -450,7 +477,6 @@ export default function App() {
       {/* MOBILE FULLSCREEN DRAWER MENU */}
       {!isAdmin && isMobileMenuOpen && (
         <div className={`lg:hidden fixed inset-0 top-[73px] z-40 overflow-y-auto p-4 space-y-4 shadow-2xl transition-all ${isDark ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'}`}>
-          
           <div className="border-b pb-2 border-slate-700/50">
             <button onClick={() => setMobileDropdown(mobileDropdown === 'about' ? null : 'about')} className="w-full flex justify-between items-center py-2 font-bold text-sm">
               <span>About Us</span>
@@ -540,202 +566,125 @@ export default function App() {
             )}
           </div>
 
-          <button onClick={() => { setActiveTab('contact'); setIsMobileMenuOpen(false); }} className="w-full bg-gradient-to-r from-rose-500 to-pink-500 text-white p-3 rounded-xl text-center font-bold text-sm shadow-md">
-            Contact Us
-          </button>
+          <button onClick={() => { setActiveTab('contact'); setIsMobileMenuOpen(false); }} className="w-full py-3 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-xl font-bold text-sm">Contact Us</button>
         </div>
       )}
 
-      {/* MAIN CONTENT AREA */}
-      <main className="flex-grow">
-        {isAdmin ? (
-          <div className="max-w-md mx-auto mt-20 p-8 border rounded-3xl shadow-2xl bg-white text-slate-900">
-            <h2 className="text-2xl font-bold mb-6 text-center">Admin Portal</h2>
-            {!isLoggedIn ? (
+      {/* MAIN CONTENT AREA WITH RUNNING VIDEO BANNER */}
+      {!isAdmin ? (
+        <main className="flex-1">
+          {/* Running Video & Image Banner Section */}
+          <div className="relative w-full h-[450px] sm:h-[550px] overflow-hidden flex items-center justify-center">
+            {/* Background Running Video */}
+            <video 
+              key={activeBanner.video}
+              autoPlay 
+              loop 
+              muted 
+              playsInline 
+              className="absolute inset-0 w-full h-full object-cover z-0 filter brightness-50"
+            >
+              <source src={activeBanner.video} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+
+            {/* Overlay Tint */}
+            <div className="absolute inset-0 bg-slate-950/40 z-10"></div>
+
+            {/* Banner Text Content */}
+            <div className="relative z-20 max-w-4xl mx-auto px-4 text-center text-white space-y-4">
+              <span className="bg-blue-600/80 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase border border-blue-400/30 shadow-lg">
+                {activeBanner.subtitle}
+              </span>
+              <h1 className="text-2xl sm:text-5xl font-extrabold tracking-tight leading-tight drop-shadow-md">
+                {activeBanner.title}
+              </h1>
+              <p className="text-sm sm:text-lg text-slate-200 max-w-2xl mx-auto font-medium drop-shadow">
+                {activeBanner.desc}
+              </p>
+            </div>
+          </div>
+
+          {/* Dynamic Content Section Based on Clicked Tab */}
+          <div className="max-w-6xl mx-auto px-4 sm:px-8 py-16 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <span className="text-blue-500 font-bold text-sm uppercase tracking-wider">Mansharp Excellence</span>
+              <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
+                {activeBanner.contentTitle}
+              </h2>
+              <p className={`text-base leading-relaxed ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
+                {activeBanner.contentText}
+              </p>
+              <button onClick={() => setActiveTab('contact')} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-bold text-sm shadow-lg shadow-blue-500/30 transition-all">
+                Connect With Our Team
+              </button>
+            </div>
+
+            <div className="relative group">
+              <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl blur-lg opacity-30 group-hover:opacity-75 transition duration-500"></div>
+              <div className={`relative rounded-2xl overflow-hidden border shadow-2xl ${isDark ? 'border-slate-800 bg-slate-900' : 'border-slate-200 bg-white'}`}>
+                <img 
+                  src={activeBanner.image} 
+                  alt={activeBanner.contentTitle} 
+                  className="w-full h-80 object-cover transform hover:scale-105 transition duration-700"
+                />
+              </div>
+            </div>
+          </div>
+        </main>
+      ) : (
+        /* ADMIN PANEL VIEW */
+        <div className="flex-1 max-w-md mx-auto p-6 w-full flex flex-col justify-center items-center">
+          {!isLoggedIn ? (
+            <div className={`w-full p-8 border rounded-3xl shadow-2xl space-y-6 ${isDark ? 'bg-slate-900 border-slate-800 text-white' : 'bg-white border-slate-200 text-slate-900'}`}>
+              <div className="text-center space-y-2">
+                <h2 className="text-2xl font-extrabold">Admin Login</h2>
+                <p className="text-xs text-slate-400">Enter credentials to access admin controls.</p>
+              </div>
               <form onSubmit={handleLogin} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-semibold mb-1">Mobile Number</label>
-                  <input type="text" value={mobile} onChange={(e) => setMobile(e.target.value)} placeholder="Enter mobile" className="w-full p-3 border rounded-xl text-sm" required />
+                  <label className="block text-xs font-bold mb-1">Mobile Number</label>
+                  <input 
+                    type="text" 
+                    value={mobile} 
+                    onChange={(e) => setMobile(e.target.value)} 
+                    placeholder="9876543210" 
+                    className={`w-full p-3 rounded-xl border text-sm outline-none focus:border-blue-500 ${isDark ? 'bg-slate-800 border-slate-700 text-white' : 'bg-slate-50 border-slate-200 text-slate-900'}`}
+                    required 
+                  />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold mb-1">Password</label>
-                  <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter password" className="w-full p-3 border rounded-xl text-sm" required />
+                  <label className="block text-xs font-bold mb-1">Password</label>
+                  <input 
+                    type="password" 
+                    value={password} 
+                    onChange={(e) => setPassword(e.target.value)} 
+                    placeholder="admin123" 
+                    className={`w-full p-3 rounded-xl border text-sm outline-none focus:border-blue-500 ${isDark ? 'bg-slate-800 border-slate-700 text-white' : 'bg-slate-50 border-slate-200 text-slate-900'}`}
+                    required 
+                  />
                 </div>
-                <button type="submit" className="w-full bg-blue-600 text-white p-3 rounded-xl font-bold text-sm hover:bg-blue-700 transition-all">Login</button>
+                <button type="submit" className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-sm shadow-lg shadow-blue-500/30 transition-all">
+                  Login to Dashboard
+                </button>
               </form>
-            ) : (
-              <div className="text-center space-y-4">
-                <p className="text-green-600 font-bold text-lg">Welcome to Admin Dashboard!</p>
-                <button onClick={() => setIsLoggedIn(false)} className="bg-red-500 text-white px-4 py-2 rounded-xl text-xs font-semibold">Logout</button>
-              </div>
-            )}
-          </div>
-        ) : (
-          <div>
-            {/* HERO BANNER SECTION WITH IMAGE */}
-            <section className="relative h-[480px] sm:h-[540px] flex items-center justify-center text-center px-4 overflow-hidden">
-              <div className="absolute inset-0 z-0">
-                <img src={activeBanner.image} alt={activeBanner.title} className="w-full h-full object-cover filter brightness-50 transform scale-105 transition-all duration-700" />
-              </div>
-              <div className="relative z-10 max-w-4xl mx-auto space-y-4 text-white">
-                <span className="bg-blue-600/80 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">{activeBanner.subtitle}</span>
-                <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">{activeBanner.title}</h2>
-                <p className="text-sm sm:text-lg text-slate-200 max-w-2xl mx-auto">{activeBanner.desc}</p>
-              </div>
-            </section>
-
-            {/* DYNAMIC CONTENT SECTION */}
-            <section className={`py-16 px-4 sm:px-8 max-w-6xl mx-auto`}>
-              <div className={`p-8 sm:p-12 rounded-3xl border shadow-xl backdrop-blur-sm transition-colors ${isDark ? 'bg-slate-900/80 border-slate-800' : 'bg-white/80 border-slate-200/80'}`}>
-                <h3 className="text-2xl sm:text-3xl font-extrabold mb-4 text-blue-600">{activeBanner.contentTitle}</h3>
-                <p className={`text-base sm:text-lg leading-relaxed ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>{activeBanner.contentText}</p>
-              </div>
-            </section>
-
-            {/* 🌟 NEW ADDED: VIDEO & APP BANNER SECTION (Services & Solutions Showcase) */}
-            <section className={`py-16 px-4 sm:px-8 max-w-6xl mx-auto`}>
-              <div className="text-center mb-12">
-                <span className="text-blue-600 font-bold text-xs uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full border border-blue-100">Interactive Showcase</span>
-                <h3 className="text-3xl font-extrabold mt-3 tracking-tight">Services That Transform Work</h3>
-                <p className={`text-sm mt-2 max-w-xl mx-auto ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Experience our modern workspace video overview and top-tier enterprise software products designed for scale.</p>
-              </div>
-
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                {/* Embedded Video Showcase */}
-                <div className={`p-4 rounded-3xl border shadow-xl ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
-                  <div className="relative rounded-2xl overflow-hidden aspect-video shadow-inner bg-black">
-                    <video 
-                      className="w-full h-full object-cover"
-                      controls 
-                      autoPlay 
-                      muted 
-                      loop
-                      poster="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
-                    >
-                      <source src="https://assets.mixkit.co/videos/preview/mixkit-team-working-in-an-office-4129-large.mp4" type="video/mp4" />
-                      Your browser does not support the video tag.
-                    </video>
-                  </div>
-                  <h4 className="font-bold text-base mt-4 px-2">Inside Mansharp Workplace Culture</h4>
-                  <p className={`text-xs mt-1 px-2 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Watch how our teams collaborate to build revolutionary cloud architectures.</p>
-                </div>
-
-                {/* App Banner Cards */}
-                <div className="space-y-4">
-                  <div onClick={() => setActiveTab('aim-app')} className={`p-6 rounded-3xl border shadow-md cursor-pointer transition-all hover:scale-[1.02] flex items-center gap-4 ${isDark ? 'bg-slate-900 border-slate-800 hover:bg-slate-800/80' : 'bg-white border-slate-200 hover:bg-blue-50/50'}`}>
-                    <div className="h-12 w-12 rounded-2xl bg-blue-600 text-white font-bold flex items-center justify-center text-xl shadow-lg shadow-blue-500/30">📱</div>
-                    <div>
-                      <h4 className="font-extrabold text-base">AIM App</h4>
-                      <p className={`text-xs mt-0.5 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Effortlessly Track And Manage All Your Company Assets In One Place.</p>
-                    </div>
-                  </div>
-
-                  <div onClick={() => setActiveTab('org-chart')} className={`p-6 rounded-3xl border shadow-md cursor-pointer transition-all hover:scale-[1.02] flex items-center gap-4 ${isDark ? 'bg-slate-900 border-slate-800 hover:bg-slate-800/80' : 'bg-white border-slate-200 hover:bg-blue-50/50'}`}>
-                    <div className="h-12 w-12 rounded-2xl bg-indigo-600 text-white font-bold flex items-center justify-center text-xl shadow-lg shadow-indigo-500/30">📊</div>
-                    <div>
-                      <h4 className="font-extrabold text-base">Mansharp Org Chart</h4>
-                      <p className={`text-xs mt-0.5 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Instantly View & Search Your Team's Hierarchy With Real-Time Org Charts.</p>
-                    </div>
-                  </div>
-
-                  <div onClick={() => setActiveTab('ai-services')} className={`p-6 rounded-3xl border shadow-md cursor-pointer transition-all hover:scale-[1.02] flex items-center gap-4 ${isDark ? 'bg-slate-900 border-slate-800 hover:bg-slate-800/80' : 'bg-white border-slate-200 hover:bg-blue-50/50'}`}>
-                    <div className="h-12 w-12 rounded-2xl bg-purple-600 text-white font-bold flex items-center justify-center text-xl shadow-lg shadow-purple-500/30">✨</div>
-                    <div>
-                      <h4 className="font-extrabold text-base">Want to Explore AI Solutions Click Here!</h4>
-                      <p className={`text-xs mt-0.5 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Discover advanced enterprise AI tools and Copilot automation suites.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-          </div>
-        )}
-      </main>
+            </div>
+          ) : (
+            <div className={`w-full p-8 border rounded-3xl shadow-2xl space-y-6 text-center ${isDark ? 'bg-slate-900 border-slate-800 text-white' : 'bg-white border-slate-200 text-slate-900'}`}>
+              <h2 className="text-2xl font-extrabold">Welcome, Admin! 🎉</h2>
+              <p className="text-sm text-slate-400">You are successfully logged into the Mansharp Technologies secure portal.</p>
+              <button onClick={() => setIsLoggedIn(false)} className="px-6 py-2.5 bg-rose-500 hover:bg-rose-600 text-white rounded-xl font-bold text-xs shadow-md">
+                Logout
+              </button>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* FOOTER */}
-      <footer className={`border-t py-12 px-4 sm:px-8 transition-colors duration-300 ${isDark ? 'border-slate-800 bg-slate-900 text-slate-300' : 'border-slate-200 bg-slate-900 text-slate-300'}`}>
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          
-          <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="bg-gradient-to-tr from-blue-600 to-purple-600 text-white font-extrabold h-8 w-8 rounded-lg flex items-center justify-center text-sm">
-                M
-              </div>
-              <h1 className="font-extrabold text-sm text-white tracking-tight">MANSHARP TECHNOLOGIES</h1>
-            </div>
-            <p className="text-xs text-slate-400 leading-relaxed">We are dedicated to providing you with exceptional service and support.</p>
-            <button onClick={() => setActiveTab('contact')} className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-xs font-semibold transition-all shadow-md">Contact Us ↗</button>
-          </div>
-
-          <div className="space-y-2">
-            <h4 className="font-bold text-xs uppercase tracking-wider text-white">Company</h4>
-            <div className="flex flex-col gap-1.5 text-xs">
-              <button onClick={() => setActiveTab('why-choose-us')} className="text-left hover:text-white transition-colors">Career</button>
-              <button onClick={() => setActiveTab('about')} className="text-left hover:text-white transition-colors">About Us</button>
-              <button onClick={() => setActiveTab('life-at-mansharp')} className="text-left hover:text-white transition-colors">Life At Mansharp</button>
-            </div>
-          </div>
-
-          <div className="space-y-2">
-            <h4 className="font-bold text-xs uppercase tracking-wider text-white">Resources</h4>
-            <div className="flex flex-col gap-1.5 text-xs">
-              <button onClick={() => setActiveTab('blogs')} className="text-left hover:text-white transition-colors">Blogs</button>
-              <button onClick={() => setActiveTab('case-studies')} className="text-left hover:text-white transition-colors">Case Studies</button>
-              <button onClick={() => setActiveTab('workshops')} className="text-left hover:text-white transition-colors">Workshops</button>
-            </div>
-          </div>
-
-          <div className="space-y-2">
-            <h4 className="font-bold text-xs uppercase tracking-wider text-white">Products</h4>
-            <div className="flex flex-col gap-1.5 text-xs">
-              <button onClick={() => setActiveTab('org-chart')} className="text-left hover:text-white transition-colors">Org Chart</button>
-              <button onClick={() => setActiveTab('aim-app')} className="text-left hover:text-white transition-colors">Asset Management App</button>
-            </div>
-          </div>
-
-        </div>
-
-        <div className="max-w-6xl mx-auto pt-8 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-400">
-          <p>© 2026 Mansharp Technologies, All rights reserved.</p>
-          
-          <div className="flex gap-4">
-            <button onClick={() => setActiveTab('privacy-policy')} className="hover:text-white transition-colors">Privacy Policy</button>
-            <button onClick={() => setActiveTab('terms')} className="hover:text-white transition-colors">Terms and Conditions</button>
-          </div>
-
-          {/* 🌟 NEW ADDED: Direct Clickable Social Icons (Facebook, Instagram, LinkedIn) */}
-          <div className="flex items-center gap-3">
-            <a 
-              href="https://facebook.com" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="h-8 w-8 rounded-full bg-slate-800 hover:bg-blue-600 flex items-center justify-center text-white transition-colors text-xs font-bold"
-              title="Facebook"
-            >
-              f
-            </a>
-            <a 
-              href="https://instagram.com" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="h-8 w-8 rounded-full bg-slate-800 hover:bg-pink-600 flex items-center justify-center text-white transition-colors text-xs font-bold"
-              title="Instagram"
-            >
-              ig
-            </a>
-            <a 
-              href="https://linkedin.com" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="h-8 w-8 rounded-full bg-slate-800 hover:bg-blue-700 flex items-center justify-center text-white transition-colors text-xs font-bold"
-              title="LinkedIn"
-            >
-              in
-            </a>
-          </div>
-        </div>
+      <footer className={`border-t py-8 px-4 text-center text-xs ${isDark ? 'bg-slate-900 border-slate-800 text-slate-400' : 'bg-white border-slate-200 text-slate-600'}`}>
+        <p>© {new Date().getFullYear()} Mansharp Technologies Private Limited. All rights reserved.</p>
       </footer>
-
     </div>
   );
 }
