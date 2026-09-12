@@ -447,16 +447,12 @@ export default function App() {
         </div>
       </header>
 
-      {/* MOBILE FULLSCREEN DRAWER MENU (Added for Mobile Responsiveness) */}
+      {/* MOBILE FULLSCREEN DRAWER MENU */}
       {!isAdmin && isMobileMenuOpen && (
         <div className={`lg:hidden fixed inset-0 top-[73px] z-40 overflow-y-auto p-4 space-y-4 shadow-2xl transition-all ${isDark ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'}`}>
           
-          {/* About Section Mobile */}
           <div className="border-b pb-2 border-slate-700/50">
-            <button 
-              onClick={() => setMobileDropdown(mobileDropdown === 'about' ? null : 'about')} 
-              className="w-full flex justify-between items-center py-2 font-bold text-sm"
-            >
+            <button onClick={() => setMobileDropdown(mobileDropdown === 'about' ? null : 'about')} className="w-full flex justify-between items-center py-2 font-bold text-sm">
               <span>About Us</span>
               <span>{mobileDropdown === 'about' ? '▲' : '▼'}</span>
             </button>
@@ -470,12 +466,8 @@ export default function App() {
             )}
           </div>
 
-          {/* AI Solutions Section Mobile */}
           <div className="border-b pb-2 border-slate-700/50">
-            <button 
-              onClick={() => setMobileDropdown(mobileDropdown === 'ai' ? null : 'ai')} 
-              className="w-full flex justify-between items-center py-2 font-bold text-sm text-blue-500"
-            >
+            <button onClick={() => setMobileDropdown(mobileDropdown === 'ai' ? null : 'ai')} className="w-full flex justify-between items-center py-2 font-bold text-sm text-blue-500">
               <span>✨ AI Solutions</span>
               <span>{mobileDropdown === 'ai' ? '▲' : '▼'}</span>
             </button>
@@ -489,12 +481,8 @@ export default function App() {
             )}
           </div>
 
-          {/* Industries Section Mobile */}
           <div className="border-b pb-2 border-slate-700/50">
-            <button 
-              onClick={() => setMobileDropdown(mobileDropdown === 'industries' ? null : 'industries')} 
-              className="w-full flex justify-between items-center py-2 font-bold text-sm"
-            >
+            <button onClick={() => setMobileDropdown(mobileDropdown === 'industries' ? null : 'industries')} className="w-full flex justify-between items-center py-2 font-bold text-sm">
               <span>Industries</span>
               <span>{mobileDropdown === 'industries' ? '▲' : '▼'}</span>
             </button>
@@ -510,12 +498,8 @@ export default function App() {
             )}
           </div>
 
-          {/* Resources & Insights Section Mobile */}
           <div className="border-b pb-2 border-slate-700/50">
-            <button 
-              onClick={() => setMobileDropdown(mobileDropdown === 'resources' ? null : 'resources')} 
-              className="w-full flex justify-between items-center py-2 font-bold text-sm"
-            >
+            <button onClick={() => setMobileDropdown(mobileDropdown === 'resources' ? null : 'resources')} className="w-full flex justify-between items-center py-2 font-bold text-sm">
               <span>Resources & Insights</span>
               <span>{mobileDropdown === 'resources' ? '▲' : '▼'}</span>
             </button>
@@ -528,12 +512,8 @@ export default function App() {
             )}
           </div>
 
-          {/* Solutions Section Mobile */}
           <div className="border-b pb-2 border-slate-700/50">
-            <button 
-              onClick={() => setMobileDropdown(mobileDropdown === 'solutions' ? null : 'solutions')} 
-              className="w-full flex justify-between items-center py-2 font-bold text-sm"
-            >
+            <button onClick={() => setMobileDropdown(mobileDropdown === 'solutions' ? null : 'solutions')} className="w-full flex justify-between items-center py-2 font-bold text-sm">
               <span>Solutions</span>
               <span>{mobileDropdown === 'solutions' ? '▲' : '▼'}</span>
             </button>
@@ -547,12 +527,8 @@ export default function App() {
             )}
           </div>
 
-          {/* Products Section Mobile */}
           <div className="border-b pb-2 border-slate-700/50">
-            <button 
-              onClick={() => setMobileDropdown(mobileDropdown === 'products' ? null : 'products')} 
-              className="w-full flex justify-between items-center py-2 font-bold text-sm"
-            >
+            <button onClick={() => setMobileDropdown(mobileDropdown === 'products' ? null : 'products')} className="w-full flex justify-between items-center py-2 font-bold text-sm">
               <span>Products</span>
               <span>{mobileDropdown === 'products' ? '▲' : '▼'}</span>
             </button>
@@ -564,136 +540,200 @@ export default function App() {
             )}
           </div>
 
-          <div className="pt-4">
-            <button onClick={() => { setActiveTab('contact'); setIsMobileMenuOpen(false); }} className="w-full bg-gradient-to-r from-rose-500 to-pink-500 text-white py-3 rounded-xl text-sm font-semibold shadow-md">
-              Contact Us
-            </button>
-          </div>
+          <button onClick={() => { setActiveTab('contact'); setIsMobileMenuOpen(false); }} className="w-full bg-gradient-to-r from-rose-500 to-pink-500 text-white p-3 rounded-xl text-center font-bold text-sm shadow-md">
+            Contact Us
+          </button>
         </div>
       )}
 
       {/* MAIN CONTENT AREA */}
-      <main className="flex-1 w-full">
-        {!isAdmin ? (
-          <div className="space-y-16 pb-20">
-            
-            {/* DYNAMIC BANNER & IMAGE SLIDER SECTION */}
-            <div className="relative w-full h-[480px] sm:h-[580px] flex items-center justify-center text-center px-4 overflow-hidden shadow-2xl">
-              <div className="absolute inset-0 z-0">
-                <img 
-                  key={activeBanner.image}
-                  src={activeBanner.image} 
-                  alt="Banner" 
-                  className={`w-full h-full object-cover scale-105 transition-all duration-700 ${isDark ? 'brightness-[0.35]' : 'brightness-[0.55]'}`}
-                />
-                <div className={`absolute inset-0 bg-gradient-to-t ${isDark ? 'from-slate-950 via-slate-950/40' : 'from-slate-950/70 via-slate-950/20'} to-transparent`}></div>
-              </div>
-
-              {/* Slider Content */}
-              <div className="relative z-10 max-w-4xl mx-auto space-y-6 animate-fadeIn">
-                <span className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full shadow-lg">
-                  {activeBanner.subtitle}
-                </span>
-                <h1 className="text-3xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight drop-shadow-lg">
-                  {activeBanner.title}
-                </h1>
-                <p className="text-slate-100 text-xs sm:text-base max-w-2xl mx-auto leading-relaxed drop-shadow">
-                  {activeBanner.desc}
-                </p>
-                <div className="flex justify-center gap-4 pt-2">
-                  <button onClick={() => setActiveTab('contact')} className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold px-7 py-3.5 rounded-2xl text-xs sm:text-sm transition-all shadow-xl shadow-blue-600/30">
-                    Get Started Today 🚀
-                  </button>
+      <main className="flex-grow">
+        {isAdmin ? (
+          <div className="max-w-md mx-auto mt-20 p-8 border rounded-3xl shadow-2xl bg-white text-slate-900">
+            <h2 className="text-2xl font-bold mb-6 text-center">Admin Portal</h2>
+            {!isLoggedIn ? (
+              <form onSubmit={handleLogin} className="space-y-4">
+                <div>
+                  <label className="block text-xs font-semibold mb-1">Mobile Number</label>
+                  <input type="text" value={mobile} onChange={(e) => setMobile(e.target.value)} placeholder="Enter mobile" className="w-full p-3 border rounded-xl text-sm" required />
                 </div>
-              </div>
-
-              {/* Slider Navigation Dots */}
-              <div className="absolute bottom-6 z-20 flex gap-2 overflow-x-auto max-w-[90%] px-2 py-1">
-                {bannerSlides.map((slide, index) => (
-                  <button
-                    key={index}
-                    onClick={() => {
-                      setCurrentSlide(index);
-                      setActiveTab(slide.id);
-                    }}
-                    className={`h-2 rounded-full transition-all duration-300 ${currentSlide === index ? 'w-8 bg-blue-500 shadow-md' : 'w-2 bg-white/50 hover:bg-white'}`}
-                    title={slide.title}
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* SCROLLABLE DETAILED CONTENT SECTION */}
-            <div className="max-w-6xl mx-auto px-4 sm:px-8 space-y-12">
-              <div className={`p-6 sm:p-12 rounded-3xl border shadow-xl grid grid-cols-1 lg:grid-cols-2 gap-8 items-center transition-colors duration-300 ${isDark ? 'bg-slate-900/80 border-slate-800' : 'bg-white/80 border-slate-200'}`}>
-                <div className="space-y-4">
-                  <span className="text-blue-500 font-bold text-xs uppercase tracking-wider">{activeBanner.subtitle}</span>
-                  <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight">{activeBanner.contentTitle}</h2>
-                  <p className={`text-xs sm:text-sm leading-relaxed ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>{activeBanner.contentText}</p>
-                  <div className="pt-2">
-                    <button onClick={() => setActiveTab('contact')} className="bg-slate-900 hover:bg-slate-800 text-white px-5 py-2.5 rounded-xl text-xs font-semibold transition-all shadow-md">
-                      Connect With Us
-                    </button>
-                  </div>
+                <div>
+                  <label className="block text-xs font-semibold mb-1">Password</label>
+                  <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter password" className="w-full p-3 border rounded-xl text-sm" required />
                 </div>
-                <div className="relative h-64 sm:h-80 rounded-2xl overflow-hidden shadow-2xl">
-                  <img src={activeBanner.image} alt="Content" className="w-full h-full object-cover" />
-                </div>
+                <button type="submit" className="w-full bg-blue-600 text-white p-3 rounded-xl font-bold text-sm hover:bg-blue-700 transition-all">Login</button>
+              </form>
+            ) : (
+              <div className="text-center space-y-4">
+                <p className="text-green-600 font-bold text-lg">Welcome to Admin Dashboard!</p>
+                <button onClick={() => setIsLoggedIn(false)} className="bg-red-500 text-white px-4 py-2 rounded-xl text-xs font-semibold">Logout</button>
               </div>
-            </div>
-
+            )}
           </div>
         ) : (
-          /* ADMIN PANEL SECTION */
-          <div className="max-w-md mx-auto px-4 py-16">
-            <div className={`p-8 rounded-3xl border shadow-2xl ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
-              <h2 className="text-2xl font-extrabold text-center mb-6">Admin Panel Login</h2>
-              {!isLoggedIn ? (
-                <form onSubmit={handleLogin} className="space-y-4">
-                  <div>
-                    <label className="block text-xs font-bold mb-1">Mobile Number</label>
-                    <input 
-                      type="text" 
-                      value={mobile} 
-                      onChange={(e) => setMobile(e.target.value)} 
-                      placeholder="Enter mobile number" 
-                      className={`w-full px-4 py-2.5 rounded-xl border text-sm outline-none ${isDark ? 'bg-slate-950 border-slate-800 text-white' : 'bg-slate-50 border-slate-200 text-slate-900'}`}
-                      required
-                    />
+          <div>
+            {/* HERO BANNER SECTION WITH IMAGE */}
+            <section className="relative h-[480px] sm:h-[540px] flex items-center justify-center text-center px-4 overflow-hidden">
+              <div className="absolute inset-0 z-0">
+                <img src={activeBanner.image} alt={activeBanner.title} className="w-full h-full object-cover filter brightness-50 transform scale-105 transition-all duration-700" />
+              </div>
+              <div className="relative z-10 max-w-4xl mx-auto space-y-4 text-white">
+                <span className="bg-blue-600/80 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">{activeBanner.subtitle}</span>
+                <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">{activeBanner.title}</h2>
+                <p className="text-sm sm:text-lg text-slate-200 max-w-2xl mx-auto">{activeBanner.desc}</p>
+              </div>
+            </section>
+
+            {/* DYNAMIC CONTENT SECTION */}
+            <section className={`py-16 px-4 sm:px-8 max-w-6xl mx-auto`}>
+              <div className={`p-8 sm:p-12 rounded-3xl border shadow-xl backdrop-blur-sm transition-colors ${isDark ? 'bg-slate-900/80 border-slate-800' : 'bg-white/80 border-slate-200/80'}`}>
+                <h3 className="text-2xl sm:text-3xl font-extrabold mb-4 text-blue-600">{activeBanner.contentTitle}</h3>
+                <p className={`text-base sm:text-lg leading-relaxed ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>{activeBanner.contentText}</p>
+              </div>
+            </section>
+
+            {/* 🌟 NEW ADDED: VIDEO & APP BANNER SECTION (Services & Solutions Showcase) */}
+            <section className={`py-16 px-4 sm:px-8 max-w-6xl mx-auto`}>
+              <div className="text-center mb-12">
+                <span className="text-blue-600 font-bold text-xs uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full border border-blue-100">Interactive Showcase</span>
+                <h3 className="text-3xl font-extrabold mt-3 tracking-tight">Services That Transform Work</h3>
+                <p className={`text-sm mt-2 max-w-xl mx-auto ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Experience our modern workspace video overview and top-tier enterprise software products designed for scale.</p>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                {/* Embedded Video Showcase */}
+                <div className={`p-4 rounded-3xl border shadow-xl ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
+                  <div className="relative rounded-2xl overflow-hidden aspect-video shadow-inner bg-black">
+                    <video 
+                      className="w-full h-full object-cover"
+                      controls 
+                      autoPlay 
+                      muted 
+                      loop
+                      poster="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
+                    >
+                      <source src="https://assets.mixkit.co/videos/preview/mixkit-team-working-in-an-office-4129-large.mp4" type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
                   </div>
-                  <div>
-                    <label className="block text-xs font-bold mb-1">Password</label>
-                    <input 
-                      type="password" 
-                      value={password} 
-                      onChange={(e) => setPassword(e.target.value)} 
-                      placeholder="Enter password" 
-                      className={`w-full px-4 py-2.5 rounded-xl border text-sm outline-none ${isDark ? 'bg-slate-950 border-slate-800 text-white' : 'bg-slate-50 border-slate-200 text-slate-900'}`}
-                      required
-                    />
-                  </div>
-                  <button type="submit" className="w-full bg-blue-600 hover:bg-blue-500 text-white py-3 rounded-xl text-sm font-bold shadow-lg transition-all">
-                    Login
-                  </button>
-                </form>
-              ) : (
-                <div className="text-center space-y-4">
-                  <div className="bg-emerald-500/10 text-emerald-500 p-4 rounded-xl font-bold text-sm">
-                    🎉 Welcome Admin! You are successfully logged in.
-                  </div>
-                  <button onClick={() => setIsLoggedIn(false)} className="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded-xl text-xs font-bold">
-                    Logout
-                  </button>
+                  <h4 className="font-bold text-base mt-4 px-2">Inside Mansharp Workplace Culture</h4>
+                  <p className={`text-xs mt-1 px-2 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Watch how our teams collaborate to build revolutionary cloud architectures.</p>
                 </div>
-              )}
-            </div>
+
+                {/* App Banner Cards */}
+                <div className="space-y-4">
+                  <div onClick={() => setActiveTab('aim-app')} className={`p-6 rounded-3xl border shadow-md cursor-pointer transition-all hover:scale-[1.02] flex items-center gap-4 ${isDark ? 'bg-slate-900 border-slate-800 hover:bg-slate-800/80' : 'bg-white border-slate-200 hover:bg-blue-50/50'}`}>
+                    <div className="h-12 w-12 rounded-2xl bg-blue-600 text-white font-bold flex items-center justify-center text-xl shadow-lg shadow-blue-500/30">📱</div>
+                    <div>
+                      <h4 className="font-extrabold text-base">AIM App</h4>
+                      <p className={`text-xs mt-0.5 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Effortlessly Track And Manage All Your Company Assets In One Place.</p>
+                    </div>
+                  </div>
+
+                  <div onClick={() => setActiveTab('org-chart')} className={`p-6 rounded-3xl border shadow-md cursor-pointer transition-all hover:scale-[1.02] flex items-center gap-4 ${isDark ? 'bg-slate-900 border-slate-800 hover:bg-slate-800/80' : 'bg-white border-slate-200 hover:bg-blue-50/50'}`}>
+                    <div className="h-12 w-12 rounded-2xl bg-indigo-600 text-white font-bold flex items-center justify-center text-xl shadow-lg shadow-indigo-500/30">📊</div>
+                    <div>
+                      <h4 className="font-extrabold text-base">Mansharp Org Chart</h4>
+                      <p className={`text-xs mt-0.5 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Instantly View & Search Your Team's Hierarchy With Real-Time Org Charts.</p>
+                    </div>
+                  </div>
+
+                  <div onClick={() => setActiveTab('ai-services')} className={`p-6 rounded-3xl border shadow-md cursor-pointer transition-all hover:scale-[1.02] flex items-center gap-4 ${isDark ? 'bg-slate-900 border-slate-800 hover:bg-slate-800/80' : 'bg-white border-slate-200 hover:bg-blue-50/50'}`}>
+                    <div className="h-12 w-12 rounded-2xl bg-purple-600 text-white font-bold flex items-center justify-center text-xl shadow-lg shadow-purple-500/30">✨</div>
+                    <div>
+                      <h4 className="font-extrabold text-base">Want to Explore AI Solutions Click Here!</h4>
+                      <p className={`text-xs mt-0.5 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Discover advanced enterprise AI tools and Copilot automation suites.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
           </div>
         )}
       </main>
 
       {/* FOOTER */}
-      <footer className={`border-t py-8 px-4 sm:px-8 text-center text-xs transition-colors duration-300 ${isDark ? 'border-slate-800 bg-slate-900 text-slate-400' : 'border-slate-200 bg-white text-slate-600'}`}>
-        <p>© 2013 - {new Date().getFullYear()} Mansharp Technologies. All rights reserved.</p>
+      <footer className={`border-t py-12 px-4 sm:px-8 transition-colors duration-300 ${isDark ? 'border-slate-800 bg-slate-900 text-slate-300' : 'border-slate-200 bg-slate-900 text-slate-300'}`}>
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+          
+          <div className="space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="bg-gradient-to-tr from-blue-600 to-purple-600 text-white font-extrabold h-8 w-8 rounded-lg flex items-center justify-center text-sm">
+                M
+              </div>
+              <h1 className="font-extrabold text-sm text-white tracking-tight">MANSHARP TECHNOLOGIES</h1>
+            </div>
+            <p className="text-xs text-slate-400 leading-relaxed">We are dedicated to providing you with exceptional service and support.</p>
+            <button onClick={() => setActiveTab('contact')} className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-xs font-semibold transition-all shadow-md">Contact Us ↗</button>
+          </div>
+
+          <div className="space-y-2">
+            <h4 className="font-bold text-xs uppercase tracking-wider text-white">Company</h4>
+            <div className="flex flex-col gap-1.5 text-xs">
+              <button onClick={() => setActiveTab('why-choose-us')} className="text-left hover:text-white transition-colors">Career</button>
+              <button onClick={() => setActiveTab('about')} className="text-left hover:text-white transition-colors">About Us</button>
+              <button onClick={() => setActiveTab('life-at-mansharp')} className="text-left hover:text-white transition-colors">Life At Mansharp</button>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <h4 className="font-bold text-xs uppercase tracking-wider text-white">Resources</h4>
+            <div className="flex flex-col gap-1.5 text-xs">
+              <button onClick={() => setActiveTab('blogs')} className="text-left hover:text-white transition-colors">Blogs</button>
+              <button onClick={() => setActiveTab('case-studies')} className="text-left hover:text-white transition-colors">Case Studies</button>
+              <button onClick={() => setActiveTab('workshops')} className="text-left hover:text-white transition-colors">Workshops</button>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <h4 className="font-bold text-xs uppercase tracking-wider text-white">Products</h4>
+            <div className="flex flex-col gap-1.5 text-xs">
+              <button onClick={() => setActiveTab('org-chart')} className="text-left hover:text-white transition-colors">Org Chart</button>
+              <button onClick={() => setActiveTab('aim-app')} className="text-left hover:text-white transition-colors">Asset Management App</button>
+            </div>
+          </div>
+
+        </div>
+
+        <div className="max-w-6xl mx-auto pt-8 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-400">
+          <p>© 2026 Mansharp Technologies, All rights reserved.</p>
+          
+          <div className="flex gap-4">
+            <button onClick={() => setActiveTab('privacy-policy')} className="hover:text-white transition-colors">Privacy Policy</button>
+            <button onClick={() => setActiveTab('terms')} className="hover:text-white transition-colors">Terms and Conditions</button>
+          </div>
+
+          {/* 🌟 NEW ADDED: Direct Clickable Social Icons (Facebook, Instagram, LinkedIn) */}
+          <div className="flex items-center gap-3">
+            <a 
+              href="https://facebook.com" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="h-8 w-8 rounded-full bg-slate-800 hover:bg-blue-600 flex items-center justify-center text-white transition-colors text-xs font-bold"
+              title="Facebook"
+            >
+              f
+            </a>
+            <a 
+              href="https://instagram.com" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="h-8 w-8 rounded-full bg-slate-800 hover:bg-pink-600 flex items-center justify-center text-white transition-colors text-xs font-bold"
+              title="Instagram"
+            >
+              ig
+            </a>
+            <a 
+              href="https://linkedin.com" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="h-8 w-8 rounded-full bg-slate-800 hover:bg-blue-700 flex items-center justify-center text-white transition-colors text-xs font-bold"
+              title="LinkedIn"
+            >
+              in
+            </a>
+          </div>
+        </div>
       </footer>
 
     </div>
