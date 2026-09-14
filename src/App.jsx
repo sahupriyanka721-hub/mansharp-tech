@@ -19,6 +19,10 @@ export default function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mobileDropdown, setMobileDropdown] = useState(null);
 
+  // New State for Interactive ROI Calculator
+  const [teamSize, setTeamSize] = useState(50);
+  const [cloudSpend, setCloudSpend] = useState(5000);
+
   const bannerSlides = [
     {
       id: 'about',
@@ -295,7 +299,6 @@ export default function App() {
     }
   };
 
-  // Helper function to jump to second page view directly with options
   const goToDetail = (tabId) => {
     setActiveTab(tabId);
     setViewMode('detail');
@@ -342,7 +345,7 @@ export default function App() {
               </div>
             </div>
 
-            {/* AI Solutions - Direct Click to Second Page with Options */}
+            {/* AI Solutions */}
             <div className="relative py-2">
               <button 
                 onClick={() => {
@@ -356,30 +359,10 @@ export default function App() {
 
               {isAiDropdownOpen && (
                 <div className={`absolute top-full left-0 mt-2 w-56 border rounded-2xl shadow-2xl p-2 flex flex-col gap-1 z-50 ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
-                  <button 
-                    onClick={() => goToDetail('ai-transformation')} 
-                    className={`text-left px-3 py-2 rounded-xl text-xs font-semibold transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-200' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-800'}`}
-                  >
-                    AI Transformation
-                  </button>
-                  <button 
-                    onClick={() => goToDetail('ai-copilot-pricing')} 
-                    className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}
-                  >
-                    Microsoft Copilot Pricing
-                  </button>
-                  <button 
-                    onClick={() => goToDetail('ai-services')} 
-                    className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}
-                  >
-                    AI Services
-                  </button>
-                  <button 
-                    onClick={() => goToDetail('ai-business-leaders')} 
-                    className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}
-                  >
-                    AI for Business Leaders
-                  </button>
+                  <button onClick={() => goToDetail('ai-transformation')} className={`text-left px-3 py-2 rounded-xl text-xs font-semibold transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-200' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-800'}`}>AI Transformation</button>
+                  <button onClick={() => goToDetail('ai-copilot-pricing')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>Microsoft Copilot Pricing</button>
+                  <button onClick={() => goToDetail('ai-services')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>AI Services</button>
+                  <button onClick={() => goToDetail('ai-business-leaders')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>AI for Business Leaders</button>
                 </div>
               )}
             </div>
@@ -498,23 +481,6 @@ export default function App() {
             )}
           </div>
 
-          <div className="border-b pb-2 border-slate-700/50">
-            <button onClick={() => setMobileDropdown(mobileDropdown === 'industries' ? null : 'industries')} className="w-full flex justify-between items-center py-2 font-bold text-sm">
-              <span>Industries</span>
-              <span>{mobileDropdown === 'industries' ? '▲' : '▼'}</span>
-            </button>
-            {mobileDropdown === 'industries' && (
-              <div className="pl-4 grid grid-cols-2 gap-2 pt-2 text-xs">
-                {['Healthcare', 'Education', 'Public Sector', 'Financial Services', 'Manufacturing', 'Energy', 'Retail', 'Software'].map((ind, idx) => {
-                  const slug = ind.toLowerCase().replace(/\s+/g, '-');
-                  return (
-                    <button key={idx} onClick={() => goToDetail(slug)} className="text-left py-1">{ind}</button>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-
           <button onClick={() => goToDetail('contact')} className="w-full bg-gradient-to-r from-rose-500 to-pink-500 text-white p-3 rounded-xl text-center font-bold text-sm shadow-md">
             Contact Us
           </button>
@@ -546,7 +512,7 @@ export default function App() {
             )}
           </div>
         ) : viewMode === 'detail' ? (
-          /* SECOND PAGE DETAILED VIEW (WITH OPTIONS & BACK BUTTON) */
+          /* SECOND PAGE DETAILED VIEW */
           <div className="py-12 px-4 sm:px-8 max-w-4xl mx-auto space-y-6">
             <button onClick={() => setViewMode('home')} className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-blue-600 text-white shadow-md hover:bg-blue-700 transition-all">
               ← Back to Home
@@ -572,7 +538,7 @@ export default function App() {
             </div>
           </div>
         ) : (
-          /* HOME PAGE (WITHOUT ANY "EXPLORE SECOND PAGE" TEXT) */
+          /* HOME PAGE */
           <div>
             <section className="relative h-[480px] sm:h-[540px] flex items-center justify-center text-center px-4 overflow-hidden">
               <div className="absolute inset-0 z-0">
@@ -589,6 +555,61 @@ export default function App() {
               <div className={`p-8 sm:p-12 rounded-3xl border shadow-xl backdrop-blur-sm transition-colors ${isDark ? 'bg-slate-900/80 border-slate-800' : 'bg-white/80 border-slate-200/80'}`}>
                 <h3 className="text-2xl sm:text-3xl font-extrabold mb-4 text-blue-600">{activeBanner.contentTitle}</h3>
                 <p className={`text-base sm:text-lg leading-relaxed ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>{activeBanner.contentText}</p>
+              </div>
+            </section>
+
+            {/* NEW ADDED SECTION: INTERACTIVE ROI & CLOUD SAVINGS CALCULATOR */}
+            <section className={`py-16 px-4 sm:px-8 max-w-6xl mx-auto`}>
+              <div className={`p-8 sm:p-12 rounded-3xl border shadow-xl ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
+                <div className="text-center max-w-2xl mx-auto mb-10">
+                  <span className="bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 px-3 py-1 rounded-full text-xs font-bold uppercase">Interactive Tool</span>
+                  <h3 className="text-2xl sm:text-3xl font-extrabold mt-3">Calculate Your Enterprise ROI & Savings</h3>
+                  <p className={`text-sm mt-2 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Estimate how much time and money Mansharp AI and Cloud Optimizations can save your company.</p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                  <div className="space-y-6">
+                    <div>
+                      <label className="block text-xs font-bold mb-2 uppercase tracking-wider text-blue-500">Number of Team Members: {teamSize}</label>
+                      <input 
+                        type="range" 
+                        min="10" 
+                        max="500" 
+                        value={teamSize} 
+                        onChange={(e) => setTeamSize(Number(e.target.value))} 
+                        className="w-full accent-blue-600 cursor-pointer"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold mb-2 uppercase tracking-wider text-blue-500">Monthly Cloud Budget ($): ${cloudSpend}</label>
+                      <input 
+                        type="range" 
+                        min="500" 
+                        max="50000" 
+                        step="500"
+                        value={cloudSpend} 
+                        onChange={(e) => setCloudSpend(Number(e.target.value))} 
+                        className="w-full accent-blue-600 cursor-pointer"
+                      />
+                    </div>
+                  </div>
+
+                  <div className={`p-6 rounded-2xl border flex flex-col justify-between text-center md:text-left shadow-inner ${isDark ? 'bg-slate-950 border-slate-800' : 'bg-blue-50/50 border-blue-100'}`}>
+                    <div>
+                      <h4 className="text-xs font-bold uppercase tracking-widest text-slate-400">Estimated Annual Savings</h4>
+                      <div className="text-3xl sm:text-4xl font-extrabold text-emerald-500 mt-2">
+                        ${(cloudSpend * 12 * 0.35 + teamSize * 120).toLocaleString()}
+                      </div>
+                      <p className={`text-xs mt-3 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                        Based on ~35% efficiency gains via Azure cloud management and automated Copilot workflows.
+                      </p>
+                    </div>
+                    <button onClick={() => goToDetail('contact')} className="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl text-xs font-bold shadow-md transition-all">
+                      Get Detailed Custom Audit ↗
+                    </button>
+                  </div>
+                </div>
               </div>
             </section>
 
