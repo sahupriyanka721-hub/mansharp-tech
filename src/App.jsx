@@ -6,15 +6,16 @@ export default function App() {
   const [mobile, setMobile] = useState('');
   const [password, setPassword] = useState('');
   const [activeTab, setActiveTab] = useState('about');
+  
+  // New State for Second Page View Mode
+  const [viewMode, setViewMode] = useState('home'); // 'home' ya 'detail'
+  
   const [theme, setTheme] = useState('light');
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Mobile Menu Drawer State
+  const [isAiDropdownOpen, setIsAiDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mobileDropdown, setMobileDropdown] = useState(null);
-
-  // 3D Interactive Card Selection State
-  const [selected3DCard, setSelected3DCard] = useState(null);
 
   const bannerSlides = [
     {
@@ -292,6 +293,14 @@ export default function App() {
     }
   };
 
+  // Helper function to navigate to a tab and open Second Page view
+  const goToDetail = (tabId) => {
+    setActiveTab(tabId);
+    setViewMode('detail');
+    setIsMobileMenuOpen(false);
+    setIsAiDropdownOpen(false);
+  };
+
   const isDark = theme === 'dark';
   const activeBanner = bannerSlides[currentSlide] || bannerSlides[0];
 
@@ -300,7 +309,7 @@ export default function App() {
       
       {/* HEADER */}
       <header className={`border-b backdrop-blur-md sticky top-0 z-50 px-4 sm:px-8 py-4 flex justify-between items-center shadow-xl transition-colors duration-300 ${isDark ? 'border-slate-800/80 bg-slate-900/95 text-white' : 'border-slate-200/80 bg-white/90 text-slate-900'}`}>
-        <div className="flex items-center gap-3 cursor-pointer" onClick={() => { setActiveTab('about'); setIsMobileMenuOpen(false); }}>
+        <div className="flex items-center gap-3 cursor-pointer" onClick={() => { setActiveTab('about'); setViewMode('home'); setIsMobileMenuOpen(false); }}>
           <div className="bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-600 text-white font-extrabold h-10 w-10 rounded-xl flex items-center justify-center text-lg shadow-lg shadow-blue-500/30">
             M
           </div>
@@ -314,26 +323,62 @@ export default function App() {
         {!isAdmin && (
           <nav className={`hidden lg:flex items-center gap-8 text-sm font-medium ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>
             
+            {/* Home Link */}
+            <button onClick={() => { setActiveTab('about'); setViewMode('home'); }} className="hover:text-blue-500 transition-colors font-bold">
+              Home
+            </button>
+
             {/* About Menu */}
             <div className="relative group py-2 cursor-pointer">
               <span className="hover:text-blue-500 flex items-center gap-1 transition-colors">
                 About <span className="text-[10px]">▼</span>
               </span>
               <div className={`absolute top-full left-0 w-48 border rounded-2xl shadow-2xl p-2 flex flex-col gap-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 z-50 ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
-                <button onClick={() => setActiveTab('about')} className={`text-left px-3 py-2 rounded-xl text-xs font-bold transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>About Us</button>
-                <button onClick={() => setActiveTab('why-choose-us')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>Why Choose Us</button>
-                <button onClick={() => setActiveTab('life-at-mansharp')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>Life At Mansharp</button>
-                <button onClick={() => setActiveTab('leadership')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>Leadership</button>
+                <button onClick={() => goToDetail('about')} className={`text-left px-3 py-2 rounded-xl text-xs font-bold transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>About Us (Second Page)</button>
+                <button onClick={() => goToDetail('why-choose-us')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>Why Choose Us</button>
+                <button onClick={() => goToDetail('life-at-mansharp')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>Life At Mansharp</button>
+                <button onClick={() => goToDetail('leadership')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>Leadership</button>
               </div>
             </div>
 
-            {/* AI Solutions Direct Full Page Trigger */}
-            <button 
-              onClick={() => setActiveTab('ai-transformation')}
-              className={`font-bold transition-colors flex items-center gap-1 px-3 py-1.5 rounded-full border shadow-sm ${activeTab.startsWith('ai-') ? 'bg-blue-600 text-white border-blue-600' : 'bg-blue-50 text-blue-600 border-blue-100 hover:bg-blue-100'}`}
-            >
-              ✨ AI Solutions
-            </button>
+            {/* AI Solutions Click-Based Dropdown Menu */}
+            <div className="relative py-2">
+              <button 
+                onClick={() => setIsAiDropdownOpen(!isAiDropdownOpen)}
+                className="hover:text-blue-600 flex items-center gap-1 transition-colors text-blue-600 font-bold bg-blue-50 px-3 py-1 rounded-full border border-blue-100 shadow-sm"
+              >
+                ✨ AI Solutions <span className="text-[10px]">{isAiDropdownOpen ? '▲' : '▼'}</span>
+              </button>
+
+              {isAiDropdownOpen && (
+                <div className={`absolute top-full left-0 mt-2 w-56 border rounded-2xl shadow-2xl p-2 flex flex-col gap-1 z-50 ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
+                  <button 
+                    onClick={() => goToDetail('ai-transformation')} 
+                    className={`text-left px-3 py-2 rounded-xl text-xs font-semibold transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-200' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-800'}`}
+                  >
+                    AI Transformation
+                  </button>
+                  <button 
+                    onClick={() => goToDetail('ai-copilot-pricing')} 
+                    className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}
+                  >
+                    Microsoft Copilot Pricing
+                  </button>
+                  <button 
+                    onClick={() => goToDetail('ai-services')} 
+                    className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}
+                  >
+                    AI Services
+                  </button>
+                  <button 
+                    onClick={() => goToDetail('ai-business-leaders')} 
+                    className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}
+                  >
+                    AI for Business Leaders
+                  </button>
+                </div>
+              )}
+            </div>
 
             {/* Industries Menu */}
             <div className="relative group py-2 cursor-pointer">
@@ -344,7 +389,7 @@ export default function App() {
                 {['Healthcare', 'Education', 'Public Sector', 'Financial Services', 'Manufacturing', 'Energy', 'Retail', 'Software'].map((ind, idx) => {
                   const slug = ind.toLowerCase().replace(/\s+/g, '-');
                   return (
-                    <button key={idx} onClick={() => setActiveTab(slug)} className={`text-left px-2 py-1.5 rounded-lg text-[11px] transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>{ind}</button>
+                    <button key={idx} onClick={() => goToDetail(slug)} className={`text-left px-2 py-1.5 rounded-lg text-[11px] transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>{ind}</button>
                   );
                 })}
               </div>
@@ -356,9 +401,9 @@ export default function App() {
                 Resources & Insights <span className="text-[10px]">▼</span>
               </span>
               <div className={`absolute top-full left-0 w-48 border rounded-2xl shadow-2xl p-2 flex flex-col gap-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 z-50 ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
-                <button onClick={() => setActiveTab('blogs')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>Blogs</button>
-                <button onClick={() => setActiveTab('case-studies')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>Case Studies</button>
-                <button onClick={() => setActiveTab('workshops')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>Events & Workshops</button>
+                <button onClick={() => goToDetail('blogs')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>Blogs</button>
+                <button onClick={() => goToDetail('case-studies')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>Case Studies</button>
+                <button onClick={() => goToDetail('workshops')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>Events & Workshops</button>
               </div>
             </div>
 
@@ -368,10 +413,10 @@ export default function App() {
                 Solutions <span className="text-[10px]">▼</span>
               </span>
               <div className={`absolute top-full left-0 w-56 border rounded-2xl shadow-2xl p-2 flex flex-col gap-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 z-50 ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
-                <button onClick={() => setActiveTab('department-solutions')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>Department Solutions</button>
-                <button onClick={() => setActiveTab('licenses')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>Licenses</button>
-                <button onClick={() => setActiveTab('technologies')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>Technologies</button>
-                <button onClick={() => setActiveTab('integration')} className={`text-left px-3.5 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>Integration & Consulting</button>
+                <button onClick={() => goToDetail('department-solutions')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>Department Solutions</button>
+                <button onClick={() => goToDetail('licenses')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>Licenses</button>
+                <button onClick={() => goToDetail('technologies')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>Technologies</button>
+                <button onClick={() => goToDetail('integration')} className={`text-left px-3.5 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>Integration & Consulting</button>
               </div>
             </div>
 
@@ -381,21 +426,20 @@ export default function App() {
                 Products <span className="text-[10px]">▼</span>
               </span>
               <div className={`absolute top-full left-[-40px] w-56 border rounded-2xl shadow-2xl p-2 flex flex-col gap-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 z-50 ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
-                <button onClick={() => setActiveTab('aim-app')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>AIM App</button>
-                <button onClick={() => setActiveTab('org-chart')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>Mansharp Org Chart</button>
+                <button onClick={() => goToDetail('aim-app')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>AIM App</button>
+                <button onClick={() => goToDetail('org-chart')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>Mansharp Org Chart</button>
               </div>
             </div>
 
-            <button onClick={() => setActiveTab('contact')} className="bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white px-4 py-2 rounded-xl text-xs font-semibold shadow-md transition-all">Contact Us</button>
+            <button onClick={() => goToDetail('contact')} className="bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white px-4 py-2 rounded-xl text-xs font-semibold shadow-md transition-all">Contact Us</button>
           </nav>
         )}
 
-        {/* Theme Toggle, Admin Buttons & Mobile Hamburger Button */}
+        {/* Theme Toggle, Admin & Mobile Hamburger */}
         <div className="flex items-center gap-2 sm:gap-3">
           <button 
             onClick={toggleTheme} 
             className={`p-2 sm:px-3 sm:py-2.5 rounded-xl border text-xs font-semibold transition-all flex items-center justify-center shadow-sm ${isDark ? 'bg-slate-900 border-slate-800 text-amber-400 hover:bg-slate-800' : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'}`}
-            title="Toggle Light/Dark Theme"
           >
             {isDark ? '☀️ Light' : '🌙 Dark'}
           </button>
@@ -404,7 +448,6 @@ export default function App() {
             {isAdmin ? 'Website View' : 'Admin Panel 🛡️'}
           </button>
 
-          {/* Mobile Menu Trigger Button */}
           {!isAdmin && (
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
@@ -416,10 +459,13 @@ export default function App() {
         </div>
       </header>
 
-      {/* MOBILE FULLSCREEN DRAWER MENU */}
+      {/* MOBILE DRAWER MENU */}
       {!isAdmin && isMobileMenuOpen && (
         <div className={`lg:hidden fixed inset-0 top-[73px] z-40 overflow-y-auto p-4 space-y-4 shadow-2xl transition-all ${isDark ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'}`}>
-          
+          <button onClick={() => { setActiveTab('about'); setViewMode('home'); setIsMobileMenuOpen(false); }} className="w-full text-left py-2 font-bold text-sm border-b border-slate-700/50">
+            Home
+          </button>
+
           <div className="border-b pb-2 border-slate-700/50">
             <button onClick={() => setMobileDropdown(mobileDropdown === 'about' ? null : 'about')} className="w-full flex justify-between items-center py-2 font-bold text-sm">
               <span>About Us</span>
@@ -427,19 +473,27 @@ export default function App() {
             </button>
             {mobileDropdown === 'about' && (
               <div className="pl-4 flex flex-col gap-2 pt-2 text-xs">
-                <button onClick={() => { setActiveTab('about'); setIsMobileMenuOpen(false); }} className="text-left py-1">About Us</button>
-                <button onClick={() => { setActiveTab('why-choose-us'); setIsMobileMenuOpen(false); }} className="text-left py-1">Why Choose Us</button>
-                <button onClick={() => { setActiveTab('life-at-mansharp'); setIsMobileMenuOpen(false); }} className="text-left py-1">Life At Mansharp</button>
-                <button onClick={() => { setActiveTab('leadership'); setIsMobileMenuOpen(false); }} className="text-left py-1">Leadership</button>
+                <button onClick={() => goToDetail('about')} className="text-left py-1">About Us Details</button>
+                <button onClick={() => goToDetail('why-choose-us')} className="text-left py-1">Why Choose Us</button>
+                <button onClick={() => goToDetail('life-at-mansharp')} className="text-left py-1">Life At Mansharp</button>
+                <button onClick={() => goToDetail('leadership')} className="text-left py-1">Leadership</button>
               </div>
             )}
           </div>
 
           <div className="border-b pb-2 border-slate-700/50">
-            <button onClick={() => { setActiveTab('ai-transformation'); setIsMobileMenuOpen(false); }} className="w-full flex justify-between items-center py-2 font-bold text-sm text-blue-500">
+            <button onClick={() => setMobileDropdown(mobileDropdown === 'ai' ? null : 'ai')} className="w-full flex justify-between items-center py-2 font-bold text-sm text-blue-500">
               <span>✨ AI Solutions</span>
-              <span>→</span>
+              <span>{mobileDropdown === 'ai' ? '▲' : '▼'}</span>
             </button>
+            {mobileDropdown === 'ai' && (
+              <div className="pl-4 flex flex-col gap-2 pt-2 text-xs">
+                <button onClick={() => goToDetail('ai-transformation')} className="text-left py-1">AI Transformation</button>
+                <button onClick={() => goToDetail('ai-copilot-pricing')} className="text-left py-1">Microsoft Copilot Pricing</button>
+                <button onClick={() => goToDetail('ai-services')} className="text-left py-1">AI Services</button>
+                <button onClick={() => goToDetail('ai-business-leaders')} className="text-left py-1">AI for Business Leaders</button>
+              </div>
+            )}
           </div>
 
           <div className="border-b pb-2 border-slate-700/50">
@@ -452,7 +506,7 @@ export default function App() {
                 {['Healthcare', 'Education', 'Public Sector', 'Financial Services', 'Manufacturing', 'Energy', 'Retail', 'Software'].map((ind, idx) => {
                   const slug = ind.toLowerCase().replace(/\s+/g, '-');
                   return (
-                    <button key={idx} onClick={() => { setActiveTab(slug); setIsMobileMenuOpen(false); }} className="text-left py-1">{ind}</button>
+                    <button key={idx} onClick={() => goToDetail(slug)} className="text-left py-1">{ind}</button>
                   );
                 })}
               </div>
@@ -466,9 +520,9 @@ export default function App() {
             </button>
             {mobileDropdown === 'resources' && (
               <div className="pl-4 flex flex-col gap-2 pt-2 text-xs">
-                <button onClick={() => { setActiveTab('blogs'); setIsMobileMenuOpen(false); }} className="text-left py-1">Blogs</button>
-                <button onClick={() => { setActiveTab('case-studies'); setIsMobileMenuOpen(false); }} className="text-left py-1">Case Studies</button>
-                <button onClick={() => { setActiveTab('workshops'); setIsMobileMenuOpen(false); }} className="text-left py-1">Events & Workshops</button>
+                <button onClick={() => goToDetail('blogs')} className="text-left py-1">Blogs</button>
+                <button onClick={() => goToDetail('case-studies')} className="text-left py-1">Case Studies</button>
+                <button onClick={() => goToDetail('workshops')} className="text-left py-1">Events & Workshops</button>
               </div>
             )}
           </div>
@@ -480,10 +534,10 @@ export default function App() {
             </button>
             {mobileDropdown === 'solutions' && (
               <div className="pl-4 flex flex-col gap-2 pt-2 text-xs">
-                <button onClick={() => { setActiveTab('department-solutions'); setIsMobileMenuOpen(false); }} className="text-left py-1">Department Solutions</button>
-                <button onClick={() => { setActiveTab('licenses'); setIsMobileMenuOpen(false); }} className="text-left py-1">Licenses</button>
-                <button onClick={() => { setActiveTab('technologies'); setIsMobileMenuOpen(false); }} className="text-left py-1">Technologies</button>
-                <button onClick={() => { setActiveTab('integration'); setIsMobileMenuOpen(false); }} className="text-left py-1">Integration & Consulting</button>
+                <button onClick={() => goToDetail('department-solutions')} className="text-left py-1">Department Solutions</button>
+                <button onClick={() => goToDetail('licenses')} className="text-left py-1">Licenses</button>
+                <button onClick={() => goToDetail('technologies')} className="text-left py-1">Technologies</button>
+                <button onClick={() => goToDetail('integration')} className="text-left py-1">Integration & Consulting</button>
               </div>
             )}
           </div>
@@ -495,13 +549,13 @@ export default function App() {
             </button>
             {mobileDropdown === 'products' && (
               <div className="pl-4 flex flex-col gap-2 pt-2 text-xs">
-                <button onClick={() => { setActiveTab('aim-app'); setIsMobileMenuOpen(false); }} className="text-left py-1">AIM App</button>
-                <button onClick={() => { setActiveTab('org-chart'); setIsMobileMenuOpen(false); }} className="text-left py-1">Mansharp Org Chart</button>
+                <button onClick={() => goToDetail('aim-app')} className="text-left py-1">AIM App</button>
+                <button onClick={() => goToDetail('org-chart')} className="text-left py-1">Mansharp Org Chart</button>
               </div>
             )}
           </div>
 
-          <button onClick={() => { setActiveTab('contact'); setIsMobileMenuOpen(false); }} className="w-full bg-gradient-to-r from-rose-500 to-pink-500 text-white p-3 rounded-xl text-center font-bold text-sm shadow-md">
+          <button onClick={() => goToDetail('contact')} className="w-full bg-gradient-to-r from-rose-500 to-pink-500 text-white p-3 rounded-xl text-center font-bold text-sm shadow-md">
             Contact Us
           </button>
         </div>
@@ -531,206 +585,110 @@ export default function App() {
               </div>
             )}
           </div>
+        ) : viewMode === 'detail' ? (
+          /* SECOND PAGE VIEW (DEDICATED FULL DETAIL LAYOUT) */
+          <div className="py-12 px-4 sm:px-8 max-w-4xl mx-auto space-y-8 animate-fadeIn">
+            <button 
+              onClick={() => setViewMode('home')}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold border bg-blue-600 text-white shadow-md hover:bg-blue-700 transition-all"
+            >
+              ← Back to Main Page
+            </button>
+
+            <div className="relative h-72 sm:h-96 rounded-3xl overflow-hidden shadow-2xl">
+              <img src={activeBanner.image} alt={activeBanner.title} className="w-full h-full object-cover filter brightness-75" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex flex-col justify-end p-6 sm:p-10 text-white">
+                <span className="bg-blue-600 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider w-max mb-2">{activeBanner.subtitle}</span>
+                <h2 className="text-2xl sm:text-4xl font-extrabold">{activeBanner.title}</h2>
+              </div>
+            </div>
+
+            <div className={`p-8 sm:p-12 rounded-3xl border shadow-xl ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
+              <h3 className="text-2xl font-extrabold text-blue-600 mb-4">{activeBanner.contentTitle}</h3>
+              <p className={`text-base sm:text-lg leading-relaxed ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>{activeBanner.contentText}</p>
+              
+              <div className="mt-8 pt-6 border-t border-slate-700/45 flex gap-4">
+                <button onClick={() => goToDetail('contact')} className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-xl text-xs font-bold shadow-lg">
+                  Inquire About This Service ↗
+                </button>
+              </div>
+            </div>
+          </div>
         ) : (
+          /* MAIN HOME VIEW */
           <div>
-            {/* AI SOLUTIONS DEDICATED FULL PAGE VIEW */}
-            {activeTab.startsWith('ai-') ? (
-              <div className="max-w-6xl mx-auto px-4 sm:px-8 py-12 space-y-12">
-                
-                {/* Top Header Banner */}
-                <div className="text-center space-y-4 max-w-3xl mx-auto">
-                  <span className="bg-blue-600/10 text-blue-600 border border-blue-200 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider inline-block">
-                    Mansharp Artificial Intelligence Hub
-                  </span>
-                  <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight">
-                    Next-Gen AI Solutions & Services
-                  </h2>
-                  <p className={`text-sm sm:text-base ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
-                    Explore enterprise intelligence models, Microsoft Copilot pricing plans, specialized advisory services, and leadership frameworks.
-                  </p>
-                </div>
-
-                {/* Sub-Navigation Cards for AI sections */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                  
-                  <div 
-                    onClick={() => setActiveTab('ai-transformation')}
-                    className={`p-6 rounded-3xl border cursor-pointer transition-all transform hover:-translate-y-1 shadow-lg ${activeTab === 'ai-transformation' ? 'border-blue-500 bg-blue-600 text-white shadow-blue-500/30' : isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}
-                  >
-                    <div className="text-2xl mb-3">🚀</div>
-                    <h3 className="font-extrabold text-base">AI Transformation</h3>
-                    <p className={`text-xs mt-2 ${activeTab === 'ai-transformation' ? 'text-blue-100' : isDark ? 'text-slate-400' : 'text-slate-500'}`}>Custom models & smart cloud setups.</p>
-                  </div>
-
-                  <div 
-                    onClick={() => setActiveTab('ai-copilot-pricing')}
-                    className={`p-6 rounded-3xl border cursor-pointer transition-all transform hover:-translate-y-1 shadow-lg ${activeTab === 'ai-copilot-pricing' ? 'border-blue-500 bg-blue-600 text-white shadow-blue-500/30' : isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}
-                  >
-                    <div className="text-2xl mb-3">💎</div>
-                    <h3 className="font-extrabold text-base">Copilot Pricing</h3>
-                    <p className={`text-xs mt-2 ${activeTab === 'ai-copilot-pricing' ? 'text-blue-100' : isDark ? 'text-slate-400' : 'text-slate-500'}`}>Flexible Microsoft Copilot plans.</p>
-                  </div>
-
-                  <div 
-                    onClick={() => setActiveTab('ai-services')}
-                    className={`p-6 rounded-3xl border cursor-pointer transition-all transform hover:-translate-y-1 shadow-lg ${activeTab === 'ai-services' ? 'border-blue-500 bg-blue-600 text-white shadow-blue-500/30' : isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}
-                  >
-                    <div className="text-2xl mb-3">🛠️</div>
-                    <h3 className="font-extrabold text-base">AI Services</h3>
-                    <p className={`text-xs mt-2 ${activeTab === 'ai-services' ? 'text-blue-100' : isDark ? 'text-slate-400' : 'text-slate-500'}`}>Curated adoption & studio integration.</p>
-                  </div>
-
-                  <div 
-                    onClick={() => setActiveTab('ai-business-leaders')}
-                    className={`p-6 rounded-3xl border cursor-pointer transition-all transform hover:-translate-y-1 shadow-lg ${activeTab === 'ai-business-leaders' ? 'border-blue-500 bg-blue-600 text-white shadow-blue-500/30' : isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}
-                  >
-                    <div className="text-2xl mb-3">👔</div>
-                    <h3 className="font-extrabold text-base">For Leaders</h3>
-                    <p className={`text-xs mt-2 ${activeTab === 'ai-business-leaders' ? 'text-blue-100' : isDark ? 'text-slate-400' : 'text-slate-500'}`}>Strategic frameworks & guidelines.</p>
-                  </div>
-
-                </div>
-
-                {/* Detailed Active AI Content Box */}
-                <div className={`p-8 sm:p-12 rounded-3xl border shadow-xl ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
-                  <span className="text-xs font-bold uppercase tracking-wider text-blue-500">Selected Focus Area</span>
-                  <h3 className="text-2xl sm:text-3xl font-extrabold mt-2 mb-4">{activeBanner.contentTitle}</h3>
-                  <p className={`text-base sm:text-lg leading-relaxed mb-6 ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
-                    {activeBanner.contentText}
-                  </p>
-                  <div className="flex gap-4">
-                    <button onClick={() => setActiveTab('contact')} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl text-xs font-bold shadow-md transition-all">
-                      Consult Our AI Experts ↗
-                    </button>
-                    <button onClick={() => setActiveTab('about')} className={`border px-6 py-3 rounded-xl text-xs font-bold transition-all ${isDark ? 'border-slate-700 hover:bg-slate-800 text-white' : 'border-slate-300 hover:bg-slate-50 text-slate-800'}`}>
-                      Back to Home
-                    </button>
-                  </div>
-                </div>
-
+            {/* HERO BANNER SECTION */}
+            <section className="relative h-[480px] sm:h-[540px] flex items-center justify-center text-center px-4 overflow-hidden">
+              <div className="absolute inset-0 z-0">
+                <img src={activeBanner.image} alt={activeBanner.title} className="w-full h-full object-cover filter brightness-50 transform scale-105 transition-all duration-700" />
               </div>
-            ) : (
-              <div>
-                {/* HERO BANNER SECTION WITH IMAGE & 3D ANIMATED ELEMENTS */}
-                <section className="relative min-h-[540px] flex flex-col items-center justify-center text-center px-4 overflow-hidden py-20">
-                  <div className="absolute inset-0 z-0">
-                    <img src={activeBanner.image} alt={activeBanner.title} className="w-full h-full object-cover filter brightness-50 transform scale-105 transition-all duration-700" />
-                  </div>
-                  
-                  {/* 3D Dynamic Glowing Background Lights */}
-                  <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[500px] h-[250px] bg-blue-600/20 blur-[120px] rounded-full pointer-events-none animate-pulse"></div>
-                  
-                  <div className="relative z-10 max-w-4xl mx-auto space-y-4 text-white px-2">
-                    <span className="bg-blue-600/80 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-[0_0_20px_rgba(59,130,246,0.5)] inline-block">
-                      {activeBanner.subtitle}
-                    </span>
-                    <h2 className="text-3xl sm:text-6xl font-extrabold tracking-tight leading-tight drop-shadow-lg">
-                      {activeBanner.title}
-                    </h2>
-                    <p className="text-sm sm:text-lg text-slate-200 max-w-2xl mx-auto leading-relaxed">
-                      {activeBanner.desc}
-                    </p>
-                  </div>
-
-                  {/* 3D / 4D INTERACTIVE BUTTON CARDS */}
-                  <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl w-full mx-auto relative z-10 px-4">
-                    
-                    <div 
-                      onClick={() => { setSelected3DCard('individual'); setActiveTab('ai-transformation'); }}
-                      className={`group relative p-5 rounded-2xl border transition-all duration-500 cursor-pointer transform hover:-translate-y-2 hover:scale-105 bg-slate-900/80 backdrop-blur-xl ${selected3DCard === 'individual' ? 'border-blue-500 shadow-[0_0_30px_rgba(59,130,246,0.6)]' : 'border-slate-700/60 hover:border-blue-400 hover:shadow-[0_0_25px_rgba(59,130,246,0.4)]'}`}
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
-                      <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-blue-400 transition-colors">Every Individual</h3>
-                      <p className="text-[11px] text-slate-300 mt-1">Smart AI tools for single users.</p>
-                    </div>
-
-                    <div 
-                      onClick={() => { setSelected3DCard('team'); setActiveTab('ai-transformation'); }}
-                      className={`group relative p-5 rounded-2xl border transition-all duration-500 cursor-pointer transform hover:-translate-y-2 hover:scale-105 bg-slate-900/80 backdrop-blur-xl ${selected3DCard === 'team' ? 'border-blue-500 shadow-[0_0_30px_rgba(59,130,246,0.6)]' : 'border-slate-700/60 hover:border-indigo-400 hover:shadow-[0_0_25px_rgba(99,102,241,0.4)]'}`}
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
-                      <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-indigo-400 transition-colors">Every Team</h3>
-                      <p className="text-[11px] text-slate-300 mt-1">Synchronized collaboration flows.</p>
-                    </div>
-
-                    <div 
-                      onClick={() => { setSelected3DCard('industry'); setActiveTab('ai-transformation'); }}
-                      className={`group relative p-5 rounded-2xl border transition-all duration-500 cursor-pointer transform hover:-translate-y-2 hover:scale-105 bg-slate-900/80 backdrop-blur-xl ${selected3DCard === 'industry' ? 'border-blue-500 shadow-[0_0_30px_rgba(59,130,246,0.6)]' : 'border-slate-700/60 hover:border-cyan-400 hover:shadow-[0_0_25px_rgba(6,182,212,0.4)]'}`}
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
-                      <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">Every Industry</h3>
-                      <p className="text-[11px] text-slate-300 mt-1">Secure enterprise-scale operations.</p>
-                    </div>
-
-                  </div>
-                </section>
-
-                {/* DYNAMIC CONTENT SECTION */}
-                <section className={`py-16 px-4 sm:px-8 max-w-6xl mx-auto`}>
-                  <div className={`p-8 sm:p-12 rounded-3xl border shadow-xl backdrop-blur-sm transition-colors ${isDark ? 'bg-slate-900/80 border-slate-800' : 'bg-white/80 border-slate-200/80'}`}>
-                    <h3 className="text-2xl sm:text-3xl font-extrabold mb-4 text-blue-600">{activeBanner.contentTitle}</h3>
-                    <p className={`text-base sm:text-lg leading-relaxed ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>{activeBanner.contentText}</p>
-                  </div>
-                </section>
-
-                {/* VIDEO & APP BANNER SECTION */}
-                <section className={`py-16 px-4 sm:px-8 max-w-6xl mx-auto`}>
-                  <div className="text-center mb-12">
-                    <span className="text-blue-600 font-bold text-xs uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full border border-blue-100">Interactive Showcase</span>
-                    <h3 className="text-3xl font-extrabold mt-3 tracking-tight">Services That Transform Work</h3>
-                    <p className={`text-sm mt-2 max-w-xl mx-auto ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Experience our modern workspace video overview and top-tier enterprise software products designed for scale.</p>
-                  </div>
-
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                    {/* Embedded Video Showcase */}
-                    <div className={`p-4 rounded-3xl border shadow-xl ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
-                      <div className="relative rounded-2xl overflow-hidden aspect-video shadow-inner bg-black">
-                        <video 
-                          className="w-full h-full object-cover"
-                          controls 
-                          autoPlay 
-                          muted 
-                          loop
-                          poster="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
-                        >
-                          <source src="https://assets.mixkit.co/videos/preview/mixkit-team-working-in-an-office-4129-large.mp4" type="video/mp4" />
-                          Your browser does not support the video tag.
-                        </video>
-                      </div>
-                      <h4 className="font-bold text-base mt-4 px-2">Inside Mansharp Workplace Culture</h4>
-                      <p className={`text-xs mt-1 px-2 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Watch how our teams collaborate to build revolutionary cloud architectures.</p>
-                    </div>
-
-                    {/* App Banner Cards */}
-                    <div className="space-y-4">
-                      <div onClick={() => setActiveTab('aim-app')} className={`p-6 rounded-3xl border shadow-md cursor-pointer transition-all hover:scale-[1.02] flex items-center gap-4 ${isDark ? 'bg-slate-900 border-slate-800 hover:bg-slate-800/80' : 'bg-white border-slate-200 hover:bg-blue-50/50'}`}>
-                        <div className="h-12 w-12 rounded-2xl bg-blue-600 text-white font-bold flex items-center justify-center text-xl shadow-lg shadow-blue-500/30">📱</div>
-                        <div>
-                          <h4 className="font-extrabold text-base">AIM App</h4>
-                          <p className={`text-xs mt-0.5 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Effortlessly Track And Manage All Your Company Assets In One Place.</p>
-                        </div>
-                      </div>
-
-                      <div onClick={() => setActiveTab('org-chart')} className={`p-6 rounded-3xl border shadow-md cursor-pointer transition-all hover:scale-[1.02] flex items-center gap-4 ${isDark ? 'bg-slate-900 border-slate-800 hover:bg-slate-800/80' : 'bg-white border-slate-200 hover:bg-blue-50/50'}`}>
-                        <div className="h-12 w-12 rounded-2xl bg-indigo-600 text-white font-bold flex items-center justify-center text-xl shadow-lg shadow-indigo-500/30">📊</div>
-                        <div>
-                          <h4 className="font-extrabold text-base">Mansharp Org Chart</h4>
-                          <p className={`text-xs mt-0.5 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Instantly View & Search Your Team's Hierarchy With Real-Time Org Charts.</p>
-                        </div>
-                      </div>
-
-                      <div onClick={() => setActiveTab('ai-transformation')} className={`p-6 rounded-3xl border shadow-md cursor-pointer transition-all hover:scale-[1.02] flex items-center gap-4 ${isDark ? 'bg-slate-900 border-slate-800 hover:bg-slate-800/80' : 'bg-white border-slate-200 hover:bg-blue-50/50'}`}>
-                        <div className="h-12 w-12 rounded-2xl bg-purple-600 text-white font-bold flex items-center justify-center text-xl shadow-lg shadow-purple-500/30">✨</div>
-                        <div>
-                          <h4 className="font-extrabold text-base">Want to Explore AI Solutions Click Here!</h4>
-                          <p className={`text-xs mt-0.5 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Discover advanced enterprise AI tools and Copilot automation suites.</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </section>
+              <div className="relative z-10 max-w-4xl mx-auto space-y-4 text-white">
+                <span className="bg-blue-600/80 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">{activeBanner.subtitle}</span>
+                <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">{activeBanner.title}</h2>
+                <p className="text-sm sm:text-lg text-slate-200 max-w-2xl mx-auto">{activeBanner.desc}</p>
+                <div className="pt-2">
+                  <button onClick={() => setViewMode('detail')} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-xl text-xs font-bold shadow-lg transition-all">
+                    Explore Details (Second Page) ↗
+                  </button>
+                </div>
               </div>
-            )}
+            </section>
+
+            {/* DYNAMIC CONTENT SECTION */}
+            <section className={`py-16 px-4 sm:px-8 max-w-6xl mx-auto`}>
+              <div className={`p-8 sm:p-12 rounded-3xl border shadow-xl backdrop-blur-sm transition-colors ${isDark ? 'bg-slate-900/80 border-slate-800' : 'bg-white/80 border-slate-200/80'}`}>
+                <h3 className="text-2xl sm:text-3xl font-extrabold mb-4 text-blue-600">{activeBanner.contentTitle}</h3>
+                <p className={`text-base sm:text-lg leading-relaxed ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>{activeBanner.contentText}</p>
+              </div>
+            </section>
+
+            {/* VIDEO & APP BANNER SECTION */}
+            <section className={`py-16 px-4 sm:px-8 max-w-6xl mx-auto`}>
+              <div className="text-center mb-12">
+                <span className="text-blue-600 font-bold text-xs uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full border border-blue-100">Interactive Showcase</span>
+                <h3 className="text-3xl font-extrabold mt-3 tracking-tight">Services That Transform Work</h3>
+                <p className={`text-sm mt-2 max-w-xl mx-auto ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Experience our modern workspace video overview and top-tier enterprise software products designed for scale.</p>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div className={`p-4 rounded-3xl border shadow-xl ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
+                  <div className="relative rounded-2xl overflow-hidden aspect-video shadow-inner bg-black">
+                    <video className="w-full h-full object-cover" controls autoPlay muted loop poster="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80">
+                      <source src="https://assets.mixkit.co/videos/preview/mixkit-team-working-in-an-office-4129-large.mp4" type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                  <h4 className="font-bold text-base mt-4 px-2">Inside Mansharp Workplace Culture</h4>
+                  <p className={`text-xs mt-1 px-2 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Watch how our teams collaborate to build revolutionary cloud architectures.</p>
+                </div>
+
+                <div className="space-y-4">
+                  <div onClick={() => goToDetail('aim-app')} className={`p-6 rounded-3xl border shadow-md cursor-pointer transition-all hover:scale-[1.02] flex items-center gap-4 ${isDark ? 'bg-slate-900 border-slate-800 hover:bg-slate-800/80' : 'bg-white border-slate-200 hover:bg-blue-50/50'}`}>
+                    <div className="h-12 w-12 rounded-2xl bg-blue-600 text-white font-bold flex items-center justify-center text-xl shadow-lg shadow-blue-500/30">📱</div>
+                    <div>
+                      <h4 className="font-extrabold text-base">AIM App</h4>
+                      <p className={`text-xs mt-0.5 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Effortlessly Track And Manage All Your Company Assets In One Place.</p>
+                    </div>
+                  </div>
+
+                  <div onClick={() => goToDetail('org-chart')} className={`p-6 rounded-3xl border shadow-md cursor-pointer transition-all hover:scale-[1.02] flex items-center gap-4 ${isDark ? 'bg-slate-900 border-slate-800 hover:bg-slate-800/80' : 'bg-white border-slate-200 hover:bg-blue-50/50'}`}>
+                    <div className="h-12 w-12 rounded-2xl bg-indigo-600 text-white font-bold flex items-center justify-center text-xl shadow-lg shadow-indigo-500/30">📊</div>
+                    <div>
+                      <h4 className="font-extrabold text-base">Mansharp Org Chart</h4>
+                      <p className={`text-xs mt-0.5 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Instantly View & Search Your Team's Hierarchy With Real-Time Org Charts.</p>
+                    </div>
+                  </div>
+
+                  <div onClick={() => goToDetail('ai-services')} className={`p-6 rounded-3xl border shadow-md cursor-pointer transition-all hover:scale-[1.02] flex items-center gap-4 ${isDark ? 'bg-slate-900 border-slate-800 hover:bg-slate-800/80' : 'bg-white border-slate-200 hover:bg-blue-50/50'}`}>
+                    <div className="h-12 w-12 rounded-2xl bg-purple-600 text-white font-bold flex items-center justify-center text-xl shadow-lg shadow-purple-500/30">✨</div>
+                    <div>
+                      <h4 className="font-extrabold text-base">Want to Explore AI Solutions Click Here!</h4>
+                      <p className={`text-xs mt-0.5 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Discover advanced enterprise AI tools and Copilot automation suites.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
           </div>
         )}
       </main>
@@ -738,63 +696,55 @@ export default function App() {
       {/* FOOTER */}
       <footer className={`border-t py-12 px-4 sm:px-8 transition-colors duration-300 ${isDark ? 'border-slate-800 bg-slate-900 text-slate-300' : 'border-slate-200 bg-slate-900 text-slate-300'}`}>
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="bg-gradient-to-tr from-blue-600 to-purple-600 text-white font-extrabold h-8 w-8 rounded-lg flex items-center justify-center text-sm">
-                M
-              </div>
+              <div className="bg-gradient-to-tr from-blue-600 to-purple-600 text-white font-extrabold h-8 w-8 rounded-lg flex items-center justify-center text-sm">M</div>
               <h1 className="font-extrabold text-sm text-white tracking-tight">MANSHARP TECHNOLOGIES</h1>
             </div>
             <p className="text-xs text-slate-400 leading-relaxed">We are dedicated to providing you with exceptional service and support.</p>
-            <button onClick={() => setActiveTab('contact')} className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-xs font-semibold transition-all shadow-md">Contact Us ↗</button>
+            <button onClick={() => goToDetail('contact')} className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-xs font-semibold transition-all shadow-md">Contact Us ↗</button>
           </div>
 
           <div className="space-y-2">
             <h4 className="font-bold text-xs uppercase tracking-wider text-white">Company</h4>
             <div className="flex flex-col gap-1.5 text-xs">
-              <button onClick={() => setActiveTab('why-choose-us')} className="text-left hover:text-white transition-colors">Career</button>
-              <button onClick={() => setActiveTab('about')} className="text-left hover:text-white transition-colors">About Us</button>
-              <button onClick={() => setActiveTab('life-at-mansharp')} className="text-left hover:text-white transition-colors">Life At Mansharp</button>
+              <button onClick={() => goToDetail('why-choose-us')} className="text-left hover:text-white transition-colors">Career</button>
+              <button onClick={() => goToDetail('about')} className="text-left hover:text-white transition-colors">About Us</button>
+              <button onClick={() => goToDetail('life-at-mansharp')} className="text-left hover:text-white transition-colors">Life At Mansharp</button>
             </div>
           </div>
 
           <div className="space-y-2">
             <h4 className="font-bold text-xs uppercase tracking-wider text-white">Resources</h4>
             <div className="flex flex-col gap-1.5 text-xs">
-              <button onClick={() => setActiveTab('blogs')} className="text-left hover:text-white transition-colors">Blogs</button>
-              <button onClick={() => setActiveTab('case-studies')} className="text-left hover:text-white transition-colors">Case Studies</button>
-              <button onClick={() => setActiveTab('workshops')} className="text-left hover:text-white transition-colors">Workshops</button>
+              <button onClick={() => goToDetail('blogs')} className="text-left hover:text-white transition-colors">Blogs</button>
+              <button onClick={() => goToDetail('case-studies')} className="text-left hover:text-white transition-colors">Case Studies</button>
+              <button onClick={() => goToDetail('workshops')} className="text-left hover:text-white transition-colors">Workshops</button>
             </div>
           </div>
 
           <div className="space-y-2">
             <h4 className="font-bold text-xs uppercase tracking-wider text-white">Products</h4>
             <div className="flex flex-col gap-1.5 text-xs">
-              <button onClick={() => setActiveTab('org-chart')} className="text-left hover:text-white transition-colors">Org Chart</button>
-              <button onClick={() => setActiveTab('aim-app')} className="text-left hover:text-white transition-colors">Asset Management App</button>
+              <button onClick={() => goToDetail('org-chart')} className="text-left hover:text-white transition-colors">Org Chart</button>
+              <button onClick={() => goToDetail('aim-app')} className="text-left hover:text-white transition-colors">Asset Management App</button>
             </div>
           </div>
-
         </div>
 
         <div className="max-w-6xl mx-auto pt-8 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-400">
           <p>© 2026 Mansharp Technologies, All rights reserved.</p>
-          
           <div className="flex gap-4">
-            <button onClick={() => setActiveTab('privacy-policy')} className="hover:text-white transition-colors">Privacy Policy</button>
-            <button onClick={() => setActiveTab('terms')} className="hover:text-white transition-colors">Terms and Conditions</button>
+            <button onClick={() => goToDetail('privacy-policy')} className="hover:text-white transition-colors">Privacy Policy</button>
+            <button onClick={() => goToDetail('terms')} className="hover:text-white transition-colors">Terms and Conditions</button>
           </div>
-
-          {/* Social Icons */}
           <div className="flex items-center gap-3">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="h-8 w-8 rounded-full bg-slate-800 hover:bg-blue-600 flex items-center justify-center text-white transition-colors text-xs font-bold shadow-md" title="Facebook">f</a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="h-8 w-8 rounded-full bg-slate-800 hover:bg-pink-600 flex items-center justify-center text-white transition-colors text-xs font-bold shadow-md" title="Instagram">ig</a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="h-8 w-8 rounded-full bg-slate-800 hover:bg-blue-700 flex items-center justify-center text-white transition-colors text-xs font-bold shadow-md" title="LinkedIn">in</a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="h-8 w-8 rounded-full bg-slate-800 hover:bg-blue-600 flex items-center justify-center text-white transition-colors text-xs font-bold shadow-md">f</a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="h-8 w-8 rounded-full bg-slate-800 hover:bg-pink-600 flex items-center justify-center text-white transition-colors text-xs font-bold shadow-md">ig</a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="h-8 w-8 rounded-full bg-slate-800 hover:bg-blue-700 flex items-center justify-center text-white transition-colors text-xs font-bold shadow-md">in</a>
           </div>
         </div>
       </footer>
-
     </div>
   );
 }
