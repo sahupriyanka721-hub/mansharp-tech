@@ -477,7 +477,7 @@ export default function App() {
             )}
           </div>
         ) : viewMode === 'detail' ? (
-          /* DETAIL VIEW WITH 3D POP BANNER AND CONTENT */
+          /* DETAIL VIEW WITH 3D POP EFFECT */
           <div className="py-12 px-4 sm:px-8 max-w-4xl mx-auto space-y-6 animate-fade-in">
             <button onClick={() => setViewMode('home')} className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-blue-600 text-white shadow-lg hover:bg-blue-700 transform hover:-translate-x-1 transition-all">
               ← Back to Home
@@ -543,11 +543,6 @@ export default function App() {
               <div className={`p-8 sm:p-14 rounded-3xl border shadow-2xl backdrop-blur-xl transform hover:scale-[1.01] hover:-translate-y-1 transition-all duration-500 ${isDark ? 'bg-slate-900/90 border-slate-800 shadow-blue-950/50' : 'bg-white/90 border-slate-200 shadow-indigo-500/10'}`}>
                 <h3 className="text-2xl sm:text-4xl font-extrabold mb-4 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">{activeBanner.contentTitle}</h3>
                 <p className={`text-base sm:text-lg leading-relaxed ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>{activeBanner.contentText}</p>
-                <div className="mt-6">
-                  <button onClick={() => goToDetail(activeBanner.id)} className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl text-xs font-bold shadow-md transition-all">
-                    Inquire Now ↗
-                  </button>
-                </div>
               </div>
             </section>
 
@@ -601,7 +596,7 @@ export default function App() {
         )}
       </main>
 
-      {/* FOOTER WITH SOCIAL MEDIA LINKS */}
+      {/* FOOTER WITH SOCIAL MEDIA LINKS (LinkedIn, Facebook, Instagram) */}
       <footer className={`border-t py-12 px-4 sm:px-8 transition-colors duration-300 ${isDark ? 'border-slate-800 bg-slate-900 text-slate-300' : 'border-slate-200 bg-slate-900 text-slate-300'}`}>
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div className="space-y-4">
@@ -611,6 +606,7 @@ export default function App() {
             </div>
             <p className="text-xs text-slate-400 leading-relaxed">Dedicated to providing you with exceptional service, support, and modern tech.</p>
             
+            {/* Social Media Links Added Here */}
             <div className="flex items-center gap-3 pt-2">
               <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="h-8 w-8 rounded-full bg-slate-800 flex items-center justify-center text-white hover:bg-blue-600 transition-colors text-xs font-bold" title="LinkedIn">in</a>
               <a href="https://facebook.com" target="_blank" rel="noreferrer" className="h-8 w-8 rounded-full bg-slate-800 flex items-center justify-center text-white hover:bg-blue-500 transition-colors text-xs font-bold" title="Facebook">fb</a>
