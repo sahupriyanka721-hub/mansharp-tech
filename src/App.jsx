@@ -17,7 +17,6 @@ export default function App() {
 
   // Mobile Menu Drawer State
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [mobileDropdown, setMobileDropdown] = useState(null);
 
   const bannerSlides = [
     {
@@ -311,7 +310,7 @@ export default function App() {
   };
 
   const isDark = theme === 'dark';
-  const activeBanner = bannerSlides[currentSlide] || bannerSlides[0];
+  const activeBanner = bannerSlides.find(slide => slide.id === activeTab) || bannerSlides[0];
 
   return (
     <div className={`min-h-screen flex flex-col font-sans transition-colors duration-300 perspective-1000 ${isDark ? 'bg-slate-950 text-slate-100 selection:bg-blue-600 selection:text-white' : 'bg-gradient-to-br from-slate-50 via-indigo-50/30 to-blue-50/40 text-slate-900 selection:bg-blue-500 selection:text-white'}`}>
@@ -446,6 +445,15 @@ export default function App() {
       {!isAdmin && isMobileMenuOpen && (
         <div className={`lg:hidden fixed inset-0 top-[73px] z-40 overflow-y-auto p-4 space-y-4 shadow-2xl transition-all ${isDark ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'}`}>
           <button onClick={() => { setActiveTab('about'); setViewMode('home'); setIsMobileMenuOpen(false); }} className="w-full text-left py-2 font-bold text-sm border-b border-slate-700/50">Home</button>
+          <div className="space-y-2 pt-2">
+            <p className="text-xs font-bold text-blue-500 uppercase">Quick Navigation</p>
+            <div className="grid grid-cols-2 gap-2">
+              <button onClick={() => goToDetail('healthcare')} className="text-left p-2 rounded-lg text-xs bg-slate-800/20">Healthcare</button>
+              <button onClick={() => goToDetail('education')} className="text-left p-2 rounded-lg text-xs bg-slate-800/20">Education</button>
+              <button onClick={() => goToDetail('ai-transformation')} className="text-left p-2 rounded-lg text-xs bg-slate-800/20">AI Solutions</button>
+              <button onClick={() => goToDetail('aim-app')} className="text-left p-2 rounded-lg text-xs bg-slate-800/20">AIM App</button>
+            </div>
+          </div>
           <button onClick={() => goToDetail('contact')} className="w-full bg-gradient-to-r from-rose-500 to-pink-500 text-white p-3 rounded-xl text-center font-bold text-sm shadow-md">Contact Us</button>
         </div>
       )}
@@ -495,10 +503,9 @@ export default function App() {
             </div>
           </div>
         ) : (
-          /* HOME PAGE WITH 3D SLIDING CAROUSEL BANNER & DEPTH HOVERS */
+          /* HOME PAGE */
           <div>
             <section className="relative h-[520px] sm:h-[600px] flex items-center justify-center text-center px-4 overflow-hidden">
-              {/* Sliding Carousel Backgrounds */}
               {bannerSlides.map((slide, idx) => (
                 <div 
                   key={slide.id} 
@@ -519,7 +526,6 @@ export default function App() {
                   {activeBanner.desc}
                 </p>
 
-                {/* Carousel Indicators */}
                 <div className="pt-6 flex justify-center gap-3">
                   {bannerSlides.map((_, idx) => (
                     <button 
@@ -532,7 +538,7 @@ export default function App() {
               </div>
             </section>
 
-            {/* CONTENT SHOWCASE CARD WITH 3D TILT HOVER */}
+            {/* CONTENT SHOWCASE CARD */}
             <section className="py-16 px-4 sm:px-8 max-w-6xl mx-auto">
               <div className={`p-8 sm:p-14 rounded-3xl border shadow-2xl backdrop-blur-xl transform hover:scale-[1.01] hover:-translate-y-1 transition-all duration-500 ${isDark ? 'bg-slate-900/90 border-slate-800 shadow-blue-950/50' : 'bg-white/90 border-slate-200 shadow-indigo-500/10'}`}>
                 <h3 className="text-2xl sm:text-4xl font-extrabold mb-4 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">{activeBanner.contentTitle}</h3>
@@ -540,7 +546,7 @@ export default function App() {
               </div>
             </section>
 
-            {/* 3D INTERACTIVE SHOWCASE CARDS */}
+            {/* INTERACTIVE SHOWCASE CARDS */}
             <section className="py-12 px-4 sm:px-8 max-w-6xl mx-auto">
               <div className="text-center mb-12">
                 <span className="text-blue-600 font-bold text-xs uppercase tracking-widest bg-blue-50 dark:bg-blue-950 px-3 py-1 rounded-full border border-blue-100 dark:border-blue-900 shadow-sm">Interactive Showcase</span>
@@ -590,7 +596,7 @@ export default function App() {
         )}
       </main>
 
-      {/* FOOTER */}
+      {/* FOOTER WITH SOCIAL MEDIA LINKS (LinkedIn, Facebook, Instagram) */}
       <footer className={`border-t py-12 px-4 sm:px-8 transition-colors duration-300 ${isDark ? 'border-slate-800 bg-slate-900 text-slate-300' : 'border-slate-200 bg-slate-900 text-slate-300'}`}>
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div className="space-y-4">
@@ -599,6 +605,14 @@ export default function App() {
               <h1 className="font-extrabold text-sm text-white tracking-tight">MANSHARP TECHNOLOGIES</h1>
             </div>
             <p className="text-xs text-slate-400 leading-relaxed">Dedicated to providing you with exceptional service, support, and modern tech.</p>
+            
+            {/* Social Media Links Added Here */}
+            <div className="flex items-center gap-3 pt-2">
+              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="h-8 w-8 rounded-full bg-slate-800 flex items-center justify-center text-white hover:bg-blue-600 transition-colors text-xs font-bold" title="LinkedIn">in</a>
+              <a href="https://facebook.com" target="_blank" rel="noreferrer" className="h-8 w-8 rounded-full bg-slate-800 flex items-center justify-center text-white hover:bg-blue-500 transition-colors text-xs font-bold" title="Facebook">fb</a>
+              <a href="https://instagram.com" target="_blank" rel="noreferrer" className="h-8 w-8 rounded-full bg-slate-800 flex items-center justify-center text-white hover:bg-pink-600 transition-colors text-xs font-bold" title="Instagram">ig</a>
+            </div>
+
             <button onClick={() => goToDetail('contact')} className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-xs font-semibold shadow-md transition-all">Contact Us ↗</button>
           </div>
 
