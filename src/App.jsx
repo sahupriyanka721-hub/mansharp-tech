@@ -9,15 +9,15 @@ export default function App() {
   const [theme, setTheme] = useState('light');
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // View Mode
+  // View Mode: 'home' ya 'detail'
   const [viewMode, setViewMode] = useState('home');
+
+  // Click-based AI dropdown state
   const [isAiDropdownOpen, setIsAiDropdownOpen] = useState(false);
+
+  // Mobile Menu Drawer State
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mobileDropdown, setMobileDropdown] = useState(null);
-
-  // Interactive ROI Calculator State
-  const [teamSize, setTeamSize] = useState(50);
-  const [cloudSpend, setCloudSpend] = useState(5000);
 
   const bannerSlides = [
     {
@@ -27,7 +27,7 @@ export default function App() {
       image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80',
       subtitle: 'About Us',
       contentTitle: 'We Are Mansharp Technologies',
-      contentText: 'Embarking on our journey in 2013, our team of Microsoft Certified Professionals strives to deliver extraordinary solutions.'
+      contentText: 'Embarking on our journey in 2013, our team of Microsoft Certified Professionals strives to deliver extraordinary solutions. We dream of bringing remarkable individuals together and transforming technology for positive change.'
     },
     {
       id: 'ai-transformation',
@@ -46,15 +46,240 @@ export default function App() {
       subtitle: 'AI Pricing',
       contentTitle: 'Flexible Plans for Your Scale',
       contentText: 'Explore Microsoft Copilot pricing models tailored for individual productivity and organization-wide transformation.'
+    },
+    {
+      id: 'ai-services',
+      title: 'Explore Our Range of AI Powered Services',
+      desc: 'Curated AI services for successful AI adoption and implementation across your enterprise.',
+      image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1600&q=80',
+      subtitle: 'AI Services',
+      contentTitle: 'Curated AI Adoption Services',
+      contentText: 'From custom Copilot studio integrations to building your own Azure AI services, we guide you at every step.'
+    },
+    {
+      id: 'ai-business-leaders',
+      title: 'AI for Business Leaders',
+      desc: 'Strategic insights and executive frameworks to leverage artificial intelligence effectively.',
+      image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&q=80',
+      subtitle: 'Executive AI',
+      contentTitle: 'Leading With Intelligence',
+      contentText: 'Empower leadership teams with data-driven decision tools and secure enterprise AI guidelines.'
+    },
+    {
+      id: 'why-choose-us',
+      title: 'Why Choose Mansharp Technologies',
+      desc: 'Discover why leading enterprises trust our Microsoft Certified Professionals for unmatched digital evolution.',
+      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=80',
+      subtitle: 'Excellence & Trust',
+      contentTitle: 'Microsoft Solutions Expertise',
+      contentText: 'We deliver innovative, growth-focused solutions that help businesses thrive and stay ahead in today’s fast-changing digital landscape.'
+    },
+    {
+      id: 'life-at-mansharp',
+      title: 'Life At Mansharp',
+      desc: 'A culture built on collaboration, continuous learning, celebration, and pushing boundaries together.',
+      image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1600&q=80',
+      subtitle: 'Our Starfleet Culture',
+      contentTitle: 'Where Passion Meets Innovation',
+      contentText: 'Our workplace thrives on diverse perspectives, continuous learning, and celebrating every success together as one unified family.'
+    },
+    {
+      id: 'leadership',
+      title: 'Together We Lead!',
+      desc: 'Guiding the path of digital transformation with decades of core technological and strategic expertise.',
+      image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&q=80',
+      subtitle: 'Visionary Leadership',
+      contentTitle: 'Guiding With Vision & Integrity',
+      contentText: 'Our leaders foster an environment of accountability, continuous growth, and long-term strategic success for global clients.'
+    },
+    {
+      id: 'healthcare',
+      title: 'Transforming Healthcare with Smart Solutions',
+      desc: 'Secure, compliant, and advanced digital platforms designed for modern healthcare providers and patient care.',
+      image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1600&q=80',
+      subtitle: 'Healthcare Industry',
+      contentTitle: 'Next-Gen Patient Care Systems',
+      contentText: 'We build HIPAA-compliant, highly secure cloud solutions that streamline clinical workflows and improve patient health outcomes.'
+    },
+    {
+      id: 'education',
+      title: 'Smart Education & E-Learning Platforms',
+      desc: 'Empowering institutions and learners worldwide with interactive, scalable cloud infrastructures.',
+      image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80',
+      subtitle: 'Education Industry',
+      contentTitle: 'Digital Transformation for Schools & Universities',
+      contentText: 'Modernizing classrooms and remote learning frameworks with robust, cloud-enabled educational management systems.'
+    },
+    {
+      id: 'public-sector',
+      title: 'Public Sector & Government Digitalization',
+      desc: 'Streamlining citizen services through transparent, secure, and highly efficient digital government tech.',
+      image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80',
+      subtitle: 'Public Sector',
+      contentTitle: 'Transparent Citizen Services',
+      contentText: 'Empowering government bodies with secure data pipelines, streamlined workflows, and citizen-first digital portals.'
+    },
+    {
+      id: 'financial-services',
+      title: 'Financial Services & Banking Tech',
+      desc: 'Robust, secure, and high-performance financial systems designed to protect data and accelerate transactions.',
+      image: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=1600&q=80',
+      subtitle: 'Fintech & Banking',
+      contentTitle: 'Secure Financial Infrastructures',
+      contentText: 'Providing encrypted, low-latency financial software solutions that safeguard sensitive assets and scale with market demands.'
+    },
+    {
+      id: 'manufacturing',
+      title: 'Manufacturing & Supply Chain Innovation',
+      desc: 'Automating industrial processes, IoT integration, and smart analytics for manufacturing excellence.',
+      image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1600&q=80',
+      subtitle: 'Manufacturing Industry',
+      contentTitle: 'Smart Factory Automation',
+      contentText: 'Connecting factory floors to cloud intelligence for predictive maintenance, optimized supply chains, and reduced downtime.'
+    },
+    {
+      id: 'energy',
+      title: 'Energy & Utilities Smart Solutions',
+      desc: 'Sustainable technologies and data management systems tailored for modern energy enterprises.',
+      image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1600&q=80',
+      subtitle: 'Energy Sector',
+      contentTitle: 'Sustainable Energy Management',
+      contentText: 'Helping utility providers monitor grid performance, reduce carbon footprints, and analyze resource distribution efficiently.'
+    },
+    {
+      id: 'retail',
+      title: 'Retail & E-Commerce Digital Growth',
+      desc: 'Enhancing customer experiences and backend inventory systems through high-speed cloud solutions.',
+      image: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=1600&q=80',
+      subtitle: 'Retail & Commerce',
+      contentTitle: 'Omnichannel Retail Experiences',
+      contentText: 'Scaling e-commerce platforms with real-time inventory tracking, AI-driven recommendations, and seamless checkout flows.'
+    },
+    {
+      id: 'software',
+      title: 'Software & Technology Product Development',
+      desc: 'Building custom software products, scalable architectures, and next-gen enterprise tools.',
+      image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80',
+      subtitle: 'Software Products',
+      contentTitle: 'Custom Engineering & SaaS',
+      contentText: 'Turning complex software concepts into market-ready, highly reliable, and cloud-native applications.'
+    },
+    {
+      id: 'blogs',
+      title: 'Mansharp Insights & Industry Blogs',
+      desc: 'Read expert thoughts on Cloud Computing, Artificial Intelligence, Microsoft Technologies, and more.',
+      image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1600&q=80',
+      subtitle: 'Resources & Insights',
+      contentTitle: 'Latest Tech Articles & Trends',
+      contentText: 'Stay updated with deep dives into emerging cloud patterns, enterprise app strategies, and expert engineering notes.'
+    },
+    {
+      id: 'case-studies',
+      title: 'Proven Success Stories & Case Studies',
+      desc: 'See how we have helped global organizations overcome complex technological challenges.',
+      image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1600&q=80',
+      subtitle: 'Success Stories',
+      contentTitle: 'Transforming Challenges Into Triumphs',
+      contentText: 'Explore our documented case histories showcasing measurable business value delivered across diverse industry verticals.'
+    },
+    {
+      id: 'workshops',
+      title: 'Events & Technical Workshops',
+      desc: 'Join our interactive seminars, webinars, and technology skill-building workshops.',
+      image: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=1600&q=80',
+      subtitle: 'Events & Learning',
+      contentTitle: 'Connect & Learn With Experts',
+      contentText: 'Participate in our live sessions designed to educate tech leaders on leveraging modern cloud architectures and AI.'
+    },
+    {
+      id: 'department-solutions',
+      title: 'Enterprise Department Solutions',
+      desc: 'Targeted workflow enhancements across HR, Finance, Operations, and Sales departments.',
+      image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1600&q=80',
+      subtitle: 'Solutions',
+      contentTitle: 'Optimizing Every Business Unit',
+      contentText: 'Tailored digital toolsets designed to remove departmental silos, automate repetitive tasks, and boost organizational output.'
+    },
+    {
+      id: 'licenses',
+      title: 'Software Licenses & Enterprise Agreements',
+      desc: 'Streamline your enterprise licensing needs with certified Microsoft partners.',
+      image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1600&q=80',
+      subtitle: 'Enterprise Licensing',
+      contentTitle: 'Hassle-Free Software Procurement',
+      contentText: 'Expert guidance on procuring, managing, and optimizing Microsoft volume licensing and cloud subscriptions.'
+    },
+    {
+      id: 'technologies',
+      title: 'Cutting-Edge Technologies & Azure Cloud',
+      desc: 'Empowering your business with state-of-the-art cloud architecture and modern developer tools.',
+      image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80',
+      subtitle: 'Technology Stack',
+      contentTitle: 'Built on Microsoft Azure & AI',
+      contentText: 'Leveraging enterprise-grade cloud frameworks, advanced analytics, and robust security protocols for maximum scalability.'
+    },
+    {
+      id: 'integration',
+      title: 'System Integration & IT Consulting',
+      desc: 'Seamlessly connect disparate legacy apps and systems with modern cloud infrastructure.',
+      image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1600&q=80',
+      subtitle: 'Consulting & Strategy',
+      contentTitle: 'Bridging Legacy & Modern Systems',
+      contentText: 'Strategic roadmap planning and seamless API integration services to unify your entire IT ecosystem.'
+    },
+    {
+      id: 'aim-app',
+      title: 'AIM Asset Management Application',
+      desc: 'Track, manage, and optimize your organization assets in real-time with supreme efficiency.',
+      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80',
+      subtitle: 'Products',
+      contentTitle: 'Real-Time Asset Tracking',
+      contentText: 'Our flagship AIM application offers end-to-end visibility and lifecycle management for enterprise hardware and software assets.'
+    },
+    {
+      id: 'org-chart',
+      title: 'Mansharp Org Chart Solution',
+      desc: 'Automate reporting lines and visualize team hierarchies dynamically with our custom app.',
+      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=80',
+      subtitle: 'Products',
+      contentTitle: 'Dynamic Corporate Hierarchy Mapping',
+      contentText: 'Effortlessly visualize team structures, manage reporting lines, and sync employee directories in real-time.'
+    },
+    {
+      id: 'contact',
+      title: 'Get in Touch With Our Experts',
+      desc: 'Let us discuss how we can accelerate your business growth through advanced technology solutions.',
+      image: 'https://images.unsplash.com/photo-1423596653951-9b62843232f3?auto=format&fit=crop&w=1600&q=80',
+      subtitle: 'Contact Us',
+      contentTitle: 'We Are Here to Help',
+      contentText: 'Reach out to our offices in USA or India, or drop us a message to start building your next big digital initiative.'
+    },
+    {
+      id: 'privacy-policy',
+      title: 'Privacy Policy & Data Security',
+      desc: 'Our steadfast commitment to maintaining data security, confidentiality, and your absolute privacy.',
+      image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1600&q=80',
+      subtitle: 'Legal',
+      contentTitle: 'Your Privacy Matters',
+      contentText: 'Read how we protect, collect, and handle your data securely in compliance with international privacy regulations.'
+    },
+    {
+      id: 'terms',
+      title: 'Terms And Conditions',
+      desc: 'Guidelines and legal agreements governing the use of Mansharp Technologies services and website.',
+      image: 'https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=1600&q=80',
+      subtitle: 'Legal',
+      contentTitle: 'Terms of Service',
+      contentText: 'Important legal terms and conditions outlining user responsibilities and service agreements with Mansharp Technologies.'
     }
   ];
 
-  // Auto-sliding effect for carousel banner
+  // Automatic sliding effect for banner every 5 seconds
   useEffect(() => {
-    const timer = setInterval(() => {
+    const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % bannerSlides.length);
     }, 5000);
-    return () => clearInterval(timer);
+    return () => clearInterval(interval);
   }, [bannerSlides.length]);
 
   useEffect(() => {
@@ -65,9 +290,18 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [activeTab]);
 
-  const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
-  const isDark = theme === 'dark';
-  const activeBanner = bannerSlides[currentSlide] || bannerSlides[0];
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (mobile === '9876543210' && password === 'admin123') {
+      setIsLoggedIn(true);
+    } else {
+      alert('Invalid Mobile Number or Password');
+    }
+  };
 
   const goToDetail = (tabId) => {
     setActiveTab(tabId);
@@ -76,138 +310,278 @@ export default function App() {
     setIsAiDropdownOpen(false);
   };
 
+  const isDark = theme === 'dark';
+  const activeBanner = bannerSlides[currentSlide] || bannerSlides[0];
+
   return (
-    <div className={`min-h-screen flex flex-col font-sans transition-colors duration-500 ${isDark ? 'bg-slate-950 text-slate-100' : 'bg-gradient-to-br from-slate-50 via-indigo-50/30 to-blue-50/40 text-slate-900'}`}>
+    <div className={`min-h-screen flex flex-col font-sans transition-colors duration-300 perspective-1000 ${isDark ? 'bg-slate-950 text-slate-100 selection:bg-blue-600 selection:text-white' : 'bg-gradient-to-br from-slate-50 via-indigo-50/30 to-blue-50/40 text-slate-900 selection:bg-blue-500 selection:text-white'}`}>
       
-      {/* HEADER WITH SMOOTH GLASSMORPHISM */}
-      <header className={`border-b backdrop-blur-xl sticky top-0 z-50 px-4 sm:px-8 py-4 flex justify-between items-center shadow-lg transition-all duration-300 ${isDark ? 'border-slate-800/80 bg-slate-900/90 text-white' : 'border-slate-200/80 bg-white/80 text-slate-900'}`}>
-        <div className="flex items-center gap-3 cursor-pointer group" onClick={() => { setActiveTab('about'); setViewMode('home'); }}>
-          <div className="bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-600 text-white font-extrabold h-10 w-10 rounded-2xl flex items-center justify-center text-lg shadow-lg shadow-blue-500/40 transform group-hover:scale-105 transition-transform">
+      {/* HEADER */}
+      <header className={`border-b backdrop-blur-md sticky top-0 z-50 px-4 sm:px-8 py-4 flex justify-between items-center shadow-xl transition-colors duration-300 ${isDark ? 'border-slate-800/80 bg-slate-900/95 text-white' : 'border-slate-200/80 bg-white/90 text-slate-900'}`}>
+        <div className="flex items-center gap-3 cursor-pointer group" onClick={() => { setActiveTab('about'); setViewMode('home'); setIsMobileMenuOpen(false); }}>
+          <div className="bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-600 text-white font-extrabold h-10 w-10 rounded-xl flex items-center justify-center text-lg shadow-lg shadow-blue-500/30 transform group-hover:rotate-12 group-hover:scale-110 transition-transform duration-300">
             M
           </div>
           <div>
-            <h1 className="font-extrabold text-base sm:text-lg tracking-tight">MANSHARP</h1>
+            <h1 className="font-extrabold text-base sm:text-lg leading-tight tracking-tight">MANSHARP</h1>
             <p className="text-[10px] tracking-widest text-blue-500 font-bold uppercase">TECHNOLOGIES</p>
           </div>
         </div>
 
-        {/* DESKTOP NAV */}
+        {/* DESKTOP NAVIGATION MENUS */}
         {!isAdmin && (
           <nav className={`hidden lg:flex items-center gap-8 text-sm font-medium ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>
-            <button onClick={() => { setActiveTab('about'); setViewMode('home'); }} className="hover:text-blue-500 transition-colors py-2">Home</button>
-            <button onClick={() => goToDetail('about')} className="hover:text-blue-500 transition-colors py-2">About Us</button>
-            <button onClick={() => goToDetail('ai-transformation')} className="hover:text-blue-600 transition-colors text-blue-600 font-bold bg-blue-50 dark:bg-blue-950/50 px-3 py-1 rounded-full border border-blue-100 dark:border-blue-900 shadow-sm">✨ AI Solutions</button>
-            <button onClick={() => goToDetail('ai-copilot-pricing')} className="hover:text-blue-500 transition-colors py-2">Pricing</button>
-            <button onClick={() => goToDetail('contact')} className="bg-gradient-to-r from-rose-500 to-pink-500 hover:opacity-90 text-white px-4 py-2 rounded-xl text-xs font-semibold shadow-md transition-all transform hover:-translate-y-0.5">Contact Us</button>
+            <button onClick={() => { setActiveTab('about'); setViewMode('home'); }} className="hover:text-blue-500 transition-colors py-2">
+              Home
+            </button>
+
+            {/* About Menu */}
+            <div className="relative group py-2 cursor-pointer">
+              <span className="hover:text-blue-500 flex items-center gap-1 transition-colors">
+                About <span className="text-[10px]">▼</span>
+              </span>
+              <div className={`absolute top-full left-0 w-48 border rounded-2xl shadow-2xl p-2 flex flex-col gap-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-3 group-hover:translate-y-0 scale-95 group-hover:scale-100 z-50 ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
+                <button onClick={() => goToDetail('about')} className={`text-left px-3 py-2 rounded-xl text-xs font-bold transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>About Us</button>
+                <button onClick={() => goToDetail('why-choose-us')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>Why Choose Us</button>
+                <button onClick={() => goToDetail('life-at-mansharp')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>Life At Mansharp</button>
+                <button onClick={() => goToDetail('leadership')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>Leadership</button>
+              </div>
+            </div>
+
+            {/* AI Solutions */}
+            <div className="relative py-2">
+              <button 
+                onClick={() => {
+                  goToDetail('ai-transformation');
+                  setIsAiDropdownOpen(!isAiDropdownOpen);
+                }}
+                className="hover:text-blue-600 flex items-center gap-1 transition-colors text-blue-600 font-bold bg-blue-50 px-3 py-1 rounded-full border border-blue-100 shadow-sm transform hover:scale-105 transition-transform"
+              >
+                ✨ AI Solutions <span className="text-[10px]">▼</span>
+              </button>
+
+              {isAiDropdownOpen && (
+                <div className={`absolute top-full left-0 mt-2 w-56 border rounded-2xl shadow-2xl p-2 flex flex-col gap-1 z-50 animate-fade-in ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
+                  <button onClick={() => goToDetail('ai-transformation')} className={`text-left px-3 py-2 rounded-xl text-xs font-semibold ${isDark ? 'hover:bg-slate-800 text-slate-200' : 'hover:bg-blue-50 text-slate-800'}`}>AI Transformation</button>
+                  <button onClick={() => goToDetail('ai-copilot-pricing')} className={`text-left px-3 py-2 rounded-xl text-xs ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 text-slate-700'}`}>Microsoft Copilot Pricing</button>
+                  <button onClick={() => goToDetail('ai-services')} className={`text-left px-3 py-2 rounded-xl text-xs ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 text-slate-700'}`}>AI Services</button>
+                  <button onClick={() => goToDetail('ai-business-leaders')} className={`text-left px-3 py-2 rounded-xl text-xs ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 text-slate-700'}`}>AI for Business Leaders</button>
+                </div>
+              )}
+            </div>
+
+            {/* Industries Menu */}
+            <div className="relative group py-2 cursor-pointer">
+              <span className="hover:text-blue-500 flex items-center gap-1 transition-colors">
+                Industries <span className="text-[10px]">▼</span>
+              </span>
+              <div className={`absolute top-full left-0 w-56 border rounded-2xl shadow-2xl p-3 grid grid-cols-2 gap-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-3 group-hover:translate-y-0 scale-95 group-hover:scale-100 z-50 ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
+                {['Healthcare', 'Education', 'Public Sector', 'Financial Services', 'Manufacturing', 'Energy', 'Retail', 'Software'].map((ind, idx) => {
+                  const slug = ind.toLowerCase().replace(/\s+/g, '-');
+                  return (
+                    <button key={idx} onClick={() => goToDetail(slug)} className={`text-left px-2 py-1.5 rounded-lg text-[11px] transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>{ind}</button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Resources Menu */}
+            <div className="relative group py-2 cursor-pointer">
+              <span className="hover:text-blue-500 flex items-center gap-1 transition-colors">
+                Resources <span className="text-[10px]">▼</span>
+              </span>
+              <div className={`absolute top-full left-0 w-48 border rounded-2xl shadow-2xl p-2 flex flex-col gap-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-3 group-hover:translate-y-0 scale-95 group-hover:scale-100 z-50 ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
+                <button onClick={() => goToDetail('blogs')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 text-slate-700'}`}>Blogs</button>
+                <button onClick={() => goToDetail('case-studies')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 text-slate-700'}`}>Case Studies</button>
+                <button onClick={() => goToDetail('workshops')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 text-slate-700'}`}>Events & Workshops</button>
+              </div>
+            </div>
+
+            {/* Solutions Menu */}
+            <div className="relative group py-2 cursor-pointer">
+              <span className="hover:text-blue-500 flex items-center gap-1 transition-colors">
+                Solutions <span className="text-[10px]">▼</span>
+              </span>
+              <div className={`absolute top-full left-0 w-56 border rounded-2xl shadow-2xl p-2 flex flex-col gap-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-3 group-hover:translate-y-0 scale-95 group-hover:scale-100 z-50 ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
+                <button onClick={() => goToDetail('department-solutions')} className={`text-left px-3 py-2 rounded-xl text-xs ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 text-slate-700'}`}>Department Solutions</button>
+                <button onClick={() => goToDetail('licenses')} className={`text-left px-3 py-2 rounded-xl text-xs ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 text-slate-700'}`}>Licenses</button>
+                <button onClick={() => goToDetail('technologies')} className={`text-left px-3 py-2 rounded-xl text-xs ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 text-slate-700'}`}>Technologies</button>
+                <button onClick={() => goToDetail('integration')} className={`text-left px-3.5 py-2 rounded-xl text-xs ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 text-slate-700'}`}>Integration & Consulting</button>
+              </div>
+            </div>
+
+            {/* Products Menu */}
+            <div className="relative group py-2 cursor-pointer">
+              <span className="hover:text-blue-500 flex items-center gap-1 transition-colors">
+                Products <span className="text-[10px]">▼</span>
+              </span>
+              <div className={`absolute top-full left-[-40px] w-56 border rounded-2xl shadow-2xl p-2 flex flex-col gap-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-3 group-hover:translate-y-0 scale-95 group-hover:scale-100 z-50 ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
+                <button onClick={() => goToDetail('aim-app')} className={`text-left px-3 py-2 rounded-xl text-xs ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 text-slate-700'}`}>AIM App</button>
+                <button onClick={() => goToDetail('org-chart')} className={`text-left px-3 py-2 rounded-xl text-xs ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 text-slate-700'}`}>Mansharp Org Chart</button>
+              </div>
+            </div>
+
+            <button onClick={() => goToDetail('contact')} className="bg-gradient-to-r from-rose-500 to-pink-500 hover:opacity-90 text-white px-4 py-2 rounded-xl text-xs font-semibold shadow-md transform hover:scale-105 transition-all">Contact Us</button>
           </nav>
         )}
 
-        <div className="flex items-center gap-2">
-          <button onClick={toggleTheme} className={`p-2 rounded-xl border text-xs font-semibold transition-all shadow-sm ${isDark ? 'bg-slate-900 border-slate-800 text-amber-400 hover:bg-slate-800' : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100'}`}>
+        <div className="flex items-center gap-2 sm:gap-3">
+          <button onClick={toggleTheme} className={`p-2 sm:px-3 sm:py-2 rounded-xl border text-xs font-semibold transition-all shadow-sm ${isDark ? 'bg-slate-900 border-slate-800 text-amber-400 hover:bg-slate-800' : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'}`}>
             {isDark ? '☀️ Light' : '🌙 Dark'}
           </button>
-          <button onClick={() => { setIsAdmin(!isAdmin); setViewMode('home'); }} className="bg-slate-900 dark:bg-slate-800 hover:bg-slate-800 text-white px-3 py-2 rounded-xl text-xs font-semibold shadow-md transition-all">
-            {isAdmin ? 'Website View' : 'Admin 🛡️'}
+
+          <button onClick={() => { setIsAdmin(!isAdmin); setIsLoggedIn(false); setIsMobileMenuOpen(false); }} className="bg-slate-900 hover:bg-slate-800 text-white px-3 sm:px-4 py-2 rounded-xl text-xs font-semibold shadow-md">
+            {isAdmin ? 'Website View' : 'Admin Panel 🛡️'}
           </button>
+
+          {!isAdmin && (
+            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className={`lg:hidden p-2 rounded-xl border text-base font-bold ${isDark ? 'bg-slate-900 border-slate-800 text-white' : 'bg-white border-slate-200 text-slate-900'}`}>
+              {isMobileMenuOpen ? '✕' : '☰'}
+            </button>
+          )}
         </div>
       </header>
 
-      {/* MAIN CONTENT AREA */}
+      {/* MOBILE DRAWER */}
+      {!isAdmin && isMobileMenuOpen && (
+        <div className={`lg:hidden fixed inset-0 top-[73px] z-40 overflow-y-auto p-4 space-y-4 shadow-2xl transition-all ${isDark ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'}`}>
+          <button onClick={() => { setActiveTab('about'); setViewMode('home'); setIsMobileMenuOpen(false); }} className="w-full text-left py-2 font-bold text-sm border-b border-slate-700/50">Home</button>
+          <button onClick={() => goToDetail('contact')} className="w-full bg-gradient-to-r from-rose-500 to-pink-500 text-white p-3 rounded-xl text-center font-bold text-sm shadow-md">Contact Us</button>
+        </div>
+      )}
+
+      {/* MAIN CONTENT CONTAINER */}
       <main className="flex-grow">
         {isAdmin ? (
-          <div className="max-w-md mx-auto mt-20 p-8 border rounded-3xl shadow-2xl bg-white text-slate-900 transform animate-fade-in">
+          <div className="max-w-md mx-auto mt-20 p-8 border rounded-3xl shadow-2xl bg-white text-slate-900 transform transition-all hover:scale-[1.01]">
             <h2 className="text-2xl font-bold mb-6 text-center">Admin Portal</h2>
-            <form onSubmit={(e) => { e.preventDefault(); setIsLoggedIn(true); }} className="space-y-4">
-              <input type="text" placeholder="Mobile" className="w-full p-3 border rounded-xl text-sm" required />
-              <input type="password" placeholder="Password" className="w-full p-3 border rounded-xl text-sm" required />
-              <button type="submit" className="w-full bg-blue-600 text-white p-3 rounded-xl font-bold text-sm hover:bg-blue-700 transition-all shadow-lg">Login</button>
-            </form>
+            {!isLoggedIn ? (
+              <form onSubmit={handleLogin} className="space-y-4">
+                <input type="text" value={mobile} onChange={(e) => setMobile(e.target.value)} placeholder="Mobile Number" className="w-full p-3 border rounded-xl text-sm" required />
+                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" className="w-full p-3 border rounded-xl text-sm" required />
+                <button type="submit" className="w-full bg-blue-600 text-white p-3 rounded-xl font-bold text-sm hover:bg-blue-700 shadow-lg transition-all">Login</button>
+              </form>
+            ) : (
+              <div className="text-center space-y-4">
+                <p className="text-green-600 font-bold text-lg">Welcome to Admin Dashboard!</p>
+                <button onClick={() => setIsLoggedIn(false)} className="bg-red-500 text-white px-4 py-2 rounded-xl text-xs font-semibold">Logout</button>
+              </div>
+            )}
           </div>
         ) : viewMode === 'detail' ? (
-          /* DETAILED PAGE WITH SLIDE-IN ANIMATION */
+          /* DETAIL VIEW WITH 3D POP EFFECT */
           <div className="py-12 px-4 sm:px-8 max-w-4xl mx-auto space-y-6 animate-fade-in">
-            <button onClick={() => setViewMode('home')} className="px-4 py-2 rounded-xl text-xs font-bold bg-blue-600 text-white shadow-md hover:bg-blue-700 transition-all transform hover:-translate-x-1">
+            <button onClick={() => setViewMode('home')} className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-blue-600 text-white shadow-lg hover:bg-blue-700 transform hover:-translate-x-1 transition-all">
               ← Back to Home
             </button>
-            <div className="relative h-64 sm:h-80 rounded-3xl overflow-hidden shadow-2xl">
-              <img src={activeBanner.image} alt="" className="w-full h-full object-cover filter brightness-75 transform hover:scale-105 transition-transform duration-700" />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent flex flex-col justify-end p-6 text-white">
-                <span className="bg-blue-600 px-3 py-1 rounded-full text-[10px] font-bold uppercase w-max mb-2">{activeBanner.subtitle}</span>
-                <h2 className="text-2xl sm:text-3xl font-extrabold">{activeBanner.title}</h2>
+
+            <div className="relative h-72 sm:h-96 rounded-3xl overflow-hidden shadow-2xl transform hover:rotate-1 hover:scale-[1.01] transition-all duration-500">
+              <img src={activeBanner.image} alt="" className="w-full h-full object-cover filter brightness-75 scale-105" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent flex flex-col justify-end p-8 text-white">
+                <span className="bg-blue-600 px-3 py-1 rounded-full text-[10px] font-bold uppercase w-max mb-3 shadow-md">{activeBanner.subtitle}</span>
+                <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">{activeBanner.title}</h2>
               </div>
             </div>
-            <div className={`p-8 rounded-3xl border shadow-xl ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
-              <h3 className="text-xl font-extrabold text-blue-600 mb-3">{activeBanner.contentTitle}</h3>
-              <p className={`text-sm sm:text-base leading-relaxed ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>{activeBanner.contentText}</p>
+
+            <div className={`p-8 sm:p-10 rounded-3xl border shadow-2xl transform transition-all ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
+              <h3 className="text-2xl font-extrabold text-blue-600 mb-4">{activeBanner.contentTitle}</h3>
+              <p className={`text-base sm:text-lg leading-relaxed ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>{activeBanner.contentText}</p>
+              
+              <div className="mt-8 pt-6 border-t border-slate-700/30 flex gap-4">
+                <button onClick={() => goToDetail('contact')} className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-6 py-3 rounded-2xl text-xs font-bold shadow-xl transform hover:-translate-y-1 transition-all">
+                  Inquire Now ↗
+                </button>
+              </div>
             </div>
           </div>
         ) : (
-          /* HOME PAGE WITH SMOOTH SLIDING BANNER CAROUSEL */
+          /* HOME PAGE WITH 3D SLIDING CAROUSEL BANNER & DEPTH HOVERS */
           <div>
-            <section className="relative h-[500px] sm:h-[580px] flex items-center justify-center text-center px-4 overflow-hidden">
+            <section className="relative h-[520px] sm:h-[600px] flex items-center justify-center text-center px-4 overflow-hidden">
+              {/* Sliding Carousel Backgrounds */}
               {bannerSlides.map((slide, idx) => (
                 <div 
                   key={slide.id} 
-                  className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${idx === currentSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-105 pointer-events-none'}`}
+                  className={`absolute inset-0 transition-all duration-1000 ease-in-out transform ${idx === currentSlide ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-110 pointer-events-none'}`}
                 >
-                  <img src={slide.image} alt="" className="w-full h-full object-cover filter brightness-[0.45]" />
+                  <img src={slide.image} alt="" className="w-full h-full object-cover filter brightness-[0.4]" />
                 </div>
               ))}
-              
-              <div className="relative z-10 max-w-4xl mx-auto space-y-4 text-white animate-fade-in">
-                <span className="bg-blue-600/90 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg">
+
+              <div className="relative z-10 max-w-4xl mx-auto space-y-6 text-white transform transition-transform duration-700">
+                <span className="bg-blue-600/90 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg animate-bounce">
                   {activeBanner.subtitle}
                 </span>
-                <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight drop-shadow-md">
+                <h2 className="text-3xl sm:text-6xl font-extrabold tracking-tight leading-tight drop-shadow-2xl">
                   {activeBanner.title}
                 </h2>
-                <p className="text-sm sm:text-lg text-slate-200 max-w-2xl mx-auto drop-shadow">
+                <p className="text-base sm:text-xl text-slate-200 max-w-2xl mx-auto drop-shadow-md">
                   {activeBanner.desc}
                 </p>
-                <div className="pt-4 flex justify-center gap-2">
+
+                {/* Carousel Indicators */}
+                <div className="pt-6 flex justify-center gap-3">
                   {bannerSlides.map((_, idx) => (
                     <button 
                       key={idx} 
                       onClick={() => setCurrentSlide(idx)}
-                      className={`h-2.5 rounded-full transition-all duration-300 ${idx === currentSlide ? 'w-8 bg-blue-500' : 'w-2.5 bg-white/50'}`}
+                      className={`h-2.5 rounded-full transition-all duration-500 shadow-md ${idx === currentSlide ? 'w-10 bg-blue-500 scale-110' : 'w-2.5 bg-white/50 hover:bg-white'}`}
                     />
                   ))}
                 </div>
               </div>
             </section>
 
-            {/* INTERACTIVE ROI CALCULATOR SECTION */}
+            {/* CONTENT SHOWCASE CARD WITH 3D TILT HOVER */}
             <section className="py-16 px-4 sm:px-8 max-w-6xl mx-auto">
-              <div className={`p-8 sm:p-12 rounded-3xl border shadow-2xl transition-all duration-300 transform hover:shadow-blue-500/10 ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
-                <div className="text-center max-w-2xl mx-auto mb-10">
-                  <span className="bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 px-3 py-1 rounded-full text-xs font-bold uppercase">Interactive Tool</span>
-                  <h3 className="text-2xl sm:text-3xl font-extrabold mt-3">Calculate Your Enterprise ROI & Savings</h3>
-                  <p className={`text-sm mt-2 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Slide to check your estimated annual cost savings with our cloud automation.</p>
+              <div className={`p-8 sm:p-14 rounded-3xl border shadow-2xl backdrop-blur-xl transform hover:scale-[1.01] hover:-translate-y-1 transition-all duration-500 ${isDark ? 'bg-slate-900/90 border-slate-800 shadow-blue-950/50' : 'bg-white/90 border-slate-200 shadow-indigo-500/10'}`}>
+                <h3 className="text-2xl sm:text-4xl font-extrabold mb-4 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">{activeBanner.contentTitle}</h3>
+                <p className={`text-base sm:text-lg leading-relaxed ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>{activeBanner.contentText}</p>
+              </div>
+            </section>
+
+            {/* 3D INTERACTIVE SHOWCASE CARDS */}
+            <section className="py-12 px-4 sm:px-8 max-w-6xl mx-auto">
+              <div className="text-center mb-12">
+                <span className="text-blue-600 font-bold text-xs uppercase tracking-widest bg-blue-50 dark:bg-blue-950 px-3 py-1 rounded-full border border-blue-100 dark:border-blue-900 shadow-sm">Interactive Showcase</span>
+                <h3 className="text-3xl font-extrabold mt-3 tracking-tight">Services That Transform Work</h3>
+                <p className={`text-sm mt-2 max-w-xl mx-auto ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Explore our modern workspace overview and top-tier enterprise software products.</p>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div className={`p-5 rounded-3xl border shadow-2xl transform hover:-translate-y-2 transition-all duration-500 ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
+                  <div className="relative rounded-2xl overflow-hidden aspect-video shadow-inner bg-black">
+                    <video className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700" controls autoPlay muted loop>
+                      <source src="https://assets.mixkit.co/videos/preview/mixkit-team-working-in-an-office-4129-large.mp4" type="video/mp4" />
+                    </video>
+                  </div>
+                  <h4 className="font-bold text-lg mt-4 px-2">Inside Mansharp Workplace Culture</h4>
+                  <p className={`text-xs mt-1 px-2 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Watch how our teams collaborate to build revolutionary cloud solutions.</p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                  <div className="space-y-6">
+                <div className="space-y-4">
+                  <div onClick={() => goToDetail('aim-app')} className={`p-6 rounded-3xl border shadow-xl cursor-pointer transform hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300 flex items-center gap-5 ${isDark ? 'bg-slate-900 border-slate-800 hover:bg-slate-800' : 'bg-white border-slate-200 hover:bg-blue-50/50'}`}>
+                    <div className="h-14 w-14 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white font-bold flex items-center justify-center text-2xl shadow-lg shadow-blue-500/40">📱</div>
                     <div>
-                      <label className="block text-xs font-bold mb-2 uppercase tracking-wider text-blue-500">Team Members: {teamSize}</label>
-                      <input type="range" min="10" max="500" value={teamSize} onChange={(e) => setTeamSize(Number(e.target.value))} className="w-full accent-blue-600 cursor-pointer" />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-bold mb-2 uppercase tracking-wider text-blue-500">Monthly Cloud Spend: ${cloudSpend}</label>
-                      <input type="range" min="500" max="50000" step="500" value={cloudSpend} onChange={(e) => setCloudSpend(Number(e.target.value))} className="w-full accent-blue-600 cursor-pointer" />
+                      <h4 className="font-extrabold text-base sm:text-lg">AIM App</h4>
+                      <p className={`text-xs mt-0.5 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Track and manage company assets in real-time with ultimate precision.</p>
                     </div>
                   </div>
 
-                  <div className={`p-6 rounded-2xl border flex flex-col justify-between text-center md:text-left shadow-inner ${isDark ? 'bg-slate-950 border-slate-800' : 'bg-blue-50/60 border-blue-100'}`}>
+                  <div onClick={() => goToDetail('org-chart')} className={`p-6 rounded-3xl border shadow-xl cursor-pointer transform hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300 flex items-center gap-5 ${isDark ? 'bg-slate-900 border-slate-800 hover:bg-slate-800' : 'bg-white border-slate-200 hover:bg-blue-50/50'}`}>
+                    <div className="h-14 w-14 rounded-2xl bg-gradient-to-tr from-indigo-600 to-purple-600 text-white font-bold flex items-center justify-center text-2xl shadow-lg shadow-indigo-500/40">📊</div>
                     <div>
-                      <h4 className="text-xs font-bold uppercase tracking-widest text-slate-400">Estimated Annual Savings</h4>
-                      <div className="text-3xl sm:text-4xl font-extrabold text-emerald-500 mt-2">
-                        ${(cloudSpend * 12 * 0.35 + teamSize * 120).toLocaleString()}
-                      </div>
-                      <p className={`text-xs mt-3 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Based on ~35% efficiency boost via advanced cloud workflows.</p>
+                      <h4 className="font-extrabold text-base sm:text-lg">Mansharp Org Chart</h4>
+                      <p className={`text-xs mt-0.5 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Instantly view & search your corporate team hierarchies dynamically.</p>
                     </div>
-                    <button onClick={() => goToDetail('contact')} className="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl text-xs font-bold shadow-lg transition-all transform hover:-translate-y-0.5">
-                      Get Custom Audit ↗
-                    </button>
+                  </div>
+
+                  <div onClick={() => goToDetail('ai-services')} className={`p-6 rounded-3xl border shadow-xl cursor-pointer transform hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300 flex items-center gap-5 ${isDark ? 'bg-slate-900 border-slate-800 hover:bg-slate-800' : 'bg-white border-slate-200 hover:bg-blue-50/50'}`}>
+                    <div className="h-14 w-14 rounded-2xl bg-gradient-to-tr from-purple-600 to-pink-600 text-white font-bold flex items-center justify-center text-2xl shadow-lg shadow-purple-500/40">✨</div>
+                    <div>
+                      <h4 className="font-extrabold text-base sm:text-lg">Explore AI Solutions</h4>
+                      <p className={`text-xs mt-0.5 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Discover advanced enterprise AI tools and Copilot automation suites.</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -217,8 +591,51 @@ export default function App() {
       </main>
 
       {/* FOOTER */}
-      <footer className={`border-t py-8 px-4 text-center text-xs ${isDark ? 'border-slate-800 bg-slate-900 text-slate-400' : 'border-slate-200 bg-slate-900 text-slate-400'}`}>
-        <p>© 2026 Mansharp Technologies. All rights reserved.</p>
+      <footer className={`border-t py-12 px-4 sm:px-8 transition-colors duration-300 ${isDark ? 'border-slate-800 bg-slate-900 text-slate-300' : 'border-slate-200 bg-slate-900 text-slate-300'}`}>
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+          <div className="space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="bg-gradient-to-tr from-blue-600 to-purple-600 text-white font-extrabold h-8 w-8 rounded-lg flex items-center justify-center text-sm">M</div>
+              <h1 className="font-extrabold text-sm text-white tracking-tight">MANSHARP TECHNOLOGIES</h1>
+            </div>
+            <p className="text-xs text-slate-400 leading-relaxed">Dedicated to providing you with exceptional service, support, and modern tech.</p>
+            <button onClick={() => goToDetail('contact')} className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-xs font-semibold shadow-md transition-all">Contact Us ↗</button>
+          </div>
+
+          <div className="space-y-2">
+            <h4 className="font-bold text-xs uppercase tracking-wider text-white">Company</h4>
+            <div className="flex flex-col gap-1.5 text-xs">
+              <button onClick={() => goToDetail('why-choose-us')} className="text-left hover:text-white transition-colors">Career</button>
+              <button onClick={() => goToDetail('about')} className="text-left hover:text-white transition-colors">About Us</button>
+              <button onClick={() => goToDetail('life-at-mansharp')} className="text-left hover:text-white transition-colors">Life At Mansharp</button>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <h4 className="font-bold text-xs uppercase tracking-wider text-white">Resources</h4>
+            <div className="flex flex-col gap-1.5 text-xs">
+              <button onClick={() => goToDetail('blogs')} className="text-left hover:text-white transition-colors">Blogs</button>
+              <button onClick={() => goToDetail('case-studies')} className="text-left hover:text-white transition-colors">Case Studies</button>
+              <button onClick={() => goToDetail('workshops')} className="text-left hover:text-white transition-colors">Workshops</button>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <h4 className="font-bold text-xs uppercase tracking-wider text-white">Products</h4>
+            <div className="flex flex-col gap-1.5 text-xs">
+              <button onClick={() => goToDetail('org-chart')} className="text-left hover:text-white transition-colors">Org Chart</button>
+              <button onClick={() => goToDetail('aim-app')} className="text-left hover:text-white transition-colors">Asset Management App</button>
+            </div>
+          </div>
+        </div>
+
+        <div className="max-w-6xl mx-auto pt-8 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-400">
+          <p>© 2026 Mansharp Technologies, All rights reserved.</p>
+          <div className="flex gap-4">
+            <button onClick={() => goToDetail('privacy-policy')} className="hover:text-white transition-colors">Privacy Policy</button>
+            <button onClick={() => goToDetail('terms')} className="hover:text-white transition-colors">Terms and Conditions</button>
+          </div>
+        </div>
       </footer>
     </div>
   );
