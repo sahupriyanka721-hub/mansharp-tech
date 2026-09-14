@@ -16,6 +16,9 @@ export default function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mobileDropdown, setMobileDropdown] = useState(null); // 'about', 'ai', 'industries', 'resources', 'solutions', 'products'
 
+  // 3D Interactive Card Selection State (New 3D Feature Added)
+  const [selected3DCard, setSelected3DCard] = useState(null);
+
   const bannerSlides = [
     {
       id: 'about',
@@ -572,15 +575,57 @@ export default function App() {
           </div>
         ) : (
           <div>
-            {/* HERO BANNER SECTION WITH IMAGE */}
-            <section className="relative h-[480px] sm:h-[540px] flex items-center justify-center text-center px-4 overflow-hidden">
+            {/* HERO BANNER SECTION WITH IMAGE & 3D ANIMATED ELEMENTS */}
+            <section className="relative min-h-[540px] flex flex-col items-center justify-center text-center px-4 overflow-hidden py-20">
               <div className="absolute inset-0 z-0">
                 <img src={activeBanner.image} alt={activeBanner.title} className="w-full h-full object-cover filter brightness-50 transform scale-105 transition-all duration-700" />
               </div>
-              <div className="relative z-10 max-w-4xl mx-auto space-y-4 text-white">
-                <span className="bg-blue-600/80 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">{activeBanner.subtitle}</span>
-                <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">{activeBanner.title}</h2>
-                <p className="text-sm sm:text-lg text-slate-200 max-w-2xl mx-auto">{activeBanner.desc}</p>
+              
+              {/* 3D Dynamic Glowing Background Lights */}
+              <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[500px] h-[250px] bg-blue-600/20 blur-[120px] rounded-full pointer-events-none animate-pulse"></div>
+              
+              <div className="relative z-10 max-w-4xl mx-auto space-y-4 text-white px-2">
+                <span className="bg-blue-600/80 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-[0_0_20px_rgba(59,130,246,0.5)] inline-block">
+                  {activeBanner.subtitle}
+                </span>
+                <h2 className="text-3xl sm:text-6xl font-extrabold tracking-tight leading-tight drop-shadow-lg">
+                  {activeBanner.title}
+                </h2>
+                <p className="text-sm sm:text-lg text-slate-200 max-w-2xl mx-auto leading-relaxed">
+                  {activeBanner.desc}
+                </p>
+              </div>
+
+              {/* 🌟 NEW 3D / 4D INTERACTIVE BUTTON CARDS (Added right below hero text matching your request) */}
+              <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl w-full mx-auto relative z-10 px-4">
+                
+                <div 
+                  onClick={() => { setSelected3DCard('individual'); setActiveTab('ai-transformation'); }}
+                  className={`group relative p-5 rounded-2xl border transition-all duration-500 cursor-pointer transform hover:-translate-y-2 hover:scale-105 bg-slate-900/80 backdrop-blur-xl ${selected3DCard === 'individual' ? 'border-blue-500 shadow-[0_0_30px_rgba(59,130,246,0.6)]' : 'border-slate-700/60 hover:border-blue-400 hover:shadow-[0_0_25px_rgba(59,130,246,0.4)]'}`}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+                  <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-blue-400 transition-colors">Every Individual</h3>
+                  <p className="text-[11px] text-slate-300 mt-1">Smart AI tools for single users.</p>
+                </div>
+
+                <div 
+                  onClick={() => { setSelected3DCard('team'); setActiveTab('ai-transformation'); }}
+                  className={`group relative p-5 rounded-2xl border transition-all duration-500 cursor-pointer transform hover:-translate-y-2 hover:scale-105 bg-slate-900/80 backdrop-blur-xl ${selected3DCard === 'team' ? 'border-blue-500 shadow-[0_0_30px_rgba(59,130,246,0.6)]' : 'border-slate-700/60 hover:border-indigo-400 hover:shadow-[0_0_25px_rgba(99,102,241,0.4)]'}`}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+                  <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-indigo-400 transition-colors">Every Team</h3>
+                  <p className="text-[11px] text-slate-300 mt-1">Synchronized collaboration flows.</p>
+                </div>
+
+                <div 
+                  onClick={() => { setSelected3DCard('industry'); setActiveTab('ai-transformation'); }}
+                  className={`group relative p-5 rounded-2xl border transition-all duration-500 cursor-pointer transform hover:-translate-y-2 hover:scale-105 bg-slate-900/80 backdrop-blur-xl ${selected3DCard === 'industry' ? 'border-blue-500 shadow-[0_0_30px_rgba(59,130,246,0.6)]' : 'border-slate-700/60 hover:border-cyan-400 hover:shadow-[0_0_25px_rgba(6,182,212,0.4)]'}`}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+                  <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">Every Industry</h3>
+                  <p className="text-[11px] text-slate-300 mt-1">Secure enterprise-scale operations.</p>
+                </div>
+
               </div>
             </section>
 
@@ -592,7 +637,7 @@ export default function App() {
               </div>
             </section>
 
-            {/* 🌟 NEW ADDED: VIDEO & APP BANNER SECTION (Services & Solutions Showcase) */}
+            {/* VIDEO & APP BANNER SECTION (Services & Solutions Showcase) */}
             <section className={`py-16 px-4 sm:px-8 max-w-6xl mx-auto`}>
               <div className="text-center mb-12">
                 <span className="text-blue-600 font-bold text-xs uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full border border-blue-100">Interactive Showcase</span>
