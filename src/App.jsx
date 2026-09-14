@@ -1,41 +1,76 @@
-{/* MOBILE DRAWER MENU */}
-      {!isAdmin && isMobileMenuOpen && (
-        <div className={`lg:hidden fixed inset-0 top-[73px] z-40 overflow-y-auto p-6 space-y-6 shadow-2xl transition-all ${isDark ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'}`}>
-          <button onClick={() => { setActiveTab('about'); setViewMode('home'); setIsMobileMenuOpen(false); }} className="w-full text-left py-2 font-bold text-sm border-b border-slate-700/50">Home</button>
+{/* FOOTER */}
+      <footer className={`border-t py-12 px-4 sm:px-8 transition-colors duration-300 ${isDark ? 'border-slate-800 bg-slate-900 text-slate-300' : 'border-slate-200 bg-slate-900 text-slate-300'}`}>
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           
-          {/* COMPANY SECTION */}
-          <div className="space-y-2">
-            <p className="text-xs font-bold text-blue-500 uppercase tracking-wider">Company</p>
-            <div className="grid grid-cols-1 gap-2 pl-2">
-              <button onClick={() => goToDetail('ai-copilot-pricing')} className="text-left py-1 text-xs opacity-80 hover:opacity-100">Microsoft Copilot Pricing</button>
-              <button onClick={() => goToDetail('ai-services')} className="text-left py-1 text-xs opacity-80 hover:opacity-100">Services</button>
-              <button onClick={() => goToDetail('ai-business-leaders')} className="text-left py-1 text-xs opacity-80 hover:opacity-100">AI for Business Leaders</button>
-              <button onClick={() => goToDetail('blogs')} className="text-left py-1 text-xs opacity-80 hover:opacity-100">Blog</button>
-              <button onClick={() => goToDetail('contact')} className="text-left py-1 text-xs opacity-80 hover:opacity-100">Contact Us</button>
+          {/* COMPANY */}
+          <div className="space-y-3">
+            <h4 className="font-bold text-xs uppercase tracking-wider text-white">COMPANY</h4>
+            <div className="flex flex-col gap-1.5 text-xs">
+              <button onClick={() => goToDetail('ai-copilot-pricing')} className="text-left hover:text-white transition-colors">Microsoft Copilot Pricing</button>
+              <button onClick={() => goToDetail('ai-services')} className="text-left hover:text-white transition-colors">Services</button>
+              <button onClick={() => goToDetail('ai-business-leaders')} className="text-left hover:text-white transition-colors">AI for Business Leaders</button>
+              <button onClick={() => goToDetail('blogs')} className="text-left hover:text-white transition-colors">Blog</button>
+              <button onClick={() => goToDetail('contact')} className="text-left hover:text-white transition-colors">Contact Us</button>
             </div>
           </div>
 
-          {/* INSIGHTS SECTION */}
-          <div className="space-y-2">
-            <p className="text-xs font-bold text-blue-500 uppercase tracking-wider">Insights</p>
-            <div className="grid grid-cols-1 gap-2 pl-2">
-              <button onClick={() => goToDetail('case-studies')} className="text-left py-1 text-xs opacity-80 hover:opacity-100">Customer Stories</button>
-              <button onClick={() => goToDetail('blogs')} className="text-left py-1 text-xs opacity-80 hover:opacity-100">Blog</button>
+          {/* INSIGHTS */}
+          <div className="space-y-3">
+            <h4 className="font-bold text-xs uppercase tracking-wider text-white">INSIGHTS</h4>
+            <div className="flex flex-col gap-1.5 text-xs">
+              <button onClick={() => goToDetail('case-studies')} className="text-left hover:text-white transition-colors">Customer Stories</button>
+              <button onClick={() => goToDetail('blogs')} className="text-left hover:text-white transition-colors">Blog</button>
             </div>
           </div>
 
-          {/* SERVICES SECTION */}
-          <div className="space-y-2">
-            <p className="text-xs font-bold text-blue-500 uppercase tracking-wider">Services</p>
-            <div className="grid grid-cols-1 gap-2 pl-2">
-              <button onClick={() => goToDetail('ai-transformation')} className="text-left py-1 text-xs opacity-80 hover:opacity-100">Microsoft 365 Copilot</button>
-              <button onClick={() => goToDetail('ai-transformation')} className="text-left py-1 text-xs opacity-80 hover:opacity-100">Copilot for Organisation</button>
-              <button onClick={() => goToDetail('ai-services')} className="text-left py-1 text-xs opacity-80 hover:opacity-100">Copilot Studio</button>
-              <button onClick={() => goToDetail('technologies')} className="text-left py-1 text-xs opacity-80 hover:opacity-100">Azure AI</button>
-              <button onClick={() => goToDetail('ai-services')} className="text-left py-1 text-xs opacity-80 hover:opacity-100">Azure AI Services</button>
+          {/* SERVICES */}
+          <div className="space-y-3">
+            <h4 className="font-bold text-xs uppercase tracking-wider text-white">SERVICES</h4>
+            <div className="flex flex-col gap-1.5 text-xs">
+              <button onClick={() => goToDetail('ai-transformation')} className="text-left hover:text-white transition-colors">Microsoft 365 Copilot</button>
+              <button onClick={() => goToDetail('ai-transformation')} className="text-left hover:text-white transition-colors">Copilot for Organisation</button>
+              <button onClick={() => goToDetail('ai-services')} className="text-left hover:text-white transition-colors">Copilot Studio</button>
+              <button onClick={() => goToDetail('technologies')} className="text-left hover:text-white transition-colors">Azure AI</button>
+              <button onClick={() => goToDetail('ai-services')} className="text-left hover:text-white transition-colors">Azure AI Services</button>
             </div>
           </div>
 
-          <button onClick={() => goToDetail('contact')} className="w-full bg-gradient-to-r from-rose-500 to-pink-500 text-white p-3 rounded-xl text-center font-bold text-sm shadow-md mt-4">Contact Us</button>
+          {/* CONTACT & SIGN UP */}
+          <div className="space-y-3">
+            <h4 className="font-bold text-xs uppercase tracking-wider text-white">CONTACT</h4>
+            <p className="text-xs text-slate-400">Get the latest updates from Penthara.AI!</p>
+            <div className="flex gap-2">
+              <input type="email" placeholder="Enter email" className="p-2 rounded-lg text-xs bg-slate-800 border border-slate-700 text-white w-full" />
+              <button onClick={() => alert('Subscribed successfully!')} className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-lg text-xs font-bold">Sign Up →</button>
+            </div>
+            <div className="text-xs text-slate-400 space-y-1 pt-2">
+              <p>+1-732-668-8002</p>
+              <p>+91-62843-00850</p>
+              <p>info@penthara.ai</p>
+            </div>
+          </div>
+
         </div>
-      )}
+
+        {/* ADDRESSES (USA & INDIA) */}
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 py-6 border-t border-slate-800 text-xs text-slate-400">
+          <div>
+            <strong className="text-white block mb-1">USA</strong>
+            <p>131 Continental Drive</p>
+            <p>Suite 305, Newark,</p>
+            <p>Delaware, 19713</p>
+          </div>
+          <div>
+            <strong className="text-white block mb-1">India</strong>
+            <p>SCO 515, Third Floor</p>
+            <p>Sector 70, Mohali</p>
+            <p>Punjab, 160055</p>
+          </div>
+        </div>
+
+        {/* COPYRIGHT & PRIVACY POLICY */}
+        <div className="max-w-6xl mx-auto pt-6 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-400">
+          <p>Copyright 2026 Penthara Technologies, All rights reserved.</p>
+          <button onClick={() => goToDetail('privacy-policy')} className="hover:text-white transition-colors">Privacy Policy</button>
+        </div>
+      </footer>
