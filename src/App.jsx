@@ -6,14 +6,16 @@ export default function App() {
   const [mobile, setMobile] = useState('');
   const [password, setPassword] = useState('');
   const [activeTab, setActiveTab] = useState('about');
-  
-  // New State for Second Page View Mode
-  const [viewMode, setViewMode] = useState('home'); // 'home' ya 'detail'
-  
   const [theme, setTheme] = useState('light');
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  // View Mode: 'home' ya 'detail' (Second Page ke liye)
+  const [viewMode, setViewMode] = useState('home');
+
+  // Click-based AI dropdown state
   const [isAiDropdownOpen, setIsAiDropdownOpen] = useState(false);
+
+  // Mobile Menu Drawer State
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mobileDropdown, setMobileDropdown] = useState(null);
 
@@ -293,7 +295,7 @@ export default function App() {
     }
   };
 
-  // Helper function to navigate to a tab and open Second Page view
+  // Helper function to jump to second page view directly with options
   const goToDetail = (tabId) => {
     setActiveTab(tabId);
     setViewMode('detail');
@@ -323,8 +325,7 @@ export default function App() {
         {!isAdmin && (
           <nav className={`hidden lg:flex items-center gap-8 text-sm font-medium ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>
             
-            {/* Home Link */}
-            <button onClick={() => { setActiveTab('about'); setViewMode('home'); }} className="hover:text-blue-500 transition-colors font-bold">
+            <button onClick={() => { setActiveTab('about'); setViewMode('home'); }} className="hover:text-blue-500 transition-colors py-2">
               Home
             </button>
 
@@ -334,20 +335,23 @@ export default function App() {
                 About <span className="text-[10px]">▼</span>
               </span>
               <div className={`absolute top-full left-0 w-48 border rounded-2xl shadow-2xl p-2 flex flex-col gap-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 z-50 ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
-                <button onClick={() => goToDetail('about')} className={`text-left px-3 py-2 rounded-xl text-xs font-bold transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>About Us (Second Page)</button>
+                <button onClick={() => goToDetail('about')} className={`text-left px-3 py-2 rounded-xl text-xs font-bold transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>About Us</button>
                 <button onClick={() => goToDetail('why-choose-us')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>Why Choose Us</button>
                 <button onClick={() => goToDetail('life-at-mansharp')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>Life At Mansharp</button>
                 <button onClick={() => goToDetail('leadership')} className={`text-left px-3 py-2 rounded-xl text-xs transition-colors ${isDark ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-blue-50 hover:text-blue-600 text-slate-700'}`}>Leadership</button>
               </div>
             </div>
 
-            {/* AI Solutions Click-Based Dropdown Menu */}
+            {/* AI Solutions - Direct Click to Second Page with Options */}
             <div className="relative py-2">
               <button 
-                onClick={() => setIsAiDropdownOpen(!isAiDropdownOpen)}
+                onClick={() => {
+                  goToDetail('ai-transformation');
+                  setIsAiDropdownOpen(!isAiDropdownOpen);
+                }}
                 className="hover:text-blue-600 flex items-center gap-1 transition-colors text-blue-600 font-bold bg-blue-50 px-3 py-1 rounded-full border border-blue-100 shadow-sm"
               >
-                ✨ AI Solutions <span className="text-[10px]">{isAiDropdownOpen ? '▲' : '▼'}</span>
+                ✨ AI Solutions <span className="text-[10px]">▼</span>
               </button>
 
               {isAiDropdownOpen && (
@@ -395,7 +399,7 @@ export default function App() {
               </div>
             </div>
 
-            {/* Resources & Insights Menu */}
+            {/* Resources Menu */}
             <div className="relative group py-2 cursor-pointer">
               <span className="hover:text-blue-500 flex items-center gap-1 transition-colors">
                 Resources & Insights <span className="text-[10px]">▼</span>
@@ -435,7 +439,7 @@ export default function App() {
           </nav>
         )}
 
-        {/* Theme Toggle, Admin & Mobile Hamburger */}
+        {/* Theme Toggle & Admin Controls */}
         <div className="flex items-center gap-2 sm:gap-3">
           <button 
             onClick={toggleTheme} 
@@ -459,12 +463,10 @@ export default function App() {
         </div>
       </header>
 
-      {/* MOBILE DRAWER MENU */}
+      {/* MOBILE FULLSCREEN DRAWER MENU */}
       {!isAdmin && isMobileMenuOpen && (
         <div className={`lg:hidden fixed inset-0 top-[73px] z-40 overflow-y-auto p-4 space-y-4 shadow-2xl transition-all ${isDark ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'}`}>
-          <button onClick={() => { setActiveTab('about'); setViewMode('home'); setIsMobileMenuOpen(false); }} className="w-full text-left py-2 font-bold text-sm border-b border-slate-700/50">
-            Home
-          </button>
+          <button onClick={() => { setActiveTab('about'); setViewMode('home'); setIsMobileMenuOpen(false); }} className="w-full text-left py-2 font-bold text-sm border-b border-slate-700/50">Home</button>
 
           <div className="border-b pb-2 border-slate-700/50">
             <button onClick={() => setMobileDropdown(mobileDropdown === 'about' ? null : 'about')} className="w-full flex justify-between items-center py-2 font-bold text-sm">
@@ -473,7 +475,7 @@ export default function App() {
             </button>
             {mobileDropdown === 'about' && (
               <div className="pl-4 flex flex-col gap-2 pt-2 text-xs">
-                <button onClick={() => goToDetail('about')} className="text-left py-1">About Us Details</button>
+                <button onClick={() => goToDetail('about')} className="text-left py-1">About Us</button>
                 <button onClick={() => goToDetail('why-choose-us')} className="text-left py-1">Why Choose Us</button>
                 <button onClick={() => goToDetail('life-at-mansharp')} className="text-left py-1">Life At Mansharp</button>
                 <button onClick={() => goToDetail('leadership')} className="text-left py-1">Leadership</button>
@@ -513,48 +515,6 @@ export default function App() {
             )}
           </div>
 
-          <div className="border-b pb-2 border-slate-700/50">
-            <button onClick={() => setMobileDropdown(mobileDropdown === 'resources' ? null : 'resources')} className="w-full flex justify-between items-center py-2 font-bold text-sm">
-              <span>Resources & Insights</span>
-              <span>{mobileDropdown === 'resources' ? '▲' : '▼'}</span>
-            </button>
-            {mobileDropdown === 'resources' && (
-              <div className="pl-4 flex flex-col gap-2 pt-2 text-xs">
-                <button onClick={() => goToDetail('blogs')} className="text-left py-1">Blogs</button>
-                <button onClick={() => goToDetail('case-studies')} className="text-left py-1">Case Studies</button>
-                <button onClick={() => goToDetail('workshops')} className="text-left py-1">Events & Workshops</button>
-              </div>
-            )}
-          </div>
-
-          <div className="border-b pb-2 border-slate-700/50">
-            <button onClick={() => setMobileDropdown(mobileDropdown === 'solutions' ? null : 'solutions')} className="w-full flex justify-between items-center py-2 font-bold text-sm">
-              <span>Solutions</span>
-              <span>{mobileDropdown === 'solutions' ? '▲' : '▼'}</span>
-            </button>
-            {mobileDropdown === 'solutions' && (
-              <div className="pl-4 flex flex-col gap-2 pt-2 text-xs">
-                <button onClick={() => goToDetail('department-solutions')} className="text-left py-1">Department Solutions</button>
-                <button onClick={() => goToDetail('licenses')} className="text-left py-1">Licenses</button>
-                <button onClick={() => goToDetail('technologies')} className="text-left py-1">Technologies</button>
-                <button onClick={() => goToDetail('integration')} className="text-left py-1">Integration & Consulting</button>
-              </div>
-            )}
-          </div>
-
-          <div className="border-b pb-2 border-slate-700/50">
-            <button onClick={() => setMobileDropdown(mobileDropdown === 'products' ? null : 'products')} className="w-full flex justify-between items-center py-2 font-bold text-sm">
-              <span>Products</span>
-              <span>{mobileDropdown === 'products' ? '▲' : '▼'}</span>
-            </button>
-            {mobileDropdown === 'products' && (
-              <div className="pl-4 flex flex-col gap-2 pt-2 text-xs">
-                <button onClick={() => goToDetail('aim-app')} className="text-left py-1">AIM App</button>
-                <button onClick={() => goToDetail('org-chart')} className="text-left py-1">Mansharp Org Chart</button>
-              </div>
-            )}
-          </div>
-
           <button onClick={() => goToDetail('contact')} className="w-full bg-gradient-to-r from-rose-500 to-pink-500 text-white p-3 rounded-xl text-center font-bold text-sm shadow-md">
             Contact Us
           </button>
@@ -586,38 +546,34 @@ export default function App() {
             )}
           </div>
         ) : viewMode === 'detail' ? (
-          /* SECOND PAGE VIEW (DEDICATED FULL DETAIL LAYOUT) */
-          <div className="py-12 px-4 sm:px-8 max-w-4xl mx-auto space-y-8 animate-fadeIn">
-            <button 
-              onClick={() => setViewMode('home')}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold border bg-blue-600 text-white shadow-md hover:bg-blue-700 transition-all"
-            >
-              ← Back to Main Page
+          /* SECOND PAGE DETAILED VIEW (WITH OPTIONS & BACK BUTTON) */
+          <div className="py-12 px-4 sm:px-8 max-w-4xl mx-auto space-y-6">
+            <button onClick={() => setViewMode('home')} className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-blue-600 text-white shadow-md hover:bg-blue-700 transition-all">
+              ← Back to Home
             </button>
 
-            <div className="relative h-72 sm:h-96 rounded-3xl overflow-hidden shadow-2xl">
+            <div className="relative h-64 sm:h-80 rounded-3xl overflow-hidden shadow-xl">
               <img src={activeBanner.image} alt={activeBanner.title} className="w-full h-full object-cover filter brightness-75" />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex flex-col justify-end p-6 sm:p-10 text-white">
-                <span className="bg-blue-600 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider w-max mb-2">{activeBanner.subtitle}</span>
-                <h2 className="text-2xl sm:text-4xl font-extrabold">{activeBanner.title}</h2>
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex flex-col justify-end p-6 text-white">
+                <span className="bg-blue-600 px-3 py-1 rounded-full text-[10px] font-bold uppercase w-max mb-2">{activeBanner.subtitle}</span>
+                <h2 className="text-2xl sm:text-3xl font-extrabold">{activeBanner.title}</h2>
               </div>
             </div>
 
-            <div className={`p-8 sm:p-12 rounded-3xl border shadow-xl ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
-              <h3 className="text-2xl font-extrabold text-blue-600 mb-4">{activeBanner.contentTitle}</h3>
-              <p className={`text-base sm:text-lg leading-relaxed ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>{activeBanner.contentText}</p>
+            <div className={`p-8 rounded-3xl border shadow-lg ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
+              <h3 className="text-xl font-extrabold text-blue-600 mb-3">{activeBanner.contentTitle}</h3>
+              <p className={`text-sm sm:text-base leading-relaxed ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>{activeBanner.contentText}</p>
               
-              <div className="mt-8 pt-6 border-t border-slate-700/45 flex gap-4">
-                <button onClick={() => goToDetail('contact')} className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-xl text-xs font-bold shadow-lg">
-                  Inquire About This Service ↗
+              <div className="mt-6 pt-6 border-t border-slate-700/30 flex gap-3">
+                <button onClick={() => goToDetail('contact')} className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl text-xs font-bold shadow transition-all">
+                  Inquire Now ↗
                 </button>
               </div>
             </div>
           </div>
         ) : (
-          /* MAIN HOME VIEW */
+          /* HOME PAGE (WITHOUT ANY "EXPLORE SECOND PAGE" TEXT) */
           <div>
-            {/* HERO BANNER SECTION */}
             <section className="relative h-[480px] sm:h-[540px] flex items-center justify-center text-center px-4 overflow-hidden">
               <div className="absolute inset-0 z-0">
                 <img src={activeBanner.image} alt={activeBanner.title} className="w-full h-full object-cover filter brightness-50 transform scale-105 transition-all duration-700" />
@@ -626,15 +582,9 @@ export default function App() {
                 <span className="bg-blue-600/80 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">{activeBanner.subtitle}</span>
                 <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">{activeBanner.title}</h2>
                 <p className="text-sm sm:text-lg text-slate-200 max-w-2xl mx-auto">{activeBanner.desc}</p>
-                <div className="pt-2">
-                  <button onClick={() => setViewMode('detail')} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-xl text-xs font-bold shadow-lg transition-all">
-                    Explore Details (Second Page) ↗
-                  </button>
-                </div>
               </div>
             </section>
 
-            {/* DYNAMIC CONTENT SECTION */}
             <section className={`py-16 px-4 sm:px-8 max-w-6xl mx-auto`}>
               <div className={`p-8 sm:p-12 rounded-3xl border shadow-xl backdrop-blur-sm transition-colors ${isDark ? 'bg-slate-900/80 border-slate-800' : 'bg-white/80 border-slate-200/80'}`}>
                 <h3 className="text-2xl sm:text-3xl font-extrabold mb-4 text-blue-600">{activeBanner.contentTitle}</h3>
@@ -653,7 +603,14 @@ export default function App() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                 <div className={`p-4 rounded-3xl border shadow-xl ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
                   <div className="relative rounded-2xl overflow-hidden aspect-video shadow-inner bg-black">
-                    <video className="w-full h-full object-cover" controls autoPlay muted loop poster="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80">
+                    <video 
+                      className="w-full h-full object-cover"
+                      controls 
+                      autoPlay 
+                      muted 
+                      loop
+                      poster="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
+                    >
                       <source src="https://assets.mixkit.co/videos/preview/mixkit-team-working-in-an-office-4129-large.mp4" type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
@@ -696,9 +653,12 @@ export default function App() {
       {/* FOOTER */}
       <footer className={`border-t py-12 px-4 sm:px-8 transition-colors duration-300 ${isDark ? 'border-slate-800 bg-slate-900 text-slate-300' : 'border-slate-200 bg-slate-900 text-slate-300'}`}>
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+          
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="bg-gradient-to-tr from-blue-600 to-purple-600 text-white font-extrabold h-8 w-8 rounded-lg flex items-center justify-center text-sm">M</div>
+              <div className="bg-gradient-to-tr from-blue-600 to-purple-600 text-white font-extrabold h-8 w-8 rounded-lg flex items-center justify-center text-sm">
+                M
+              </div>
               <h1 className="font-extrabold text-sm text-white tracking-tight">MANSHARP TECHNOLOGIES</h1>
             </div>
             <p className="text-xs text-slate-400 leading-relaxed">We are dedicated to providing you with exceptional service and support.</p>
@@ -730,14 +690,17 @@ export default function App() {
               <button onClick={() => goToDetail('aim-app')} className="text-left hover:text-white transition-colors">Asset Management App</button>
             </div>
           </div>
+
         </div>
 
         <div className="max-w-6xl mx-auto pt-8 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-400">
           <p>© 2026 Mansharp Technologies, All rights reserved.</p>
+          
           <div className="flex gap-4">
             <button onClick={() => goToDetail('privacy-policy')} className="hover:text-white transition-colors">Privacy Policy</button>
             <button onClick={() => goToDetail('terms')} className="hover:text-white transition-colors">Terms and Conditions</button>
           </div>
+
           <div className="flex items-center gap-3">
             <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="h-8 w-8 rounded-full bg-slate-800 hover:bg-blue-600 flex items-center justify-center text-white transition-colors text-xs font-bold shadow-md">f</a>
             <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="h-8 w-8 rounded-full bg-slate-800 hover:bg-pink-600 flex items-center justify-center text-white transition-colors text-xs font-bold shadow-md">ig</a>
@@ -745,6 +708,7 @@ export default function App() {
           </div>
         </div>
       </footer>
+
     </div>
   );
 }
